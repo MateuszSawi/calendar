@@ -4,7 +4,7 @@ const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  // const [isSubmitted, setIsSubmitted] = useState('false');
+  const [isSubmitted, setIsSubmitted] = useState('false');
   const [isCorrect, setIsCorrect] = useState('false');
 
   const handleSubmit = (event) => {

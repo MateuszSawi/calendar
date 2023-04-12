@@ -8,17 +8,33 @@ function CalendarElement(props) {
   const [date, setDate] = useState(new Date());
   const [showTime, setShowTime] = useState(false) 
 
-  let fixedDate = moment(date).format('dddd DD/MM/YYYY');
+  let fixedDate = moment(date).format('DD/MM/YYYY');
   let dayOfTheWeek = moment(date).format('dddd'); 
   let day = moment(date).format('DD'); 
   let month = moment(date).format('MM'); 
   let year = moment(date).format('YYYY'); 
 
-  console.log('====== CalendarElement ======');
-  console.log('Date before fix - ', date);
-  console.log('fixedDate - ', fixedDate);
-  console.log('Date params - ', dayOfTheWeek, '|', day, '|', month, '|', year);
-  console.log(' ');
+  if (dayOfTheWeek === 'Monday') {
+    dayOfTheWeek = 'Poniedziałek';
+  } else if (dayOfTheWeek === 'Tuesday') {
+    dayOfTheWeek = 'Wtorek';
+  } else if (dayOfTheWeek === 'Wednesday') {
+    dayOfTheWeek = 'Środa';
+  } else if (dayOfTheWeek === 'Thursday') {
+    dayOfTheWeek = 'Czwartek';
+  } else if (dayOfTheWeek === 'Friday') {
+    dayOfTheWeek = 'Piątek';
+  } else if (dayOfTheWeek === 'Saturday') {
+    dayOfTheWeek = 'Sobota';
+  } else if (dayOfTheWeek === 'Sunday') {
+    dayOfTheWeek = 'Niedziela';
+  }
+
+  // console.log('====== CalendarElement ======');
+  // console.log('Date before fix - ', date);
+  // console.log('fixedDate - ', fixedDate);
+  // console.log('Date params - ', dayOfTheWeek, '|', day, '|', month, '|', year);
+  // console.log(' ');
 
   return (
     <div className='app'>
@@ -41,8 +57,13 @@ function CalendarElement(props) {
       </p> 
              )
       }
-      <Time showTime={showTime} date={date} fixedDate={fixedDate} />
-   
+      <Time showTime={showTime} 
+        date={date} 
+        fixedDate={fixedDate} 
+        dayOfTheWeek={dayOfTheWeek} 
+        day={day} 
+        month={month} 
+        year={year} />
     </div>
      )
 }
