@@ -1,12 +1,12 @@
 const initialState = {
-  columns: [
+  crematorium: [
     {
-      id: 1,
-      title: 'Books',
+      year: 2023,
+      month: 'Books',
       icon: 'book',
     },
     {
-      id: 2,
+      id: 2024,
       title: 'Movies',
       icon: 'film',
     },
@@ -16,6 +16,7 @@ const initialState = {
       icon: 'gamepad',
     }
   ],
+
   cards: [
     { 
       id: 1, 

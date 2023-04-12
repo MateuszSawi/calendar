@@ -8,11 +8,16 @@ function CalendarElement(props) {
   const [date, setDate] = useState(new Date());
   const [showTime, setShowTime] = useState(false) 
 
-  let fixedDate = moment(date).format('DD/MM/YYYY');
+  let fixedDate = moment(date).format('dddd DD/MM/YYYY');
+  let dayOfTheWeek = moment(date).format('dddd'); 
+  let day = moment(date).format('DD'); 
+  let month = moment(date).format('MM'); 
+  let year = moment(date).format('YYYY'); 
 
   console.log('====== CalendarElement ======');
   console.log('Date before fix - ', date);
   console.log('fixedDate - ', fixedDate);
+  console.log('Date params - ', dayOfTheWeek, '|', day, '|', month, '|', year);
   console.log(' ');
 
   return (

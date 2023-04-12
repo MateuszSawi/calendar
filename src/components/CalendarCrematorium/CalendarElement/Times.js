@@ -10,8 +10,8 @@ const time = ['01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','0
 
 function Times(props) {
 
-  const [event, setEvent] = useState('01:00')
-  const [info, setInfo] = useState(false)
+  const [event, setEvent] = useState('01:00');
+  const [info, setInfo] = useState(false);
 
   function displayInfo(e) {
     setInfo(true);
