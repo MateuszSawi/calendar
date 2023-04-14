@@ -1,8 +1,37 @@
 .window {
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.innerWindow {
+  display: flex;
+  flex-direction: row;
+}
+
+.windowClosed {
+  padding: 10px;
+  
 }
 
 .closeWindowButton {
   height: 30px;
   width: 30px;
+}
+
+.textarea {
+  // width: 80%;
+  height: 300px;
+  max-width: 100%;
+  max-height: 300px;
+}
+
+.x {
+  position: absolute;
+  background-color: lightpink;
+
+  padding: 10px;
+
+  box-shadow: 0px 0px 10px 10px #000000;
 }
