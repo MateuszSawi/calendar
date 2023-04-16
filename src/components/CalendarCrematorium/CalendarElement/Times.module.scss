@@ -1,11 +1,13 @@
 .label {
-  background-color: red;
+  // background-color: red;
 }
 
 .input {
-  background-color: green;
-  width: 100%;
-  height: 30px;
+  // background-color: green;
+  // width: 100%;
+  // height: 30px;
+
+  
 }
 
 .timeBox {
@@ -17,9 +19,12 @@
 .window {
   height: 80%;
   width: 40%;
-  background-color: lightblue;
-  border: 1px solid;
+  background-color: #ebebeb;
+  // background-color: #f4f4f4;
+  border: none;
+  border-radius: 16px;
   position: fixed;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
 
-  transform: translateY(-50%);
+  transform: translateY(-72%);
 }

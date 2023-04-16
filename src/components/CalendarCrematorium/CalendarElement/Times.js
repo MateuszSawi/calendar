@@ -30,7 +30,32 @@ function Times(props) {
     }
   };
 
-  // console.log(windowVisibility, event);
+  // filter
+
+  const data = [
+    { h: '01:00', name: 'John', age: 25 },
+    { h: '05:00', name: 'Jane', age: 30 },
+    { h: '20:00', name: 'Bob', age: 35 },
+    { h: '13:00', name: 'Alice', age: 40 },
+  ];
+
+  const [yearFilter, setYearFilter] = useState('01:00');
+  const [monthFilter, setMonthFilter] = useState('');
+  const [dayFilter, setDayFilter] = useState('');
+  const [hourFilter, setHourFilter] = useState('');
+
+  const handleFilterChange = (event) => {
+    setYearFilter(event.target.value);
+  };
+
+  const filteredData = data.filter((item) => item.name.toLowerCase().includes(yearFilter));
+
+  const elementArray = filteredData.map((item) => (
+    <div key={item.id}>
+      <p>Name: {item.name}</p>
+      <p>Age: {item.age}</p>
+    </div>
+  ));
   
 return (
   <>
@@ -58,7 +83,9 @@ return (
       {times.map(time => {
         return (
           <div className={styles.timeBox}>
-            <span>{time} {props.dayOfTheWeek} {props.fixedDate}</span>
+            <span><strong>{time}</strong> {props.dayOfTheWeek} {props.fixedDate}</span>
+
+            {elementArray}
 
             <button onClick={(e)=> {
               setTime(e);
