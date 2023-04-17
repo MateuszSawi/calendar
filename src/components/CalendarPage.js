@@ -9,9 +9,9 @@ function App() {
         <CalendarCrematorium />
       </div>
 
-      <div className={styles.calendar}>
+      {/* <div className={styles.calendar}>
         <CalendarCrematorium />
-      </div>
+      </div> */}
     </div>
     );
 }

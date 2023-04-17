@@ -40,11 +40,12 @@
   // height: 80%;
   height: 85%;
   width: 70%;
-  background-color: #ebebeb;
   // background-color: #f4f4f4;
+  position: fixed;
+
+  background-color: #ebebeb;
   border: none;
   border-radius: 16px;
-  position: fixed;
   box-shadow: 0 0 10px rgba(0,0,0,0.4);
 
   // transform: translateY(-72%);

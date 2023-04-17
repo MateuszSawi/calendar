@@ -2,11 +2,12 @@ import {useState} from 'react';
 import moment from 'moment';
 import Calendar from 'react-calendar';
 import './CalendarElement.css';
-import Time from './Time.js'
+import Time from './Time.js';
+import axios from 'axios';
 
 function CalendarElement(props) {
   const [date, setDate] = useState(new Date());
-  const [showTime, setShowTime] = useState(false) 
+  const [showTime, setShowTime] = useState(false); 
 
   let fixedDate = moment(date).format('DD/MM/YYYY');
   let dayOfTheWeek = moment(date).format('dddd'); 
@@ -36,11 +37,16 @@ function CalendarElement(props) {
   // console.log('Date params - ', dayOfTheWeek, '|', day, '|', month, '|', year);
   // console.log(' ');
 
+  
+
   return (
     <div className='app'>
       <h1 className='header'>Krematorium "Zieleń"</h1>
       <div>
-       <Calendar onChange={setDate} value={date} onClickDay={() => setShowTime(true)} />
+       <Calendar onChange={setDate} value={date} 
+        onClickDay={() => {
+          setShowTime(true);
+          }} />
       </div>
    
       {date.length > 0 ? (

@@ -121,58 +121,6 @@ function Box(props) {
     setotherInfo(value);
   };
 
-  // filter
-
-  // const data = useSelector((state) => state.data.crematorium);
-
-  // const [reservations, setReservations] = useState(data);
-
-  // // console.log('year: ', props.year, '|', 'month: ', props.month, '|','day: ', props.day, '|','time: ', props.event);
-  // console.log('DATA: ', data);
-
-  // for (let year in data) {
-  //   if (year === '2023'){
-  //     console.log(year);
-  //     for(let month in year) {
-  //       console.log(month);
-  //     }
-  //   }
-  // }
-
-  // console.log(
-  //   '++++++++++ ZMIENNE ++++++++++',
-  //   'name: ', name,
-  //   'surname: ', surname,
-  //   'weight: ', weight,
-  //   'family: ', family,
-  //   'religion: ', religion,
-  //   'company: ', company,
-  //   'otherInfo: ', otherInfo,
-  //   ' '
-  // )
-
-  let year = props.year.toString();
-  let month = props.month.toString();
-  let day = props.day.toString();
-  let time = props.event.toString();
-
-  // submitForm button
-
-  const [message, setMessage] = useState('');
-
-  const handleClick = () => {};
-    // setMessage('Kliknięto przycisk!');
-  // };
-
-  const obj = [
-    name,
-    surname,
-    weight,
-    family,
-    religion,
-    company
-  ]
-
   const submitForm = () => {
     // if (name === '') {
     //   handleClick();
@@ -202,26 +150,31 @@ function Box(props) {
       setMessage('Błędne wypełnienie!');
       handleClick();
     } else {
-      // console.log('name: ', name, 'surname: ', surname, 'weight: ', weight,
-      // 'family: ', family,  'religion: ',religion, 'company: ', company,  'otherInfo: ', otherInfo);
-      // console.log('DANE: ', year, month, day, time);
       setMessage('');
       handleClick();
-
       if (props.windowVisibility === true) {
         props.setWindowVisibility(false);
         props.setEvent('');
       }
-
-
     }
-
-    // for (let one of obj ) {
-    //   console.log(one);
-    //   handleClick();
-    // }
-
   }
+
+  // message
+
+  const [message, setMessage] = useState('');
+
+  const handleClick = () => {};
+
+  // filter
+
+  const obj = [
+    name,
+    surname,
+    weight,
+    family,
+    religion,
+    company
+  ]
 
 return (
   <div className={styles.window}>
@@ -301,16 +254,16 @@ return (
         <label>Wyznanie :&nbsp;</label>
         <button onClick={toggleMenuReligion} className={styles.optionButton}>{religion}</button>
         {isOpenReligion && (
-          <ul className={styles.toggleMenu}>
-            <li onClick={() => handleOptionClickReligion('chrześcijaństwo')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'chrześcijaństwo' ? <strong>chrześcijaństwo</strong> : 'chrześcijaństwo'}</button></li>
-            <li onClick={() => handleOptionClickReligion('islam')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'islam' ? <strong>islam</strong> : 'islam'}</button></li>
-            <li onClick={() => handleOptionClickReligion('hinduizm')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'hinduizm' ? <strong>hinduizm</strong> : 'hinduizm'}</button></li>
-            <li onClick={() => handleOptionClickReligion('byddyzm')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'byddyzm' ? <strong>byddyzm</strong> : 'byddyzm'}</button></li>
-            <li onClick={() => handleOptionClickReligion('sikhizm')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'sikhizm' ? <strong>sikhizm</strong> : 'sikhizm'}</button></li>
-            <li onClick={() => handleOptionClickReligion('judaizm')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'judaizm' ? <strong>judaizm</strong> : 'judaizm'}</button></li>
-            <li onClick={() => handleOptionClickReligion('bahaizm')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'bahaizm' ? <strong>bahaizm</strong> : 'bahaizm'}</button></li>
-            <li onClick={() => handleOptionClickReligion('bezwyznaniowi')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'bezwyznaniowi' ? <strong>bezwyznaniowi</strong> : 'bezwyznaniowi'}</button></li>
-          </ul>
+          <div className={styles.toggleMenu}>
+            <div onClick={() => handleOptionClickReligion('chrześcijaństwo')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'chrześcijaństwo' ? <strong>chrześcijaństwo</strong> : 'chrześcijaństwo'}</button></div>
+            <div onClick={() => handleOptionClickReligion('islam')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'islam' ? <strong>islam</strong> : 'islam'}</button></div>
+            <div onClick={() => handleOptionClickReligion('hinduizm')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'hinduizm' ? <strong>hinduizm</strong> : 'hinduizm'}</button></div>
+            <div onClick={() => handleOptionClickReligion('byddyzm')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'byddyzm' ? <strong>byddyzm</strong> : 'byddyzm'}</button></div>
+            <div onClick={() => handleOptionClickReligion('sikhizm')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'sikhizm' ? <strong>sikhizm</strong> : 'sikhizm'}</button></div>
+            <div onClick={() => handleOptionClickReligion('judaizm')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'judaizm' ? <strong>judaizm</strong> : 'judaizm'}</button></div>
+            <div onClick={() => handleOptionClickReligion('bahaizm')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'bahaizm' ? <strong>bahaizm</strong> : 'bahaizm'}</button></div>
+            <div onClick={() => handleOptionClickReligion('bezwyznaniowi')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'bezwyznaniowi' ? <strong>bezwyznaniowi</strong> : 'bezwyznaniowi'}</button></div>
+          </div>
         )}
       </div>
 
@@ -318,28 +271,28 @@ return (
         <label>Firma :&nbsp;</label>
         <button onClick={toggleMenuCompany} className={styles.optionButton}>{company}</button>
         {isOpenCompany && (
-          <ul className={styles.toggleMenu}>
-            <li onClick={() => handleOptionClickCompany('Firma 1')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 1' ? <strong>Firma 1</strong> : 'Firma 1'}</button></li>
-            <li onClick={() => handleOptionClickCompany('Firma 2')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 2' ? <strong>Firma 2</strong> : 'Firma 2'}</button></li>
-            <li onClick={() => handleOptionClickCompany('Firma 3')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 3' ? <strong>Firma 3</strong> : 'Firma 3'}</button></li>
-            <li onClick={() => handleOptionClickCompany('Firma 4')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 4' ? <strong>Firma 4</strong> : 'Firma 4'}</button></li>
-            <li onClick={() => handleOptionClickCompany('Firma 5')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 5' ? <strong>Firma 5</strong> : 'Firma 5'}</button></li>
-            <li onClick={() => handleOptionClickCompany('Firma 6')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 6' ? <strong>Firma 6</strong> : 'Firma 6'}</button></li>
-            <li onClick={() => handleOptionClickCompany('Firma 7')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 7' ? <strong>Firma 7</strong> : 'Firma 7'}</button></li>
-            <li onClick={() => handleOptionClickCompany('Firma 8')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 8' ? <strong>Firma 8</strong> : 'Firma 8'}</button></li>
-            <li onClick={() => handleOptionClickCompany('Firma 9')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 9' ? <strong>Firma 9</strong> : 'Firma 9'}</button></li>
-            <li onClick={() => handleOptionClickCompany('Firma 10')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 10' ? <strong>Firma 10</strong> : 'Firma 10'}</button></li>
+          <div className={styles.toggleMenu}>
+            <div onClick={() => handleOptionClickCompany('Firma 1')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 1' ? <strong>Firma 1</strong> : 'Firma 1'}</button></div>
+            <div onClick={() => handleOptionClickCompany('Firma 2')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 2' ? <strong>Firma 2</strong> : 'Firma 2'}</button></div>
+            <div onClick={() => handleOptionClickCompany('Firma 3')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 3' ? <strong>Firma 3</strong> : 'Firma 3'}</button></div>
+            <div onClick={() => handleOptionClickCompany('Firma 4')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 4' ? <strong>Firma 4</strong> : 'Firma 4'}</button></div>
+            <div onClick={() => handleOptionClickCompany('Firma 5')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 5' ? <strong>Firma 5</strong> : 'Firma 5'}</button></div>
+            <div onClick={() => handleOptionClickCompany('Firma 6')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 6' ? <strong>Firma 6</strong> : 'Firma 6'}</button></div>
+            <div onClick={() => handleOptionClickCompany('Firma 7')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 7' ? <strong>Firma 7</strong> : 'Firma 7'}</button></div>
+            <div onClick={() => handleOptionClickCompany('Firma 8')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 8' ? <strong>Firma 8</strong> : 'Firma 8'}</button></div>
+            <div onClick={() => handleOptionClickCompany('Firma 9')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 9' ? <strong>Firma 9</strong> : 'Firma 9'}</button></div>
+            <div onClick={() => handleOptionClickCompany('Firma 10')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 10' ? <strong>Firma 10</strong> : 'Firma 10'}</button></div>
 
-            <li onClick={() => handleOptionClickCompanyOther('Inna')}  className={styles.companyButtonWrapper}><button className={styles.companyButton}>
+            <div onClick={() => handleOptionClickCompanyOther('Inna')}  className={styles.companyButtonWrapper}><button className={styles.companyButton}>
               {selectedOptionCompany === 'Inna' ? <strong>Inna</strong> : 'Inna'}</button>
               {selectedOptionCompany === 'Inna' && (
                 <div>
-                  <input type="text" value={inputValueCompany} onChange={handleInputChangeCompany} />
-                  <button onClick={closeCompanies}>zatwierdź</button>
+                  <input type="text" value={inputValueCompany} onChange={handleInputChangeCompany} className={styles.otherCompanyInput} />
+                  <button onClick={closeCompanies} className={styles.submitOtherCompanyButton}>zatwierdź</button>
                 </div>
               )}
-            </li>
-          </ul>
+            </div>
+          </div>
         )}
         {/* {selectedOptionCompany && (
           <p>You selected: {selectedOptionCompany}</p>
