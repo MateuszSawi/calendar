@@ -1,8 +1,10 @@
+
+
 .window {
   padding: 10px;
   display: flex;
   flex-direction: column;
-  
+  // background-color: ;
 }
 
 .labelInnerWindow {
@@ -100,4 +102,26 @@
   display: flex;
   // justify-content: flex-end;
   flex-direction: column;
+}
+
+// submit
+
+.submitWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.submitButtonDiv {
+  padding: 20px 0px 10px 10px;
+}
+
+.submitButton {
+  height: 30px;
+  width: 100px;
+}
+
+.message {
+  // padding-right: 10px;
+  color: #FF0000;
 }

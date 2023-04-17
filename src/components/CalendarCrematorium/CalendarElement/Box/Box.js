@@ -1,5 +1,6 @@
 import styles from './Box.module.scss';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 function Box(props) {
 
@@ -120,19 +121,107 @@ function Box(props) {
     setotherInfo(value);
   };
 
-  //
+  // filter
 
-  console.log(
-    '++++++++++ ZMIENNE ++++++++++',
-    'name: ', name,
-    'surname: ', surname,
-    'weight: ', weight,
-    'family: ', family,
-    'religion: ', religion,
-    'company: ', company,
-    'otherInfo: ', otherInfo,
-    ' '
-  )
+  // const data = useSelector((state) => state.data.crematorium);
+
+  // const [reservations, setReservations] = useState(data);
+
+  // // console.log('year: ', props.year, '|', 'month: ', props.month, '|','day: ', props.day, '|','time: ', props.event);
+  // console.log('DATA: ', data);
+
+  // for (let year in data) {
+  //   if (year === '2023'){
+  //     console.log(year);
+  //     for(let month in year) {
+  //       console.log(month);
+  //     }
+  //   }
+  // }
+
+  // console.log(
+  //   '++++++++++ ZMIENNE ++++++++++',
+  //   'name: ', name,
+  //   'surname: ', surname,
+  //   'weight: ', weight,
+  //   'family: ', family,
+  //   'religion: ', religion,
+  //   'company: ', company,
+  //   'otherInfo: ', otherInfo,
+  //   ' '
+  // )
+
+  let year = props.year.toString();
+  let month = props.month.toString();
+  let day = props.day.toString();
+  let time = props.event.toString();
+
+  // submitForm button
+
+  const [message, setMessage] = useState('');
+
+  const handleClick = () => {};
+    // setMessage('Kliknięto przycisk!');
+  // };
+
+  const obj = [
+    name,
+    surname,
+    weight,
+    family,
+    religion,
+    company
+  ]
+
+  const submitForm = () => {
+    // if (name === '') {
+    //   handleClick();
+    //   setMessage('Imie');
+    // } else if (surname === '') {
+    //   handleClick();
+    //   setMessage('Nazwisko');
+    // } else if (weight === '') {
+    //   handleClick();
+    //   setMessage('Waga');
+    // } else if (family === undefined) {
+    //   handleClick();
+    //   setMessage('Rodzina');
+    // } else if (religion === 'wybierz') {
+    //   handleClick();
+    //   setMessage('Religia');
+    // } else if (company === 'wybierz' || company === '') {
+    //   handleClick();
+    //   setMessage('Firma');
+    // } else {
+    //   console.log('name: ', name, 'surname: ', surname, 'weight: ', weight,
+    //   'family: ', family,  'religion: ',religion, 'company: ', company,  'otherInfo: ', otherInfo);
+    //   console.log('DANE: ', year, month, day, time);
+    // }
+
+    if (name === '' || surname === '' || weight === '' || family === undefined || religion === 'wybierz' || company === 'wybierz' || company === '') {
+      setMessage('Błędne wypełnienie!');
+      handleClick();
+    } else {
+      // console.log('name: ', name, 'surname: ', surname, 'weight: ', weight,
+      // 'family: ', family,  'religion: ',religion, 'company: ', company,  'otherInfo: ', otherInfo);
+      // console.log('DANE: ', year, month, day, time);
+      setMessage('');
+      handleClick();
+
+      if (props.windowVisibility === true) {
+        props.setWindowVisibility(false);
+        props.setEvent('');
+      }
+
+
+    }
+
+    // for (let one of obj ) {
+    //   console.log(one);
+    //   handleClick();
+    // }
+
+  }
 
 return (
   <div className={styles.window}>
@@ -187,7 +276,7 @@ return (
             type="number"
             value={weight}
             onChange={handleWeightInputChange}
-            placeholder="Podaj wagę w kilogramach"
+            placeholder="Podaj wagę w kg"
           />
           &nbsp;kg
         </label>
@@ -246,7 +335,7 @@ return (
               {selectedOptionCompany === 'Inna' && (
                 <div>
                   <input type="text" value={inputValueCompany} onChange={handleInputChangeCompany} />
-                  <button onClick={closeCompanies} >zatwierdź</button>
+                  <button onClick={closeCompanies}>zatwierdź</button>
                 </div>
               )}
             </li>
@@ -269,6 +358,13 @@ return (
       value={otherInfo}
       onChange={handleOtherInfoInputChange}
     />
+
+    <div className={styles.submitWrapper}>
+      <div className={styles.submitButtonDiv}>
+        <button className={styles.submitButton} onClick={submitForm} >Rezerwuj</button>
+      </div>
+      {message && <div className={styles.message}>{message}</div>}
+    </div>
 
   </div>
   )

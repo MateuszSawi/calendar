@@ -38,7 +38,7 @@ function CalendarElement(props) {
 
   return (
     <div className='app'>
-      <h1 className='header'>Zielen</h1>
+      <h1 className='header'>Krematorium "Zieleń"</h1>
       <div>
        <Calendar onChange={setDate} value={date} onClickDay={() => setShowTime(true)} />
       </div>
