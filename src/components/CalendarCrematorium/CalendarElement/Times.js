@@ -98,7 +98,7 @@ function Times(props) {
   // const dateTimeObject = { year, month, day, hour };
   // const dateTimeObject = { year, month, props.day, event };
   // console.log(year, month, day, hour)
-  console.log(dateTimeObject); // { year: 2023, month: 4, day: 17, hour: 10 }
+  // console.log(dateTimeObject); // { year: 2023, month: 4, day: 17, hour: 10 }
   
 return (
   <>
