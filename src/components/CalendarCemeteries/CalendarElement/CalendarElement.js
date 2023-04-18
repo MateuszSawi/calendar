@@ -64,7 +64,7 @@ function CalendarElement() {
 
   return (
     <div className='app'>
-      <h1 className='header'>Krematorium "Zieleń"</h1>
+      <h1 className='header'>Cmentarz</h1>
       <div>
        <Calendar onChange={handleDateChange} value={date} 
         onClickDay={() => {

@@ -1,0 +1,38 @@
+.submitWrapper {
+    display: flex;
+    flex-direction: column;
+    // flex-direction: row;
+    align-items: flex-end;
+    // justify-content: flex-end;
+  }
+  
+  .submitButtonDiv {
+    padding: 20px 0px 10px 10px;
+  }
+  
+  .submitButton {
+    height: 30px;
+    width: 100px;
+  
+    background-color: #667363;
+    color: #fff;
+  
+    border: none;
+    border-radius: 2px;
+  
+    box-shadow: 0 0 2px rgba(0,0,0,0.4);
+  }
+  
+  .submitButton:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    background-color: #5d695a;
+  }
+  
+  .submitButton:active {
+    transform: translateY(0.5px);
+  }
+  
+  .message {
+    // padding-right: 10px;
+    color: #FF0000;
+  }
