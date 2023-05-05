@@ -3,7 +3,8 @@ import styles from './Times.module.scss';
 import Box from './Box/Box';
 import { useSelector } from 'react-redux';
 
-const times = ['01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00','24:00']
+// const times = ['07:00','07:15','07:30','07:45','08:00','08:15','08:30','08:45','09:00','09:15','09:30','09:45','10:00','10:15','10:30','10:45','11:00','11:15','11:30','11:45','12:00','12:15','12:30','12:45','13:00','13:15','13:30','13:45','14:00','14:15','14:30','14:45','15:00','15:15','15:30','15:45','16:00','16:15','16:30','16:45']
+const times = ['07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00'];
 
 function Times(props) {
 
@@ -45,13 +46,16 @@ function Times(props) {
   //     ))}
   //   </ul>
   // </div>
+
+  // baza danych będzie dość obszerna, dynamiczne godziny będą powodować wolniejsze ładowanie strony, proponuje zrobić na stałe 'czasy' co 15 min i na końcu dat dodatkowe pole terminu, 
+      // jesli zostanie wypelnione pojawi sie nowe puste pole 
+
+      // https://chat.openai.com/?model=text-davinci-002-render-sha
+
+      
   
 return (
-  <>
-    <p>
-      <span>Wybrany dzień : </span>{event}
-    </p>
- 
+  <> 
     {windowVisibility && (
       <div className={styles.windowBackground}>
         <div className={styles.window}>
@@ -72,6 +76,7 @@ return (
 
     <div className="times">
       {times.map(time => {
+        // if (time === '07:15'){
         return (
           <div className={styles.timeBox}>
             <div className={styles.leftWrapper}>
@@ -91,8 +96,17 @@ return (
               }}> DODAJ </button>
             </div>
           </div>
+
+          
         )
+            // }
       })}
+      
+
+
+
+
+
       {/* <div>
         {info ? `Your appointment is set to ${event} | ${props.date.toDateString()}` : null}
       </div> */}

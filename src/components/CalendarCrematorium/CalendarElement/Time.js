@@ -12,7 +12,17 @@ function Time(props) {
       dayOfTheWeek={props.dayOfTheWeek} 
       day={props.day} 
       month={props.month} 
-      year={props.year} /> : null}
+      year={props.year}
+      responseData={props.responseData} 
+
+      handleDateChange={props.handleDateChange}
+      isLoading={props.isLoading}
+      
+      setDate={props.setDate}
+      setShowTime={props.setShowTime}
+      getCookie={props.getCookie}
+      setResponseData={props.setResponseData}
+    /> : null}
   </div>
   )
 }

@@ -1,5 +1,14 @@
-.timeBox {
+.container {
   border-top: 1px solid;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  width: 95%;
+  justify-content: space-between;
+}
+
+.timeBox {
+  // border-top: 1px solid;
   padding: 10px;
 
   display: flex;
@@ -15,13 +24,39 @@
   // border: solid;
   // height: 100%;
   padding-right: 10px;
+
 }
 
 .rightWrapper {
   // height: 100%;
   // border: solid;85
   align-items: flex-end;
+
 }
+
+// ======================== Response Info ==========================
+
+.innerTimeBox {
+  padding: 10px;
+  padding-top: 0px;
+  display: flex;
+  flex-direction: row;
+}
+
+.responseInfo {
+  width: 100%;
+  // border: solid;
+  // height: 100%;
+  padding-right: 10px;
+
+}
+
+.responseInfoButtons {
+  align-items: flex-end;
+}
+
+
+// =================================================================
 
 .windowBackground {
   position: fixed;
@@ -47,4 +82,23 @@
   border: none;
   border-radius: 16px;
   box-shadow: 0 0 12px rgba(0,0,0,0.6);
+}
+
+// ----------------------------------------------------------------
+
+.reservationWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.reservationData {
+  padding: 0px 0px 10px 10px;
+  margin: 0;
+}
+
+// ----------------------------------------------------------------
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: flex-end;
 }

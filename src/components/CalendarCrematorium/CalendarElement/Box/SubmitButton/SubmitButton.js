@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import styles from './SubmitButton.module.scss';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 function Time(props) {
 
   // submit form
 
   const submitForm = () => {
-    if (props.name === '' || props.surname === '' || props.weight === '' || props.family === undefined || props.religion === 'wybierz' || props.company === 'wybierz' || props.company === '') {
+    if (
+        props.name === '' || props.surname === '' || props.weight === '' || props.family === undefined || 
+        props.religion === 'wybierz' || 
+        props.company === 'wybierz' || props.company === '') {
       setMessage('Błędne wypełnienie!');
       handleClick();
     } else {
@@ -17,6 +22,8 @@ function Time(props) {
         props.setWindowVisibility(false);
         props.setEvent('');
       }
+
+      props.handleDateChange(props.date);
     }
   }
 
@@ -30,9 +37,7 @@ function Time(props) {
 
   const handleDataSend = () => {
     const data = { 
-      // day: day, month: month, year: year 
-      exists: 1,
-      name: props.name,
+      exists: "1",
       name: props.name,
       surname: props.surname,
       weight: props.weight,
@@ -40,23 +45,25 @@ function Time(props) {
       company: props.company,
       religion: props.religion,
       otherInfo: props.otherInfo,
+      time: props.time,
+      day: props.day,
+      month: props.month,
+      year: props.year,
     };
-    fetch('/polls/addtodatabase/2/', {
-      method: 'POST',
+    axios.post('http://localhost:8000/polls/addtodatabase/', data, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data)
+      withCredentials: true,
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        // do something with response data
-      })
-      .catch(error => {
-        console.error(error);
-        // handle error
-      });
+    .then(response => {
+      console.log(response.data);
+      // do something with response data
+    })
+    .catch(error => {
+      console.error(error);
+      // handle error
+    });
   };
  
   return (

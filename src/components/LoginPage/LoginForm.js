@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -9,17 +10,35 @@ const LoginForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch('https://example.com/api/login', {
-      method: 'POST',
+    axios.post('http://localhost:8000/polls/login/', {
+      username: username,
+      password: password
+    }, 
+    {
+      withCredentials: true,
       headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
+        'Content-Type': 'application/json'
+      }
     })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error(error));
+      .then((response) => {
+        const headers = response.headers;
+        console.log(headers)
+        const cookies = headers.get('set-cookie');
+        console.log(cookies)
+        // if (cookies) {
+        //   const sessionIdCookie = cookies.filter((cookie) => {
+        //     return cookie.startsWith('sessionid=');
+        //   })[0];
+        //   if (sessionIdCookie) {
+        //     document.cookie = sessionIdCookie.split(';')[0];
+        //   }
+        // }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
+  
 
   return (
     <form onSubmit={handleSubmit}>

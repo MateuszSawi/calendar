@@ -56,9 +56,9 @@ function Box(props) {
 
   let family;
   if (yesChecked === true ) {
-    family = 'yes';
+    family = 'true';
   } else if (noChecked === true ) {
-    family = 'no';
+    family = 'false';
   }
 
   // religion
@@ -124,14 +124,14 @@ function Box(props) {
 
   // filter
 
-  const obj = [
-    name,
-    surname,
-    weight,
-    family,
-    religion,
-    company
-  ]
+  // const obj = [
+  //   name,
+  //   surname,
+  //   weight,
+  //   family,
+  //   religion,
+  //   company
+  // ]
 
 return (
   <div className={styles.window}>
@@ -212,14 +212,8 @@ return (
         <button onClick={toggleMenuReligion} className={styles.optionButton}>{religion}</button>
         {isOpenReligion && (
           <div className={styles.toggleMenu}>
-            <div onClick={() => handleOptionClickReligion('chrześcijaństwo')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'chrześcijaństwo' ? <strong>chrześcijaństwo</strong> : 'chrześcijaństwo'}</button></div>
-            <div onClick={() => handleOptionClickReligion('islam')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'islam' ? <strong>islam</strong> : 'islam'}</button></div>
-            <div onClick={() => handleOptionClickReligion('hinduizm')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'hinduizm' ? <strong>hinduizm</strong> : 'hinduizm'}</button></div>
-            <div onClick={() => handleOptionClickReligion('byddyzm')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'byddyzm' ? <strong>byddyzm</strong> : 'byddyzm'}</button></div>
-            <div onClick={() => handleOptionClickReligion('sikhizm')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'sikhizm' ? <strong>sikhizm</strong> : 'sikhizm'}</button></div>
-            <div onClick={() => handleOptionClickReligion('judaizm')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'judaizm' ? <strong>judaizm</strong> : 'judaizm'}</button></div>
-            <div onClick={() => handleOptionClickReligion('bahaizm')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'bahaizm' ? <strong>bahaizm</strong> : 'bahaizm'}</button></div>
-            <div onClick={() => handleOptionClickReligion('bezwyznaniowi')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'bezwyznaniowi' ? <strong>bezwyznaniowi</strong> : 'bezwyznaniowi'}</button></div>
+            <div onClick={() => handleOptionClickReligion('katolickie')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'katolickie' ? <strong>katolickie</strong> : 'katolickie'}</button></div>
+            <div onClick={() => handleOptionClickReligion('niekatolickie')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'niekatolickie' ? <strong>niekatolickie</strong> : 'niekatolickie'}</button></div>
           </div>
         )}
       </div>
@@ -265,6 +259,19 @@ return (
       windowVisibility={props.windowVisibility}
       setWindowVisibility={props.setWindowVisibility}
       setEvent={props.setEvent}
+      date={props.date} 
+
+      day={props.day}
+      month={props.month}
+      year={props.year}
+      time={props.event}
+
+      setDate={props.setDate}
+      setShowTime={props.setShowTime}
+      getCookie={props.getCookie}
+      setResponseData={props.setResponseData}
+
+      handleDateChange={props.handleDateChange}
       
       name={name}
       surname={surname}

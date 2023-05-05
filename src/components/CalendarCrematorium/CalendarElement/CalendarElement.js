@@ -1,13 +1,15 @@
-import {useState} from 'react';
+import React, { useState, useEffect } from "react";
 import moment from 'moment';
 import Calendar from 'react-calendar';
 import './CalendarElement.css';
 import Time from './Time.js';
-// import axios from 'axios';
+import axios from 'axios';
 
 function CalendarElement() {
   const [date, setDate] = useState(new Date());
-  const [showTime, setShowTime] = useState(false); 
+  const [showTime, setShowTime] = useState(true); 
+
+  console.log(date)
 
   let fixedDate = moment(date).format('DD/MM/YYYY');
   let dayOfTheWeek = moment(date).format('dddd'); 
@@ -31,11 +33,18 @@ function CalendarElement() {
     dayOfTheWeek = 'Niedziela';
   }
 
-  // console.log('====== CalendarElement ======');
-  // console.log('Date before fix - ', date);
-  // console.log('fixedDate - ', fixedDate);
-  // console.log('Date params - ', dayOfTheWeek, '|', day, '|', month, '|', year);
-  // console.log(' ');
+  function getCookie(cookieName) {
+    let cookie = {};
+    document.cookie.split(';').forEach(function(el) {
+      let [key,value] = el.split('=');
+      cookie[key.trim()] = value;
+    })
+    return cookie[cookieName];
+  }
+
+  const [responseData, setResponseData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  // const [responseData, setResponseData] = useState(null);
 
   const handleDateChange = (date) => {
     setDate(date);
@@ -44,17 +53,26 @@ function CalendarElement() {
     const month = date.getMonth() + 1; // add 1 since getMonth() returns zero-based index
     const year = date.getFullYear();
     const data = { day: day, month: month, year: year };
-    fetch('/polls/addtodatabase/', {
-      method: 'POST',
+    const sessionid = getCookie("jwt_token");
+    console.log(sessionid);
+
+    setIsLoading(true); // ustawienie stanu ładowania na true
+
+    axios.post('http://localhost:8000/polls/readfromdatabase/', { day, month, year }, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': sessionid
       },
-      body: JSON.stringify(data)
+      withCredentials: true
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        // do something with response data
+      .then(response => {
+        // console.log(response.data);
+        setResponseData(response.data);
+
+        setTimeout(() => { // wymuszenie minimum czasu ładowania
+          setResponseData(response.data);
+          setIsLoading(false); // ustawienie stanu ładowania na false
+        }, 500); // czas ładowania w milisekundach
       })
       .catch(error => {
         console.error(error);
@@ -62,37 +80,58 @@ function CalendarElement() {
       });
   };
 
+  // render calendar 
+
+
+
   return (
     <div className='app'>
       <h1 className='header'>Krematorium "Zieleń"</h1>
-      <div>
-       <Calendar onChange={handleDateChange} value={date} 
-        onClickDay={() => {
-          setShowTime(true);
-        }} />
-      </div>
-   
-      {date.length > 0 ? (
-      <p>
-        <span>Start:</span>
-        {date[0].toDateString()}
-        &nbsp;
-        &nbsp;
-        <span>End:</span>{date[1].toDateString()}
-      </p>
-             ) : (
-      <p>
-        <span>Wybrany dzień : </span>{fixedDate}
-      </p> 
-             )
-      }
-      <Time showTime={showTime} 
-        date={date} 
-        fixedDate={fixedDate} 
-        dayOfTheWeek={dayOfTheWeek} 
-        day={day} 
-        month={month} 
-        year={year} />
+      
+          <div>
+            <div>
+            <Calendar onChange={handleDateChange} value={date} 
+              onClickDay={() => {
+                setShowTime(true);
+              }} />
+            </div>
+        
+            {date.length > 0 ? (
+            <p>
+              <span>Start:</span>
+              {date[0].toDateString()}
+              &nbsp;
+              &nbsp;
+              <span>End:</span>{date[1].toDateString()}
+            </p>
+                  ) : (
+            <p>
+              <span>Wybrany dzień : </span>{fixedDate}
+            </p> 
+                  )
+            }
+            <p>
+              &nbsp;  
+            </p>
+      
+            <Time showTime={showTime} 
+              date={date} 
+              fixedDate={fixedDate} 
+              dayOfTheWeek={dayOfTheWeek} 
+              day={day} 
+              month={month} 
+              year={year} 
+              responseData={responseData} 
+              
+              handleDateChange={handleDateChange}
+              isLoading={isLoading}
+              
+              setDate={setDate}
+              setShowTime={setShowTime}
+              getCookie={getCookie}
+              setResponseData={setResponseData} />
+          </div>
+        
     </div>
      )
 }

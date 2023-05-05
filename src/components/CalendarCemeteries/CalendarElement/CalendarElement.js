@@ -86,6 +86,9 @@ function CalendarElement() {
       </p> 
              )
       }
+      <p>
+        &nbsp;  
+      </p>
       <Time showTime={showTime} 
         date={date} 
         fixedDate={fixedDate} 
