@@ -37,6 +37,8 @@ function Box(props) {
   const handleWeightInputChange = (event) => {
     const value = event.target.value;
     setWeight(value);
+    // const weightToSend = value ? value : 0; // jeśli wartość istnieje, użyj jej, w przeciwnym razie ustaw 0
+    // setWeight(weightToSend);
   };
 
   // family
@@ -124,14 +126,12 @@ function Box(props) {
 
   // filter
 
-  // const obj = [
-  //   name,
-  //   surname,
-  //   weight,
-  //   family,
-  //   religion,
-  //   company
-  // ]
+  let isMidnight = false;
+  if (props.event === '00:00') {
+    isMidnight = true;
+  } else {
+    isMidnight = false;
+  }
 
 return (
   <div className={styles.window}>
@@ -140,7 +140,13 @@ return (
       <div 
       // className={styles.chosenTime}
       >
-        <label><strong>{props.event} {props.dayOfTheWeek} {props.fixedDate}</strong></label>
+        {/* <label><strong>{props.event} {props.dayOfTheWeek} {props.fixedDate}</strong></label> */}
+        {!isMidnight && (
+          <label><strong>{props.event} {props.dayOfTheWeek} {props.fixedDate}</strong></label>
+        )}
+        {isMidnight && (
+          <label><strong>24:00 {props.dayOfTheWeek} {props.fixedDate}</strong></label>
+        )}
       </div>
 
       <div 
@@ -269,12 +275,18 @@ return (
       setDate={props.setDate}
       setShowTime={props.setShowTime}
       getCookie={props.getCookie}
+      
       setResponseData={props.setResponseData}
+      setIsLoading={props.setIsLoading}
 
       handleDateChange={props.handleDateChange}
+
+      responseData={props.responseData} 
+      isLoading={props.isLoading}
       
       name={name}
       surname={surname}
+      setWeight={setWeight}
       weight={weight}
       family={family}
       company={company}

@@ -22,6 +22,7 @@ function Time(props) {
       setShowTime={props.setShowTime}
       getCookie={props.getCookie}
       setResponseData={props.setResponseData}
+      setIsLoading={props.setIsLoading}
     /> : null}
   </div>
   )

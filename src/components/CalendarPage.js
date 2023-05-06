@@ -1,7 +1,7 @@
 import CalendarCrematorium from './CalendarCrematorium/CalendarCrematorium';
 import styles from './CalendarPage.module.scss';
 
-import CalendarCementary from './CalendarCemeteries/CalendarCementary';
+// import CalendarCementary from './CalendarCemeteries/CalendarCementary';
 
 function App() {
 
@@ -11,9 +11,9 @@ function App() {
         <CalendarCrematorium />
       </div>
 
-      <div className={styles.calendar}>
+      {/* <div className={styles.calendar}>
         <CalendarCementary />
-      </div>
+      </div> */}
     </div>
     );
 }

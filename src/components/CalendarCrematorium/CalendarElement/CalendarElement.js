@@ -7,9 +7,9 @@ import axios from 'axios';
 
 function CalendarElement() {
   const [date, setDate] = useState(new Date());
-  const [showTime, setShowTime] = useState(true); 
+  const [showTime, setShowTime] = useState(false); 
 
-  console.log(date)
+  // console.log(date);
 
   let fixedDate = moment(date).format('DD/MM/YYYY');
   let dayOfTheWeek = moment(date).format('dddd'); 
@@ -42,9 +42,8 @@ function CalendarElement() {
     return cookie[cookieName];
   }
 
-  const [responseData, setResponseData] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  // const [responseData, setResponseData] = useState(null);
+  const [responseData, setResponseData] = useState(null);
 
   const handleDateChange = (date) => {
     setDate(date);
@@ -54,7 +53,7 @@ function CalendarElement() {
     const year = date.getFullYear();
     const data = { day: day, month: month, year: year };
     const sessionid = getCookie("jwt_token");
-    console.log(sessionid);
+    // console.log(sessionid);
 
     setIsLoading(true); // ustawienie stanu ładowania na true
 
@@ -72,7 +71,7 @@ function CalendarElement() {
         setTimeout(() => { // wymuszenie minimum czasu ładowania
           setResponseData(response.data);
           setIsLoading(false); // ustawienie stanu ładowania na false
-        }, 500); // czas ładowania w milisekundach
+        }, 1000); // czas ładowania w milisekundach
       })
       .catch(error => {
         console.error(error);
@@ -81,8 +80,6 @@ function CalendarElement() {
   };
 
   // render calendar 
-
-
 
   return (
     <div className='app'>
@@ -129,7 +126,8 @@ function CalendarElement() {
               setDate={setDate}
               setShowTime={setShowTime}
               getCookie={getCookie}
-              setResponseData={setResponseData} />
+              setResponseData={setResponseData}
+              setIsLoading={setIsLoading} />
           </div>
         
     </div>
