@@ -30,7 +30,7 @@ function Times(props) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch('/polls//')
+    fetch('/polls/login/')  ///polls//
       .then(response => response.json())
       .then(data => setData(data))
       .catch(error => console.error(error));

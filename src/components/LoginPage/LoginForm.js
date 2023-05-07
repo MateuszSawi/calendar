@@ -38,6 +38,26 @@ const LoginForm = () => {
         console.error(error);
       });
   };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   axios.get('/polls/login/', {
+  //   }, 
+  //   {
+  //     withCredentials: true,
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   })
+  //     .then((response) => {
+  //       isLoggedIn = true - mozna dodawac i edit
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // };
+
+
   
 
   return (
