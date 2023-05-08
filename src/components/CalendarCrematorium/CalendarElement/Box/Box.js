@@ -82,6 +82,39 @@ function Box(props) {
 
   // company
 
+  const companies = [
+    'Obol - Sopot',
+    'Zakrzewski - Gdynia',
+    'Ostatnia posługa - Rumia',
+    'Chejron - Gdynia',
+    'Orszak - Gdynia',
+    'Ochnio - Wejherowo',
+    'Eternum - Rumia',
+    'Tanatos - Gdańsk',
+    'Zarząd cmentarzy komunalnych - Gdynia',
+    'Lilia - Starogard Gdański',
+    'Anubis - Sopot',
+    'M.Z.Z. Koziara - Gdańsk',
+    'Aakcesoria Masiak-Lewandowska - Gdynia',
+    'Lademann - Wejherowo',
+    'Henryk Pioch - Kartuzy',
+    'Kalia - Kleszczewo',
+    'Hedez - Puck',
+    'Kalia - Gdańsk',
+    'Juka - Starogard Gdańsk',
+    'Św.Józef - Żukowo',
+    'PPU "Zieleń" - Gdańsk',
+    'Światłość wiekuista - Pruszcz Gdański',
+    'Kremo - Gdańsk',
+    'Kalia - Puck',
+    'Przymorze - Gdańsk',
+    'Credo - Gdańsk',
+    'Róża - Gdynia',
+    'Concordia - Gdynia',
+    'Starówka - Tczew',
+    'ZCK Sopot'
+  ];      
+
   const [isOpenCompany, setIsOpenCompany] = useState(false);
   const [selectedOptionCompany, setSelectedOptionCompany] = useState('wybierz');
   const [inputValueCompany, setInputValueCompany] = useState('');
@@ -114,6 +147,17 @@ function Box(props) {
   if (company === 'Inna') {
     company = inputValueCompany;
   }
+
+  // const mappedCompanies = companies.map(singleCompany => {
+  //   // console.log(singleCompany)
+  //   return (
+  //   <div onClick={() => handleOptionClickCompany(singleCompany)} className={styles.companyButtonWrapper}>
+  //     <button className={styles.companyButton}>
+  //       <p className={styles.companyNameOnButton}>{selectedOptionCompany === singleCompany ? <strong>{singleCompany}</strong> : singleCompany}</p>
+  //     </button>
+  //   </div>
+  //   )
+  // });   
 
   // otherInfo
 
@@ -214,22 +258,11 @@ return (
       </div>
 
       <div className={styles.infoBox}>
-        <label>Wyznanie :&nbsp;</label>
-        <button onClick={toggleMenuReligion} className={styles.optionButton}>{religion}</button>
-        {isOpenReligion && (
-          <div className={styles.toggleMenu}>
-            <div onClick={() => handleOptionClickReligion('katolickie')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'katolickie' ? <strong>katolickie</strong> : 'katolickie'}</button></div>
-            <div onClick={() => handleOptionClickReligion('niekatolickie')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'niekatolickie' ? <strong>niekatolickie</strong> : 'niekatolickie'}</button></div>
-          </div>
-        )}
-      </div>
-
-      <div className={styles.infoBox}>
         <label>Firma :&nbsp;</label>
         <button onClick={toggleMenuCompany} className={styles.optionButton}>{company}</button>
         {isOpenCompany && (
-          <div className={styles.toggleMenu}>
-            <div onClick={() => handleOptionClickCompany('Firma 1')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 1' ? <strong>Firma 1</strong> : 'Firma 1'}</button></div>
+          <div className={styles.toggleMenuCompany}>
+            {/* <div onClick={() => handleOptionClickCompany('Firma 1')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 1' ? <strong>Firma 1</strong> : 'Firma 1'}</button></div>
             <div onClick={() => handleOptionClickCompany('Firma 2')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 2' ? <strong>Firma 2</strong> : 'Firma 2'}</button></div>
             <div onClick={() => handleOptionClickCompany('Firma 3')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 3' ? <strong>Firma 3</strong> : 'Firma 3'}</button></div>
             <div onClick={() => handleOptionClickCompany('Firma 4')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 4' ? <strong>Firma 4</strong> : 'Firma 4'}</button></div>
@@ -238,10 +271,21 @@ return (
             <div onClick={() => handleOptionClickCompany('Firma 7')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 7' ? <strong>Firma 7</strong> : 'Firma 7'}</button></div>
             <div onClick={() => handleOptionClickCompany('Firma 8')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 8' ? <strong>Firma 8</strong> : 'Firma 8'}</button></div>
             <div onClick={() => handleOptionClickCompany('Firma 9')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 9' ? <strong>Firma 9</strong> : 'Firma 9'}</button></div>
-            <div onClick={() => handleOptionClickCompany('Firma 10')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 10' ? <strong>Firma 10</strong> : 'Firma 10'}</button></div>
+            <div onClick={() => handleOptionClickCompany('Firma 10')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 10' ? <strong>Firma 10</strong> : 'Firma 10'}</button></div> */}
+
+            {companies.map(singleCompany => {
+              // console.log(singleCompany)
+              return (
+                <div onClick={() => handleOptionClickCompany(singleCompany)} className={styles.companyButtonWrapper}>
+                  <button className={styles.companyButton}>
+                    <p className={styles.companyNameOnButton}>{selectedOptionCompany === singleCompany ? <strong>{singleCompany}</strong> : singleCompany}</p>
+                  </button>
+                </div>
+              )
+            })}
 
             <div onClick={() => handleOptionClickCompanyOther('Inna')}  className={styles.companyButtonWrapper}><button className={styles.companyButton}>
-              {selectedOptionCompany === 'Inna' ? <strong>Inna</strong> : 'Inna'}</button>
+              <p className={styles.companyNameOnButton}>{selectedOptionCompany === 'Inna' ? <strong>Inna</strong> : 'Inna'}</p></button>
               {selectedOptionCompany === 'Inna' && (
                 <div>
                   <input type="text" value={inputValueCompany} onChange={handleInputChangeCompany} className={styles.otherCompanyInput} />
@@ -251,7 +295,19 @@ return (
             </div>
           </div>
         )}
-      </div>      
+      </div>   
+
+      <div className={styles.infoBox}>
+        <label>Wyznanie :&nbsp;</label>
+        <button onClick={toggleMenuReligion} className={styles.optionButton}>{religion}</button>
+        {isOpenReligion && (
+          <div className={styles.toggleMenu}>
+            <div onClick={() => handleOptionClickReligion('katolickie')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'katolickie' ? <strong>katolickie</strong> : 'katolickie'}</button></div>
+            <div onClick={() => handleOptionClickReligion('Świadek Jehowy')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'Świadek Jehowy' ? <strong>Świadek Jehowy</strong> : 'Świadek Jehowy'}</button></div>
+            <div onClick={() => handleOptionClickReligion('inne')} className={styles.religionButtonWrapper}><button className={styles.religionButton}>{religion === 'inne' ? <strong>inne</strong> : 'inne'}</button></div>
+          </div>
+        )}
+      </div>   
     </div>
       
     <label>Uwagi :&nbsp;</label>

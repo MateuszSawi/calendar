@@ -81,6 +81,25 @@
   transform: translateY(27px);
 }
 
+.toggleMenuCompany {
+  position: absolute;
+  background-color: lightpink;
+
+  padding: 10px;
+
+  box-shadow: 0px 0px 10px 10px #000000;
+
+  background-color: #ebebeb;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+
+  transform: translateY(27px);
+
+  max-height: 400px;
+  overflow: auto;
+}
+
 .textarea {
   min-height: 160px;
   max-height: 300px;
@@ -109,11 +128,13 @@
 
 .infoBox {
   // width: 30%;
-  width: 255px;
+  max-width: 255px;
   padding: 10px;
   display: flex;
   // flex-wrap: wrap;
   justify-content: flex-end;
+  // align-items: center;
+
 }
 
 .infoBoxKg {
@@ -123,6 +144,7 @@
   display: flex;
   // flex-wrap: wrap;
   justify-content: flex-end;
+  // align-items: center;
 }
 
 .checkboxWrapper {
@@ -138,20 +160,26 @@
 }
 
 .companyButton {
-  width: 120px;
+  width: 200px;
   text-align: left;
   // border-radius: 2px;
-  height: 25px;
+  height: auto;
   background-color: #fff;
   // border: 1px solid #aaa;
 
   border: none;
   border-radius: 2px;
+
+  display: flex;
 }
 
 .companyButton:hover {
   box-shadow: 0 0 5px rgba(0,0,0,0.4);
   background-color: #f4f4f4;
+}
+
+.companyNameOnButton {
+  margin: 5px;
 }
 
 // single religion button
@@ -220,6 +248,7 @@
   border: none;
   border-radius: 2px;
   border: 1px solid #aaa;
+  width: 200px;
 }
 
 // ------------------------------------------------------
