@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import styles from './LoginForm.module.scss'
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -61,25 +62,39 @@ const LoginForm = () => {
   
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Nazwa użytkownika:
-        <input
-          type="text"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        />
-      </label>
-      <label>
-        Hasło:
-        <input
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </label>
-      <button type="submit">Zaloguj</button>
-    </form>
+    <div className={styles.loginWrapper}>
+      <div className={styles.loginBox}>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.loginElement}>
+            <label>
+              Nazwa użytkownika : &nbsp;
+              <input
+                className={styles.input}
+                type="text"
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+              />
+            </label>
+          </div>
+
+          <div className={styles.loginElement}>
+            <label>
+              Hasło : &nbsp;
+              <input
+                className={styles.input}
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </label>
+          </div>
+
+          <div className={styles.loginButtonWrapper}>
+            <button className={styles.loginButton} type="submit">Zaloguj</button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 

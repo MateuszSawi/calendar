@@ -10,7 +10,7 @@ return (
   <header className={styles.header}>
     <div className={styles.headerInner}>
       <div className={styles.imgDiv}>
-        <img alt="zielen" src={process.env.PUBLIC_URL + 'zielen.png'} />
+        <img alt="zielen" src={process.env.PUBLIC_URL + 'logo_zielen_oryginalne.png'} />
       </div>
 
       <div className={styles.userDiv}>

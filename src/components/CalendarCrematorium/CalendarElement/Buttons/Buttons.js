@@ -159,26 +159,26 @@ function Buttons(props) {
  
   return (
     <div className={styles.buttonsWrapper}>
-    {props.addButtonVisibility && (
-      <button onClick={() => {
-        addButtonClick(props.time);
-        props.setTime(props.time);
-        props.openWindow();
-      }}> DODAJ </button>
-    )} 
+      {props.addButtonVisibility && (
+        <button onClick={() => {
+          addButtonClick(props.time);
+          props.setTime(props.time);
+          props.openWindow();
+        }}> DODAJ </button>
+      )} 
 
-    {!props.addButtonVisibility && (
-      <div className={styles.responseInfoButtons}>
-      <button onClick={() => {
-        handleDataEdit();
-      }}> EDYTUJ </button>
+      {!props.addButtonVisibility && (
+        <div className={styles.responseInfoButtons}>
+        <button onClick={() => {
+          handleDataEdit();
+        }}> EDYTUJ </button>
 
-      <button onClick={() => {
-        handleDataDelete();
-      }}> USUŃ </button>
+        <button onClick={() => {
+          handleDataDelete();
+        }}> USUŃ </button>
+      </div>
+      )} 
     </div>
-    )} 
-  </div>
   )
 }
 
