@@ -7,6 +7,11 @@
   justify-content: space-between;
 }
 
+.timeBoxWrapper {
+  // background-color: red;
+  width: 100%;
+}
+
 .timeBox {
   // border-top: 1px solid;
   padding: 10px;
@@ -54,6 +59,16 @@
   align-items: flex-end;
 }
 
+.addButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0px 10px 41px 0px;
+}
+
+// .x {
+//   background-color: red;
+//   width: 100%;
+// }
 
 // =================================================================
 

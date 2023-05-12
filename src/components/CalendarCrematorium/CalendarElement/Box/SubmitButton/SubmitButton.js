@@ -73,6 +73,8 @@ function SubmitButton(props) {
 
   const [loading, setLoading] = useState(true);
 
+  console.log(props.family)
+
   const handleDataSend = (weightToSend) => {
     const data = { 
       exists: "2",

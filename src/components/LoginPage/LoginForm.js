@@ -9,7 +9,7 @@ const LoginForm = () => {
   const [isSubmitted, setIsSubmitted] = useState('false');
   const [isCorrect, setIsCorrect] = useState('false');
 
-  const handleSubmit = (event) => {
+  const handleLogin = (event) => {
     event.preventDefault();
     axios.post('http://localhost:8000/polls/login/', {
       username: username,
@@ -23,9 +23,9 @@ const LoginForm = () => {
     })
       .then((response) => {
         const headers = response.headers;
-        console.log(headers)
+        console.log('headers: ', headers)
         const cookies = headers.get('set-cookie');
-        console.log(cookies)
+        console.log('cookies: ', cookies)
         // if (cookies) {
         //   const sessionIdCookie = cookies.filter((cookie) => {
         //     return cookie.startsWith('sessionid=');
@@ -40,26 +40,26 @@ const LoginForm = () => {
       });
   };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   axios.get('/polls/login/', {
-  //   }, 
-  //   {
-  //     withCredentials: true,
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   })
-  //     .then((response) => {
-  //       isLoggedIn = true - mozna dodawac i edit
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
+  const handleCheckSession = () => {
+    // event.preventDefault();
+    axios.get('http://localhost:8000/polls/checklogin', {
+      
+    })
+      .then((response) => {
+        console.log('checkSession :', response);
+        if (response.status) {
+          console.log('GGGG: ', response.status)
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
-
-  
+  const handleSubmit = (event) => {
+    handleLogin(event);
+    handleCheckSession();
+  };
 
   return (
     <div className={styles.loginWrapper}>

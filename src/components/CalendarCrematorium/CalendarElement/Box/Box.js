@@ -1,7 +1,8 @@
 import styles from './Box.module.scss';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import SubmitButton from './SubmitButton/SubmitButton'
+import SubmitButton from './SubmitButton/SubmitButton';
+import CloseBoxButton from './CloseBoxButton/CloseBoxButton';
 
 function Box(props) {
 
@@ -37,8 +38,6 @@ function Box(props) {
   const handleWeightInputChange = (event) => {
     const value = event.target.value;
     setWeight(value);
-    // const weightToSend = value ? value : 0; // jeśli wartość istnieje, użyj jej, w przeciwnym razie ustaw 0
-    // setWeight(weightToSend);
   };
 
   // family
@@ -56,11 +55,12 @@ function Box(props) {
     setNoChecked(true);
   };
 
-  let family;
+  const [family, setFamily] = useState(false);
+  
   if (yesChecked === true ) {
-    family = 'true';
+    setFamily(true);
   } else if (noChecked === true ) {
-    family = 'false';
+    setFamily(false);
   }
 
   // religion
@@ -146,18 +146,7 @@ function Box(props) {
   company = selectedOptionCompany;
   if (company === 'Inna') {
     company = inputValueCompany;
-  }
-
-  // const mappedCompanies = companies.map(singleCompany => {
-  //   // console.log(singleCompany)
-  //   return (
-  //   <div onClick={() => handleOptionClickCompany(singleCompany)} className={styles.companyButtonWrapper}>
-  //     <button className={styles.companyButton}>
-  //       <p className={styles.companyNameOnButton}>{selectedOptionCompany === singleCompany ? <strong>{singleCompany}</strong> : singleCompany}</p>
-  //     </button>
-  //   </div>
-  //   )
-  // });   
+  } 
 
   // otherInfo
 
@@ -181,10 +170,7 @@ return (
   <div className={styles.window}>
 
     <div className={styles.labelInnerWindow}>
-      <div 
-      // className={styles.chosenTime}
-      >
-        {/* <label><strong>{props.event} {props.dayOfTheWeek} {props.fixedDate}</strong></label> */}
+      <div>
         {!isMidnight && (
           <label><strong>{props.event} {props.dayOfTheWeek} {props.fixedDate}</strong></label>
         )}
@@ -193,10 +179,40 @@ return (
         )}
       </div>
 
-      <div 
-      // className={styles.closeButton}
-      >
-        <button className={styles.closeWindowButton} onClick={closeWindow} >X</button>
+      <div>
+        <CloseBoxButton 
+          closeWindow={closeWindow}
+          windowVisibility={props.windowVisibility}
+          setWindowVisibility={props.setWindowVisibility}
+          setEvent={props.setEvent}
+          date={props.date} 
+    
+          day={props.day}
+          month={props.month}
+          year={props.year}
+          time={props.event}
+    
+          setDate={props.setDate}
+          setShowTime={props.setShowTime}
+          getCookie={props.getCookie}
+          
+          setResponseData={props.setResponseData}
+          setIsLoading={props.setIsLoading}
+    
+          handleDateChange={props.handleDateChange}
+    
+          responseData={props.responseData} 
+          isLoading={props.isLoading}
+          
+          name={name}
+          surname={surname}
+          setWeight={setWeight}
+          weight={weight}
+          family={family}
+          company={company}
+          religion={religion}
+          otherInfo={otherInfo}
+        />
       </div>
     </div>
 
@@ -262,19 +278,7 @@ return (
         <button onClick={toggleMenuCompany} className={styles.optionButton}>{company}</button>
         {isOpenCompany && (
           <div className={styles.toggleMenuCompany}>
-            {/* <div onClick={() => handleOptionClickCompany('Firma 1')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 1' ? <strong>Firma 1</strong> : 'Firma 1'}</button></div>
-            <div onClick={() => handleOptionClickCompany('Firma 2')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 2' ? <strong>Firma 2</strong> : 'Firma 2'}</button></div>
-            <div onClick={() => handleOptionClickCompany('Firma 3')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 3' ? <strong>Firma 3</strong> : 'Firma 3'}</button></div>
-            <div onClick={() => handleOptionClickCompany('Firma 4')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 4' ? <strong>Firma 4</strong> : 'Firma 4'}</button></div>
-            <div onClick={() => handleOptionClickCompany('Firma 5')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 5' ? <strong>Firma 5</strong> : 'Firma 5'}</button></div>
-            <div onClick={() => handleOptionClickCompany('Firma 6')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 6' ? <strong>Firma 6</strong> : 'Firma 6'}</button></div>
-            <div onClick={() => handleOptionClickCompany('Firma 7')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 7' ? <strong>Firma 7</strong> : 'Firma 7'}</button></div>
-            <div onClick={() => handleOptionClickCompany('Firma 8')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 8' ? <strong>Firma 8</strong> : 'Firma 8'}</button></div>
-            <div onClick={() => handleOptionClickCompany('Firma 9')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 9' ? <strong>Firma 9</strong> : 'Firma 9'}</button></div>
-            <div onClick={() => handleOptionClickCompany('Firma 10')} className={styles.companyButtonWrapper}><button className={styles.companyButton}>{selectedOptionCompany === 'Firma 10' ? <strong>Firma 10</strong> : 'Firma 10'}</button></div> */}
-
             {companies.map(singleCompany => {
-              // console.log(singleCompany)
               return (
                 <div onClick={() => handleOptionClickCompany(singleCompany)} className={styles.companyButtonWrapper}>
                   <button className={styles.companyButton}>
