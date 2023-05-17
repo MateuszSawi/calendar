@@ -4,13 +4,15 @@ import axios from 'axios';
 function CloseBoxButton(props) {
 
   const deleteButtonClick = (time) => {
-    handleDataDelete();
+    if (!props.isFromEdit) {
+      handleDataDelete();
 
-    handleDateChangeOnDelete(props.date);
-
-    setTimeout(() => {
       handleDateChangeOnDelete(props.date);
-    }, 2000);
+
+      setTimeout(() => {
+        handleDateChangeOnDelete(props.date);
+      }, 2000);
+    }
   }
 
   const handleDataDelete = () => {
@@ -69,6 +71,11 @@ function CloseBoxButton(props) {
 
       setTimeout(() => { // wymuszenie minimum czasu ładowania
         props.setResponseData(response.data);
+        // props.setIsLoading(false);
+      }, 1000); // czas ładowania w milisekundach
+
+      setTimeout(() => { // wymuszenie minimum czasu ładowania
+        // props.setResponseData(response.data);
         props.setIsLoading(false);
       }, 2000); // czas ładowania w milisekundach
     })

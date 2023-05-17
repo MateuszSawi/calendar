@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './LoginForm.module.scss'
+import { useNavigate } from 'react-router-dom';
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const [isSubmitted, setIsSubmitted] = useState('false');
   const [isCorrect, setIsCorrect] = useState('false');
+
+  const [wrongLogin, setWrongLogin] = useState('');
+
+  const navigate = useNavigate();
+
+  console.log(props)
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -23,9 +30,10 @@ const LoginForm = () => {
     })
       .then((response) => {
         const headers = response.headers;
-        console.log('headers: ', headers)
+        // console.log('headers: ', headers)
         const cookies = headers.get('set-cookie');
-        console.log('cookies: ', cookies)
+        // console.log('cookies: ', cookies)
+        
         // if (cookies) {
         //   const sessionIdCookie = cookies.filter((cookie) => {
         //     return cookie.startsWith('sessionid=');
@@ -40,15 +48,22 @@ const LoginForm = () => {
       });
   };
 
-  const handleCheckSession = () => {
-    // event.preventDefault();
-    axios.get('http://localhost:8000/polls/checklogin', {
-      
+  const handleCheckSession = (event) => {
+    event.preventDefault();
+    axios.get('http://localhost:8000/polls/checksession', {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
       .then((response) => {
-        console.log('checkSession :', response);
-        if (response.status) {
-          console.log('GGGG: ', response.status)
+        // console.log(response.data.login);
+        if (response.data.isLoggedIn) {
+          props.setUserName(response.data.login);
+          navigate('/calendar');
+          setWrongLogin('');
+        } else {
+          setWrongLogin('Błędne dane logowania.');
         }
       })
       .catch((error) => {
@@ -58,7 +73,9 @@ const LoginForm = () => {
 
   const handleSubmit = (event) => {
     handleLogin(event);
-    handleCheckSession();
+    setTimeout(() => { // wymuszenie minimum czasu ładowania
+      handleCheckSession(event);
+    }, 1000); // czas ładowania w milisekundach
   };
 
   return (
@@ -92,6 +109,8 @@ const LoginForm = () => {
           <div className={styles.loginButtonWrapper}>
             <button className={styles.loginButton} type="submit">Zaloguj</button>
           </div>
+
+          {wrongLogin && <div className={styles.wrongLoginMessage}>{wrongLogin}</div>}
         </form>
       </div>
     </div>

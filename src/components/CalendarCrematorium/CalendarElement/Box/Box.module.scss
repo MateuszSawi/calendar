@@ -166,6 +166,7 @@
 
 .religionButton {
   width: 120px;
+  // min-width: 120px;
   text-align: left;
   // border-radius: 2px;
   height: 25px;
@@ -182,10 +183,48 @@
   background-color: #f4f4f4;
 }
 
+.familyButton {
+  width: 60px;
+  // min-width: 120px;
+  text-align: center;
+  // border-radius: 2px;
+  height: 25px;
+  // padding: 20px;
+  background-color: #fff;
+  // border: 1px solid #aaa;
+
+  border: none;
+  border-radius: 2px;
+}
+
+.familyButton:hover {
+  box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  background-color: #f4f4f4;
+}
+
+.optionButtonFamily {
+  min-height: 25px;
+  text-align: center;
+  width: 60px;
+  background-color: #fff;
+  // border: 1px solid #aaa;
+
+  border: none;
+  border-radius: 2px;
+
+  box-shadow: 0 0 2px rgba(0,0,0,0.4);
+}
+
+.optionButtonFamily:hover {
+  box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  background-color: #f4f4f4;
+}
+
+
 // choice button
 
 .optionButton {
-  height: 25px;
+  min-height: 25px;
   text-align: center;
   width: 120px;
   background-color: #fff;

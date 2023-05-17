@@ -84,6 +84,7 @@ function AddButton(props) {
   return (
     <div className={styles.addButtonWrapper}>
       <button onClick={() => {
+        props.setIsFromEdit(false);
         addButtonClick(props.time);
         props.setTime(props.time);
         props.openWindow();}} >DODAJ

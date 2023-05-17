@@ -4,7 +4,7 @@ import { FaUser } from 'react-icons/fa';
 
 function Header(props) {
 
-  
+  console.log(props)
   
 return (
   <header className={styles.header}>
@@ -18,7 +18,7 @@ return (
           <FaUser size="1.4em" />
         </div>
         <div className={styles.user}>
-          Nazwa użytkownika
+          {props.userName}
         </div>
       </div>
     </div>

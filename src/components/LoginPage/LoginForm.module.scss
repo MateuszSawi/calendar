@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
   width: 360px;
-  height: 200px;
+  height: 240px;
 
 
   background-color: #ebebeb;
@@ -70,3 +70,13 @@
 
   border-radius: 5px;
 }
+
+// wrong login notification
+
+.wrongLoginMessage {
+  color: #FF0000;
+
+  display: flex;
+  justify-content: center;
+}
+

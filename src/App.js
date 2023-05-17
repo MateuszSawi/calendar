@@ -3,20 +3,23 @@ import CalendarPage from './components/CalendarPage';
 import LoginForm from './components/LoginPage/LoginForm';
 import Header from './components/Header/Header';
 import { Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
 
 function App() {
 
-  // const routes = useRoutes([
-  //   { path: '/', element: <LoginForm /> },
-  //   { path: '/calendar', element: <CalendarPage /> },
-  // ]);
+  const [userName, setUserName] = useState('');
 
   return (
     <div className='container'>
-      <Header />
+      <Header 
+        userName={userName}
+      />
+
       <Routes>
         <Route path="/"
-          element={<LoginForm />} />
+          element={<LoginForm 
+            setUserName={setUserName}
+          />} />
         <Route path="/calendar"
           element={<CalendarPage />} />
       </Routes>

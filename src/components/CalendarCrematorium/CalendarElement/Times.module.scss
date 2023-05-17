@@ -116,3 +116,77 @@
   display: flex;
   justify-content: flex-end;
 }
+
+// ------------------- powiadomienie przed usuń -------------------
+
+.notificationBackground {
+  position: fixed;
+  width: 50%;
+  left: 0;
+  height: 100%;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+}
+
+.notificationWrapper {
+  // height: 85%;
+  height: 220px;
+  // width: 70%;
+  // width: 380px;
+  width: 320px;
+  min-width: 220px;
+  position: fixed;
+  background-color: #ebebeb;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.6);
+
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: center;
+}
+
+.notificationBox {
+  height: 120px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.notificationBar {
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  // top: 10px;
+  padding: 10px;
+}
+
+// close notification box button
+
+.closeWindowButton {
+  height: 30px;
+  width: 30px;
+
+  background-color: #667363;
+  color: #fff;
+
+  border: none;
+  border-radius: 2px;
+
+  box-shadow: 0 0 2px rgba(0,0,0,0.4);
+}
+
+.closeWindowButton:hover {
+  box-shadow: 0 0 7px rgba(0,0,0,0.4);
+  background-color: #5d695a;
+}
+
+.closeWindowButton:active {
+  transform: translateY(0.5px);
+}

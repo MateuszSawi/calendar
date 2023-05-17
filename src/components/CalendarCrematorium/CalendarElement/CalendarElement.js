@@ -70,8 +70,13 @@ function CalendarElement() {
 
         setTimeout(() => { // wymuszenie minimum czasu ładowania
           setResponseData(response.data);
-          setIsLoading(false); // ustawienie stanu ładowania na false
+          // setIsLoading(false); // ustawienie stanu ładowania na false
         }, 1000); // czas ładowania w milisekundach
+
+        setTimeout(() => { // TEGO NIE
+          setIsLoading(false); // ustawienie stanu ładowania na false
+        }, 2000);
+
       })
       .catch(error => {
         console.error(error);
