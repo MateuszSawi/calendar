@@ -1,4 +1,5 @@
 import CalendarCrematorium from './CalendarCrematorium/CalendarCrematorium';
+import CalendarCemetery from './CalendarCemetery/CalendarCemetery';
 import styles from './CalendarPage.module.scss';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -33,9 +34,9 @@ function App() {
         <CalendarCrematorium />
       </div>
 
-      {/* <div className={styles.calendar}>
-        <CalendarCementary />
-      </div> */}
+      <div className={styles.calendar}>
+        <CalendarCemetery />
+      </div>
     </div>
     );
 }
