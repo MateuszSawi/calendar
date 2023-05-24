@@ -2,6 +2,7 @@ import styles from './BoxCemetery.module.scss';
 import React, { useState } from 'react';
 import SubmitButtonCemetery from './SubmitButtonCemetery/SubmitButtonCemetery';
 import CloseBoxButtonCemetery from './CloseBoxButtonCemetery/CloseBoxButtonCemetery';
+import HourForm from './HourForm/HourForm';
 
 function BoxCemetery(props) {
 
@@ -44,45 +45,71 @@ function BoxCemetery(props) {
     setSurname(value);
   };
 
-  // weight
+  // // weight
 
-  if (!responseDataInitial.weight) {responseDataInitial.weight = ''}
-  if (responseDataInitial.weight === 0) {responseDataInitial.weight = ''}
-  if (responseDataInitial.weight === '0') {responseDataInitial.weight = ''}
+  // if (!responseDataInitial.weight) {responseDataInitial.weight = ''}
+  // if (responseDataInitial.weight === 0) {responseDataInitial.weight = ''}
+  // if (responseDataInitial.weight === '0') {responseDataInitial.weight = ''}
 
-  const parsedWeight = parseInt(responseDataInitial.weight);
+  // const parsedWeight = parseInt(responseDataInitial.weight);
 
-  const [weight, setWeight] = useState(parsedWeight);
+  // const [weight, setWeight] = useState(parsedWeight);
 
-  const handleWeightInputChange = (event) => {
-    const value = event.target.value;
-    setWeight(value);
-  };
+  // const handleWeightInputChange = (event) => {
+  //   const value = event.target.value;
+  //   setWeight(value);
+  // };
 
-  // family
+  // trumpet
 
-  let familyValue;
+  let trumpetValue;
 
-  if (responseDataInitial.family === 'tak') {
-    familyValue = true;
-  } else if (responseDataInitial.family === 'nie') {
-    familyValue = false;
+  if (responseDataInitial.trumpet === 'tak') {
+    trumpetValue = true;
+  } else if (responseDataInitial.trumpet === 'nie') {
+    trumpetValue = false;
   }
 
-  const [family, setFamily] = useState(familyValue);
-  const [yesChecked, setYesChecked] = useState(responseDataInitial.family === 'tak');
-  const [noChecked, setNoChecked] = useState(responseDataInitial.family === 'nie');
+  const [trumpet, setTrumpet] = useState(trumpetValue);
+  const [yesCheckedTrumpet, setYesCheckedTrumpet] = useState(responseDataInitial.trumpet === 'tak');
+  const [noCheckedTrumpet, setNoCheckedTrumpet] = useState(responseDataInitial.trumpet === 'nie');
 
-  const handleYesChange = () => {
-    setYesChecked(true);
-    setNoChecked(false);
-    setFamily(true);
+  const handleYesChangeTrumpet = () => {
+    setYesCheckedTrumpet(true);
+    setNoCheckedTrumpet(false);
+    setTrumpet(true);
   };
 
-  const handleNoChange = () => {
-    setYesChecked(false);
-    setNoChecked(true);
-    setFamily(false);
+  const handleNoChangeTrumpet = () => {
+    setYesCheckedTrumpet(false);
+    setNoCheckedTrumpet(true);
+    setTrumpet(false);
+  };
+
+  // orchestra
+
+  let orchestraValue;
+
+  if (responseDataInitial.orchestra === 'tak') {
+    orchestraValue = true;
+  } else if (responseDataInitial.orchestra === 'nie') {
+    orchestraValue = false;
+  }
+
+  const [orchestra, setOrchestra] = useState(orchestraValue);
+  const [yesCheckedOrchestra, setYesCheckedOrchestra] = useState(responseDataInitial.orchestra === 'tak');
+  const [noCheckedOrchestra, setNoCheckedOrchestra] = useState(responseDataInitial.orchestra === 'nie');
+
+  const handleYesChangeOrchestra = () => {
+    setYesCheckedOrchestra(true);
+    setNoCheckedOrchestra(false);
+    setOrchestra(true);
+  };
+
+  const handleNoChangeOrchestra = () => {
+    setYesCheckedOrchestra(false);
+    setNoCheckedOrchestra(true);
+    setOrchestra(false);
   };
 
   // company
@@ -128,7 +155,7 @@ function BoxCemetery(props) {
   let company;
 
   const toggleMenuCompany = () => {
-    if (isOpenPlaceofentry === false) {
+    if (isOpenPlaceofentry === false && isOpenBurialPlace === false && isOpenBurialtype === false) {
       setIsOpenCompany(!isOpenCompany);
     }
   };
@@ -170,11 +197,12 @@ function BoxCemetery(props) {
   if (!responseDataInitial.placeofentry) {responseDataInitial.placeofentry = ''}
 
   const [placeofentry, setPlaceofentry] = useState(responseDataInitial.placeofentry);
+  const [selectedOptionPlaceofentry, setSelectedOptionPlaceofentry] = useState(responseDataInitial.placeofentry);
   const [isOpenPlaceofentry, setIsOpenPlaceofentry] = useState(false);
 
 
   const toggleMenuPlaceofentry = () => {
-    if (isOpenCompany === false) {
+    if (isOpenCompany === false && isOpenBurialPlace === false && isOpenBurialtype === false) {
       setIsOpenPlaceofentry(!isOpenPlaceofentry);
     }
   };
@@ -182,6 +210,41 @@ function BoxCemetery(props) {
   const handleOptionClickPlaceofentry = (option) => {
     setPlaceofentry(option);
     setIsOpenPlaceofentry(false);
+    setSelectedOptionPlaceofentry(option);
+  };
+
+  // burialplace
+
+  const burialPlaces = [
+    'Na nowym miejscu',
+    'Na miejscu odzyskanym',
+    'Na nowym miejscu do pochówku urnowego',
+    'Do grobu rodzinnego',
+    'Na miejscu rezerwowym',
+    'Do grobowca',
+    'Do grobowca dla dzieci martwo-narodzonych',
+    'Do kolumbarium',
+    'Do murowanego grobu zbiorowego dla urn',
+    'Ekshumacja'
+  ];      
+
+  if (!responseDataInitial.burialplace) {responseDataInitial.burialplace = ''}
+
+  const [burialplace, setBurialPlace] = useState(responseDataInitial.burialplace);
+  const [selectedOptionBurialplace, setSelectedOptionBurialplace] = useState(responseDataInitial.burialplace);
+  const [isOpenBurialPlace, setIsOpenBurialPlace] = useState(false);
+
+
+  const toggleMenuBurialPlace = () => {
+    if (isOpenCompany === false && isOpenPlaceofentry === false && isOpenBurialtype === false) {
+      setIsOpenBurialPlace(!isOpenBurialPlace);
+    }
+  };
+
+  const handleOptionClickBurialPlace = (option) => {
+    setBurialPlace(option);
+    setIsOpenBurialPlace(false);
+    setSelectedOptionBurialplace(option);
   };
 
   // burialtype
@@ -194,11 +257,12 @@ function BoxCemetery(props) {
   if (!responseDataInitial.burialtype) {responseDataInitial.burialtype = ''}
 
   const [burialtype, setBurialtype] = useState(responseDataInitial.burialtype);
+  const [selectedOptionBurialtype, setSelectedOptionBurialtype] = useState(responseDataInitial.burialtype);
   const [isOpenBurialtype, setIsOpenBurialtype] = useState(false);
 
 
   const toggleMenuBurialtype = () => {
-    if (isOpenCompany === false) {
+    if (isOpenCompany === false && isOpenPlaceofentry === false && isOpenBurialPlace === false) {
       setIsOpenBurialtype(!isOpenBurialtype);
     }
   };
@@ -206,17 +270,29 @@ function BoxCemetery(props) {
   const handleOptionClickBurialtype = (option) => {
     setBurialtype(option);
     setIsOpenBurialtype(false);
+    setSelectedOptionBurialtype(option);
   };
 
-  // otherInfo
+  // servicedescription
 
-  if (!responseDataInitial.otherInfo) {responseDataInitial.otherInfo = ''}
+  if (!responseDataInitial.servicedescription) {responseDataInitial.servicedescription = ''}
 
-  const [otherInfo, setotherInfo] = useState(responseDataInitial.otherInfo);
+  const [servicedescription, setServiceDescription] = useState(responseDataInitial.servicedescription);
 
-  const handleOtherInfoInputChange = (event) => {
+  const handleServiceDescriptionInputChange = (event) => {
     const value = event.target.value;
-    setotherInfo(value);
+    setServiceDescription(value);
+  };
+
+  // others
+
+  if (!responseDataInitial.others) {responseDataInitial.others = ''}
+
+  const [others, setothers] = useState(responseDataInitial.others);
+
+  const handleothersInputChange = (event) => {
+    const value = event.target.value;
+    setothers(value);
   };
  
   // filter
@@ -227,6 +303,16 @@ function BoxCemetery(props) {
   } else {
     isMidnight = false;
   }
+
+  // // time form
+
+  // const [isOpenMinute, setIsOpenMinute] = useState(false);
+  // const [isOpenHour, setIsOpenHour] = useState(false);
+
+  // const [selectedTime, setSelectedTime] = useState(false);
+  // // let selectedTime;
+
+  // console.log(selectedTime)
 
   return (
     <div className={styles.window}>
@@ -240,7 +326,7 @@ function BoxCemetery(props) {
           )}
         </div>
 
-        {/* <div>
+        <div>
           <CloseBoxButtonCemetery
             closeWindow={closeWindow}
             windowVisibility={props.windowVisibility}
@@ -252,6 +338,8 @@ function BoxCemetery(props) {
             month={props.month}
             year={props.year}
             time={props.event}
+
+            cemetery={props.cemetery}
       
             setDate={props.setDate}
             setShowTime={props.setShowTime}
@@ -270,17 +358,39 @@ function BoxCemetery(props) {
             
             name={name}
             surname={surname}
-            setWeight={setWeight}
-            weight={weight}
-            family={family}
+            trumpet={trumpet}
+            orchestra={orchestra}
             company={company}
-            // religion={religion}
-            otherInfo={otherInfo}
+            placeofentry={placeofentry}
+            burialplace={burialplace}
+            burialtype={burialtype}
+            servicedescription={servicedescription}
+            others={others}
           />
-        </div> */}
+        </div>
       </div>
 
       <div className={styles.innerWindow}>
+
+        {/* <HourForm 
+          isOpenBurialPlace={isOpenBurialPlace}
+          isOpenBurialtype={isOpenBurialtype}
+          isOpenCompany={isOpenCompany}
+          isOpenPlaceofentry={isOpenPlaceofentry}
+          time={props.event}
+
+          isOpenMinute={isOpenMinute}
+          setIsOpenMinute={setIsOpenMinute}
+          isOpenHour={isOpenHour}
+          setIsOpenHour={setIsOpenHour}
+
+          selectedTime={selectedTime}
+          setSelectedTime={setSelectedTime}
+
+          setEvent={props.setEvent}
+
+          cemetery={props.cemetery}
+        /> */}
         
         <div className={styles.infoBox}>
           <label>
@@ -308,7 +418,7 @@ function BoxCemetery(props) {
           </label>
         </div>
       
-        <div className={styles.infoBoxKg}>
+        {/* <div className={styles.infoBoxKg}>
           <label>
             Waga :&nbsp;
             <input
@@ -320,30 +430,76 @@ function BoxCemetery(props) {
             />
             &nbsp;kg
           </label>
-        </div>
+        </div> */}
 
         <div className={styles.infoBox}>
-          Udział rodziny :&nbsp;
+          Trąbka :&nbsp;
           <div className={styles.checkboxWrapper}>
             <div>
               <input type="checkbox" 
-                checked={yesChecked} 
+                checked={yesCheckedTrumpet} 
                 value={true} 
                 className={styles.checkboxInfo} 
-                onChange={handleYesChange} />
+                onChange={handleYesChangeTrumpet} />
               Tak
             </div>
             
             <div>
               <input 
                 type="checkbox" 
-                checked={noChecked} 
+                checked={noCheckedTrumpet} 
                 className={styles.checkboxInfo} 
-                onChange={handleNoChange} />
+                onChange={handleNoChangeTrumpet} />
+              Nie
+            </div>
+          </div>
+
+          <div className={styles.checkBoxGap}></div>
+
+          Organista :&nbsp;
+          <div className={styles.checkboxWrapper}>
+            <div>
+              <input type="checkbox" 
+                checked={yesCheckedOrchestra} 
+                value={true} 
+                className={styles.checkboxInfo} 
+                onChange={handleYesChangeOrchestra} />
+              Tak
+            </div>
+            
+            <div>
+              <input 
+                type="checkbox" 
+                checked={noCheckedOrchestra} 
+                className={styles.checkboxInfo} 
+                onChange={handleNoChangeOrchestra} />
               Nie
             </div>
           </div>
         </div>
+
+        {/* <div className={styles.infoBox}>
+          Organista :&nbsp;
+          <div className={styles.checkboxWrapper}>
+            <div>
+              <input type="checkbox" 
+                checked={yesCheckedOrchestra} 
+                value={true} 
+                className={styles.checkboxInfo} 
+                onChange={handleYesChangeOrchestra} />
+              Tak
+            </div>
+            
+            <div>
+              <input 
+                type="checkbox" 
+                checked={noCheckedOrchestra} 
+                className={styles.checkboxInfo} 
+                onChange={handleNoChangeOrchestra} />
+              Nie
+            </div>
+          </div>
+        </div> */}
 
         {/* <div className={styles.infoBox}>
           <label>Udział rodziny :&nbsp;</label>
@@ -393,7 +549,25 @@ function BoxCemetery(props) {
                 return (
                   <div onClick={() => handleOptionClickPlaceofentry(singleEntryPlace)} className={styles.companyButtonWrapper}>
                     <button className={styles.companyButton}>
-                      <p className={styles.companyNameOnButton}>{selectedOptionCompany === singleEntryPlace ? <strong>{singleEntryPlace}</strong> : singleEntryPlace}</p>
+                      <p className={styles.companyNameOnButton}>{selectedOptionPlaceofentry === singleEntryPlace ? <strong>{singleEntryPlace}</strong> : singleEntryPlace}</p>
+                    </button>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </div>   
+
+        <div className={styles.infoBox}>
+          <label>Miejsce pochówku :&nbsp;</label>
+          <button onClick={toggleMenuBurialPlace} className={styles.optionButton}>{burialplace}</button>
+          {isOpenBurialPlace && (
+            <div className={styles.toggleMenuCompany}>
+              {burialPlaces.map(singleBurialPlace => {
+                return (
+                  <div onClick={() => handleOptionClickBurialPlace(singleBurialPlace)} className={styles.companyButtonWrapper}>
+                    <button className={styles.companyButton}>
+                      <p className={styles.companyNameOnButton}>{selectedOptionBurialplace === singleBurialPlace ? <strong>{singleBurialPlace}</strong> : singleBurialPlace}</p>
                     </button>
                   </div>
                 )
@@ -410,8 +584,8 @@ function BoxCemetery(props) {
               {burialTypes.map(singleBurialType => {
                 return (
                   <div onClick={() => handleOptionClickBurialtype(singleBurialType)} className={styles.companyButtonWrapper}>
-                    <button className={styles.companyButton}>
-                      <p className={styles.companyNameOnButton}>{selectedOptionCompany === singleBurialType ? <strong>{singleBurialType}</strong> : singleBurialType}</p>
+                    <button className={styles.burialButton}>
+                      <p className={styles.companyNameOnButton}>{selectedOptionBurialtype === singleBurialType ? <strong>{singleBurialType}</strong> : singleBurialType}</p>
                     </button>
                   </div>
                 )
@@ -420,12 +594,19 @@ function BoxCemetery(props) {
           )}
         </div>
       </div>
+
+      <label>Opis usługi :&nbsp;</label>
+      <textarea
+        className={styles.textareaDesc}
+        value={servicedescription}
+        onChange={handleServiceDescriptionInputChange}
+      />
         
       <label>Uwagi :&nbsp;</label>
       <textarea
         className={styles.textarea}
-        value={otherInfo}
-        onChange={handleOtherInfoInputChange}
+        value={others}
+        onChange={handleothersInputChange}
       />
 
       <SubmitButtonCemetery
@@ -433,6 +614,8 @@ function BoxCemetery(props) {
         setWindowVisibility={props.setWindowVisibility}
         setEvent={props.setEvent}
         date={props.date} 
+
+        cemetery={props.cemetery}
 
         day={props.day}
         month={props.month}
@@ -456,12 +639,14 @@ function BoxCemetery(props) {
         
         name={name}
         surname={surname}
-        setWeight={setWeight}
-        weight={weight}
-        family={family}
+        trumpet={trumpet}
+        orchestra={orchestra}
         company={company}
-        // religion={religion}
-        otherInfo={otherInfo} />
+        placeofentry={placeofentry}
+        burialplace={burialplace}
+        burialtype={burialtype}
+        servicedescription={servicedescription}
+        others={others} />
     </div>
   )
 }

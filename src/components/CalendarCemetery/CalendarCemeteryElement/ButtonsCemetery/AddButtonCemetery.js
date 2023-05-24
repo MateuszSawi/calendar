@@ -25,20 +25,24 @@ function AddButtonCemetery(props) {
   const handleDataSend = () => {
     const data = { 
       exists: "1",
+      cemetery: props.cemetery,
       name: '',
       surname: '',
-      weight: 0,
-      family: '',
+      trumpet: true,
+      orchestra: true,
       company: '',
-      religion: '',
-      otherInfo: '',
+      placeofentry: '',
+      burialplace: '',
+      burialtype: '',
+      servicedescription: '',
+      others: '',
       time: props.time,
       date: props.date,
       day: props.day,
       month: props.month,
       year: props.year,
     };
-    axios.post('http://localhost:8000/polls/addtodatabase/', data, {
+    axios.post('http://localhost:8000/polls/addtocemetery/', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -57,12 +61,13 @@ function AddButtonCemetery(props) {
     const day = date.getDate();
     const month = date.getMonth() + 1; // add 1 since getMonth() returns zero-based index
     const year = date.getFullYear();
-    const data = { day: day, month: month, year: year };
+    const data = { day: day, month: month, year: year, cemetery:props.cemetery };
     const sessionid = props.getCookie("jwt_token");
   
+    let cemetery = props.cemetery;
     // props.setIsLoading(true); // ustawienie stanu ładowania na true
   
-    axios.post('http://localhost:8000/polls/readfromdatabase/', { day, month, year }, {
+    axios.post('http://localhost:8000/polls/readcemetery/', { day, month, year, cemetery }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid

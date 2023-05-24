@@ -1,0 +1,110 @@
+.hourBox {
+  max-width: 265px;
+  padding: 10px;
+  display: flex;
+  // flex-wrap: wrap;
+  justify-content: flex-end;
+  flex-direction: row;
+
+}
+
+.optionButton {
+  height: 25px;
+  text-align: center;
+  width: 40px;
+  background-color: #fff;
+  // border: 1px solid #aaa;
+
+  border: none;
+  border-radius: 2px;
+
+  box-shadow: 0 0 2px rgba(0,0,0,0.4);
+}
+
+.optionButton:hover {
+  box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  background-color: #f4f4f4;
+}
+
+.hourColon {
+  height: 25px;
+  padding: 0px 5px 0px 5px;
+}
+
+.timeButton {
+  // width: 100px;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 50px;
+  // border-radius: 2px;
+  // height: auto;
+  background-color: #fff;
+  // border: 1px solid #aaa;
+
+  border: none;
+  border-radius: 2px;
+
+  display: flex;
+}
+
+.timeButton:hover {
+  box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  background-color: #f4f4f4;
+}
+
+.toggleMenuHour {
+  position: absolute;
+  background-color: lightpink;
+
+  padding: 10px;
+
+  box-shadow: 0px 0px 10px 10px #000000;
+
+  background-color: #ebebeb;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+
+  // transform: translateY(27px);
+  transform: translate(-53px, 27px);
+
+  max-height: 400px;
+  overflow: auto;
+}
+
+.toggleMenuMinute {
+  position: absolute;
+  background-color: lightpink;
+
+  padding: 10px;
+
+  box-shadow: 0px 0px 10px 10px #000000;
+
+  background-color: #ebebeb;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+
+  transform: translateY(27px);
+
+  max-height: 400px;
+  overflow: auto;
+}
+
+.buttonWrapper {
+  padding: 1px;
+  // display: flex;
+  // text-align: center;
+  // justify-content: center;
+}
+
+.nameOnButton {
+  // display: flex;
+  // text-align: center;
+  // justify-content: center;
+  margin: 0;
+}

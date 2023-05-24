@@ -18,19 +18,23 @@ function CloseBoxButtonCemetery(props) {
   const handleDataDelete = () => {
     const data = { 
       exists: "0",
+      cemetery: props.cemetery,
       name: props.name,
       surname: props.surname,
-      weight: props.weight,
-      family: props.family,
+      trumpet: props.trumpet,
+      orchestra: props.orchestra,
       company: props.company,
-      religion: props.religion,
-      otherInfo: props.otherInfo,
+      placeofentry: props.placeofentry,
+      burialplace: props.burialplace,
+      burialtype: props.burialtype,
+      servicedescription: props.servicedescription,
+      others: props.others,
       time: props.time,
       day: props.day,
       month: props.month,
       year: props.year,
     };
-    axios.post('http://localhost:8000/polls/addtodatabase/', data, {
+    axios.post('http://localhost:8000/polls/addtocemetery/', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -52,14 +56,15 @@ function CloseBoxButtonCemetery(props) {
     const day = date.getDate();
     const month = date.getMonth() + 1; // add 1 since getMonth() returns zero-based index
     const year = date.getFullYear();
-    const data = { day: day, month: month, year: year };
+    const data = { day: day, month: month, year: year, cemetery: props.cemetery };
     const sessionid = props.getCookie("jwt_token");
 
     props.setIsLoading(true);
   
     // props.setIsLoading(true); // ustawienie stanu ładowania na true
+    let cemetery = props.cemetery;
   
-    axios.post('http://localhost:8000/polls/readfromdatabase/', { day, month, year }, {
+    axios.post('http://localhost:8000/polls/readcemetery/', { day, month, year, cemetery }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid

@@ -45,19 +45,39 @@ function CalendarCemeteryElement() {
   const [isLoading, setIsLoading] = useState(false);
   const [responseData, setResponseData] = useState(null);
 
+  // ------- cemetery -------
+
+  const cemeteries = [
+    'lostowicki',
+    'centralny',
+    'sobieszewo',
+    'ignacego',
+    'salvator',
+    'garnizonowy',
+    'oliwa',
+    'nowyport',
+  ];
+
+  const [cemetery, setCemeteryState] = useState('lostowicki');
+
+  // ------------------------
+
   const handleDateChange = (date) => {
+
+    // setTimes([]);
+
     setDate(date);
     setShowTime(true);
     const day = date.getDate();
     const month = date.getMonth() + 1; // add 1 since getMonth() returns zero-based index
     const year = date.getFullYear();
-    const data = { day: day, month: month, year: year };
+    const data = { day: day, month: month, year: year, cemetery: cemetery };
     const sessionid = getCookie("jwt_token");
     // console.log(sessionid);
 
     setIsLoading(true); // ustawienie stanu ładowania na true
 
-    axios.post('http://localhost:8000/polls/readfromdatabase/', { day, month, year }, {
+    axios.post('http://localhost:8000/polls/readcemetery/', { day, month, year, cemetery }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid
@@ -77,6 +97,8 @@ function CalendarCemeteryElement() {
           setIsLoading(false); // ustawienie stanu ładowania na false
         }, 2000);
 
+        // console.log(times);
+
       })
       .catch(error => {
         console.error(error);
@@ -84,57 +106,54 @@ function CalendarCemeteryElement() {
       });
   };
 
-  // render calendar 
-
   return (
     <div className='app'>
       <h1 className='header'>Krematorium "Zieleń"</h1>
-      
-          <div>
-            <div>
-            <Calendar onChange={handleDateChange} value={date} 
-              onClickDay={() => {
-                setShowTime(true);
-              }} />
-            </div>
-        
-            {date.length > 0 ? (
-            <p>
-              <span>Start:</span>
-              {date[0].toDateString()}
-              &nbsp;
-              &nbsp;
-              <span>End:</span>{date[1].toDateString()}
-            </p>
-                  ) : (
-            <p>
-              <span>Wybrany dzień : </span>{fixedDate}
-            </p> 
-                  )
-            }
-            <p>
-              &nbsp;  
-            </p>
-      
-            <TimeCemetery showTime={showTime} 
-              date={date} 
-              fixedDate={fixedDate} 
-              dayOfTheWeek={dayOfTheWeek} 
-              day={day} 
-              month={month} 
-              year={year} 
-              responseData={responseData} 
-              
-              handleDateChange={handleDateChange}
-              isLoading={isLoading}
-              
-              setDate={setDate}
-              setShowTime={setShowTime}
-              getCookie={getCookie}
-              setResponseData={setResponseData}
-              setIsLoading={setIsLoading} />
-          </div>
-        
+      <div>
+        <div>
+        <Calendar onChange={handleDateChange} value={date} 
+          onClickDay={() => {
+            setShowTime(true);
+          }} />
+        </div>
+    
+        {date.length > 0 ? (
+        <p>
+          <span>Start:</span>
+          {date[0].toDateString()}
+          &nbsp;
+          &nbsp;
+          <span>End:</span>{date[1].toDateString()}
+        </p>
+              ) : (
+        <p>
+          <span>Wybrany dzień : </span>{fixedDate}
+        </p> 
+              )
+        }
+        <p>
+          &nbsp;  
+        </p>
+  
+        <TimeCemetery showTime={showTime} 
+          date={date} 
+          fixedDate={fixedDate} 
+          dayOfTheWeek={dayOfTheWeek} 
+          day={day} 
+          month={month} 
+          year={year} 
+          responseData={responseData} 
+          
+          handleDateChange={handleDateChange}
+          isLoading={isLoading}
+          
+          cemetery={cemetery}
+          setDate={setDate}
+          setShowTime={setShowTime}
+          getCookie={getCookie}
+          setResponseData={setResponseData}
+          setIsLoading={setIsLoading} />
+      </div>
     </div>
      )
 }

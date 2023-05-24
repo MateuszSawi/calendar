@@ -5,9 +5,33 @@ import ButtonsCemetery from './ButtonsCemetery/ButtonsCemetery';
 import AddButtonCemetery from './ButtonsCemetery/AddButtonCemetery';
 // import NotificationDeleteButton from './NotificationDeleteButton/NotificationDeleteButton'
 
-const times = ['01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00','00:00']
+const timesCemetery = [
+    '07:00','07:15','07:30','07:45',
+    '08:00','08:15','08:30','08:45',
+    '09:00','09:15','09:30','09:45',
+    '10:00','10:15','10:30','10:45',
+    '11:00','11:15','11:30','11:45',
+    '12:00','12:15','12:30','12:45',
+    '13:00','13:15','13:30','13:45',
+    '14:00','14:15','14:30','14:45',
+    '15:00','15:15','15:30','15:45',
+    '16:00','16:15','16:30','16:45'
+  ];
 
 function TimesCemetery(props) {
+
+  // const [times, setTimes] = useState([
+  //   '07:00','07:15','07:30','07:45',
+  //   '08:00','08:15','08:30','08:45',
+  //   '09:00','09:15','08:30','08:45',
+  //   '10:00','10:15','10:30','10:45',
+  //   '11:00','11:15','11:30','11:45',
+  //   '12:00','12:15','12:30','12:45',
+  //   '13:00','13:15','13:30','13:45',
+  //   '14:00','14:15','14:30','14:45',
+  //   '15:00','15:15','15:30','15:45',
+  //   '16:00','16:15','16:30','16:45'
+  // ]);
 
   const [event, setEvent] = useState('');
   const [info, setInfo] = useState(false);
@@ -41,7 +65,23 @@ function TimesCemetery(props) {
 
   // const [notificationVisability, setNotificationVisability] = useState(false);
   const [isFromEdit, setIsFromEdit] = useState(false);
-  
+
+  // TIMES
+
+  // if(props.responseData){
+  //   for (let result of props.responseData.results) {
+  //     let timeFromResponse = result.time.toString();
+  //     let finalTimeFromResponse = timeFromResponse.substring(0, timeFromResponse.length - 3);
+  //     // console.log(finalTimeFromResponse);
+
+  //     setTimes([...times, finalTimeFromResponse])
+
+
+  //   }
+  // }
+
+  // console.log(times);
+
 return (
   <div >
     {windowVisibility && (
@@ -58,6 +98,8 @@ return (
             day={props.day} 
             month={props.month} 
             year={props.year}
+
+            cemetery={props.cemetery}
 
             // setSelectedOptionCompany={setSelectedOptionCompany}
             // selectedOptionCompany={selectedOptionCompany}
@@ -83,7 +125,7 @@ return (
 
     {props.isLoading ? <div>Ładowanie...</div> : (
       <div className="times" >
-        {times.map(time => {    
+        {timesCemetery.map(time => {    
           addButtonVisibility = true;
 
           let isMidnight = false;
@@ -112,12 +154,18 @@ return (
                     responseData.results.map(response => {
 
                       let responseDataTime = response.time.substring(0, response.time.length - 3);
-                      let responseDataWeight = Math.round(response.weight);
+                      // let responseDataWeight = Math.round(response.weight);
 
-                      if (response.family === true) {
-                        response.family = 'tak';
-                      } else if (response.family === false){
-                        response.family = 'nie';
+                      if (response.trumpet === true) {
+                        response.trumpet = 'tak';
+                      } else if (response.trumpet === false){
+                        response.trumpet = 'nie';
+                      }
+
+                      if (response.orchestra === true) {
+                        response.orchestra = 'tak';
+                      } else if (response.orchestra === false){
+                        response.orchestra = 'nie';
                       }
 
                       if (responseDataTime === time) {
@@ -128,17 +176,29 @@ return (
                             <div className={styles.responseInfo}>
                               <div className={styles.reservationWrapper}>
                                 <p className={styles.reservationData}>{response.name} {response.surname}</p>
-                                <p className={styles.reservationData}>{responseDataWeight} kg</p>
                               </div>
-                                
+
                               <div className={styles.reservationWrapper}>
-                                <p className={styles.reservationData}>Udział rodziny: {response.family}</p>
-                                <p className={styles.reservationData}>Wyznanie: {response.religion}</p>
                                 <p className={styles.reservationData}>Firma: {response.company}</p>
+                                <p className={styles.reservationData}>Miejsce wyjścia: {response.placeofentry}</p>
+                              </div>
+
+                              <div className={styles.reservationWrapper}>
+                                <p className={styles.reservationData}>Miejsce pochówku: {response.burialplace}</p>
+                                <p className={styles.reservationData}>Rodzaj pochówku: {response.burialtype}</p>
+                              </div>
+
+                              <div className={styles.reservationWrapper}>
+                                <p className={styles.reservationData}>trąbka: {response.trumpet}</p>
+                                <p className={styles.reservationData}>organista: {response.orchestra}</p>
+                              </div>
+
+                              <div className={styles.reservationWrapper}>
+                                <p className={styles.reservationData}>Opis usługi: {response.servicedescription}</p>
                               </div>
                                 
                               <div className={styles.reservationWrapper}>
-                                <p className={styles.reservationData}>Uwagi: {response.otherInfo}</p>
+                                <p className={styles.reservationData}>Uwagi: {response.others}</p>
                               </div>
 
                               <div className={styles.reservationWrapper}>
@@ -163,6 +223,8 @@ return (
                               month={props.month} 
                               year={props.year}
                               userAdding={props.userAdding}
+
+                              cemetery={props.cemetery}
 
                               setDate={props.setDate}
                               setShowTime={props.setShowTime}
@@ -271,6 +333,8 @@ return (
                         month={props.month} 
                         year={props.year}
                         userAdding={props.userAdding}
+
+                        cemetery={props.cemetery}
 
                         setIsFromEdit={setIsFromEdit}
         

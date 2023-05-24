@@ -18,6 +18,8 @@ function TimeCemetery(props) {
         handleDateChange={props.handleDateChange}
         isLoading={props.isLoading}
         
+        cemetery={props.cemetery}
+
         setDate={props.setDate}
         setShowTime={props.setShowTime}
         getCookie={props.getCookie}

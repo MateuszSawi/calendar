@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 function SubmitButtonCemetery(props) {
 
-  // console.log(props);
+  // console.log(props.time);
 
   const handleDateChange = (date) => {
   props.setDate(date);
@@ -13,12 +13,14 @@ function SubmitButtonCemetery(props) {
   const day = date.getDate();
   const month = date.getMonth() + 1; // add 1 since getMonth() returns zero-based index
   const year = date.getFullYear();
-  const data = { day: day, month: month, year: year };
+  const data = { day: day, month: month, year: year, cemetery: props.cemetery };
   const sessionid = props.getCookie("jwt_token");
 
   props.setIsLoading(true); // ustawienie stanu ładowania na true
 
-  axios.post('http://localhost:8000/polls/readfromdatabase/', { day, month, year }, {
+  let cemetery = props.cemetery;
+
+  axios.post('http://localhost:8000/polls/readcemetery/', { day, month, year, cemetery }, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': sessionid
@@ -57,9 +59,10 @@ function SubmitButtonCemetery(props) {
 
       setMessage('');
       handleClick();
-      const weightToSend = props.weight ? props.weight : 0;
-      const familyToSend = props.family ? props.family : false;
-      handleDataSend(weightToSend, familyToSend);
+      // const weightToSend = props.weight ? props.weight : 0;
+      const trumpetToSend = props.trumpet ? props.trumpet : false;
+      const orchestraToSend = props.orchestra ? props.orchestra : false;
+      handleDataSend(trumpetToSend, orchestraToSend);
 
       if (props.windowVisibility === true) {
         props.setWindowVisibility(false);
@@ -80,7 +83,7 @@ function SubmitButtonCemetery(props) {
     //   props.family,' | ',
     //   props.company,' | ',
     //   props.religion,' | ',
-    //   props.otherInfo,' | ',
+    //   props.others,' | ',
     //   props.time,' | ',
     //   props.date,' | ',
     //   props.day,' | ',
@@ -100,23 +103,27 @@ function SubmitButtonCemetery(props) {
 
   // console.log(props.family)
 
-  const handleDataSend = (weightToSend, familyToSend) => {
+  const handleDataSend = (trumpetToSend, orchestraToSend) => {
     const data = { 
       exists: "2",
+      cemetery: props.cemetery,
       name: props.name,
       surname: props.surname,
-      weight: weightToSend,
-      family: familyToSend,
+      trumpet: trumpetToSend,
+      orchestra: orchestraToSend,
       company: props.company,
-      religion: props.religion,
-      otherInfo: props.otherInfo,
+      placeofentry: props.placeofentry,
+      burialplace: props.burialplace,
+      burialtype: props.burialtype,
+      servicedescription: props.servicedescription,
+      others: props.others,
       time: props.time,
       date: props.date,
       day: props.day,
       month: props.month,
       year: props.year,
     };
-    axios.post('http://localhost:8000/polls/addtodatabase/', data, {
+    axios.post('http://localhost:8000/polls/addtocemetery/', data, {
       headers: {
         'Content-Type': 'application/json',
       },
