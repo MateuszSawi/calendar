@@ -4,6 +4,7 @@ import Calendar from 'react-calendar';
 import './CalendarCemeteryElement.css';
 import TimeCemetery from './TimeCemetery';
 import axios from 'axios';
+import Cemeteries from './Cemeteries/Cemeteries';
 
 function CalendarCemeteryElement() {
   const [date, setDate] = useState(new Date());
@@ -47,20 +48,12 @@ function CalendarCemeteryElement() {
 
   // ------- cemetery -------
 
-  const cemeteries = [
-    'lostowicki',
-    'centralny',
-    'sobieszewo',
-    'ignacego',
-    'salvator',
-    'garnizonowy',
-    'oliwa',
-    'nowyport',
-  ];
+  // let cemetery;
+  const [cemetery, setCemetery] = useState('lostowicki');
 
-  const [cemetery, setCemeteryState] = useState('lostowicki');
+  // console.log(cemetery);
 
-  // ------------------------
+  // ------------ API ------------
 
   const handleDateChange = (date) => {
 
@@ -96,9 +89,6 @@ function CalendarCemeteryElement() {
         setTimeout(() => { // TEGO NIE
           setIsLoading(false); // ustawienie stanu ładowania na false
         }, 2000);
-
-        // console.log(times);
-
       })
       .catch(error => {
         console.error(error);
@@ -108,7 +98,21 @@ function CalendarCemeteryElement() {
 
   return (
     <div className='app'>
-      <h1 className='header'>Krematorium "Zieleń"</h1>
+      {/* <h1 className='header'>Krematorium "Zieleń"</h1> */}
+
+      <Cemeteries 
+        cemetery={cemetery}
+        setCemetery={setCemetery}
+        handleDateChange={handleDateChange}
+        date={date}
+
+        setDate={setDate}
+        setShowTime={setShowTime}
+        getCookie={getCookie}
+        setIsLoading={setIsLoading}
+        setResponseData={setResponseData}
+      />
+
       <div>
         <div>
         <Calendar onChange={handleDateChange} value={date} 
