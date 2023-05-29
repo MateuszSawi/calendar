@@ -30,7 +30,7 @@ function CloseBoxButton(props) {
       month: props.month,
       year: props.year,
     };
-    axios.post('http://localhost:8000/polls/addtodatabase/', data, {
+    axios.post('/polls/addtodatabase/', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -59,7 +59,7 @@ function CloseBoxButton(props) {
   
     // props.setIsLoading(true); // ustawienie stanu ładowania na true
   
-    axios.post('http://localhost:8000/polls/readfromdatabase/', { day, month, year }, {
+    axios.post('/polls/readfromdatabase/', { day, month, year }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid

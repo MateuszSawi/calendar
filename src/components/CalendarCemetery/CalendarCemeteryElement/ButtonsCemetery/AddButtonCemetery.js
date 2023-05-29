@@ -42,7 +42,7 @@ function AddButtonCemetery(props) {
       month: props.month,
       year: props.year,
     };
-    axios.post('http://localhost:8000/polls/addtocemetery/', data, {
+    axios.post('/polls/addtocemetery/', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -67,7 +67,7 @@ function AddButtonCemetery(props) {
     let cemetery = props.cemetery;
     // props.setIsLoading(true); // ustawienie stanu ładowania na true
   
-    axios.post('http://localhost:8000/polls/readcemetery/', { day, month, year, cemetery }, {
+    axios.post('/polls/readcemetery/', { day, month, year, cemetery }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid
