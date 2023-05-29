@@ -147,21 +147,27 @@ function Buttons(props) {
       console.error(error);
     });
   };
+
+  // console.log(props.authorities);
  
   return (
     <div className={styles.buttonsWrapper}>
       {!props.addButtonVisibility && (
         <div className={styles.responseInfoButtons}>
-          <button onClick={() => {
-            props.setTime(props.time);
-            props.openWindow();
-            props.setIsFromEdit(true);
-          }}> EDYTUJ </button>
+          {props.authorities === 3 || props.authorities === 2 ? (
+            <button onClick={() => {
+              props.setTime(props.time);
+              props.openWindow();
+              props.setIsFromEdit(true);
+            }}> EDYTUJ </button>
+          ) : null}
 
-          <button onClick={() => {
-            // showDeleteNotification();
-            deleteButtonClick();
-          }}> USUŃ </button>
+          {props.authorities === 3 || props.authorities === 2 ? (
+            <button onClick={() => {
+              // showDeleteNotification();
+              deleteButtonClick();
+            }}> USUŃ </button>
+          ) : null}
         </div>
       )} 
     </div>

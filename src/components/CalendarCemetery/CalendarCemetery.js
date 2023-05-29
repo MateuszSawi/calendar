@@ -1,10 +1,10 @@
 import styles from './CalendarCemetery.module.scss';
 import CalendarCemeteryElement from './CalendarCemeteryElement/CalendarCemeteryElement';
 
-function CalendarCemetery() {
+function CalendarCemetery(props) {
   
   return (
-    <CalendarCemeteryElement />
+    <CalendarCemeteryElement authorities={props.authorities} />
   );
 }
 

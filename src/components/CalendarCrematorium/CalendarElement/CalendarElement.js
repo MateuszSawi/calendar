@@ -5,7 +5,7 @@ import './CalendarElement.css';
 import Time from './Time.js';
 import axios from 'axios';
 
-function CalendarElement() {
+function CalendarElement(props) {
   const [date, setDate] = useState(new Date());
   const [showTime, setShowTime] = useState(false); 
 
@@ -124,6 +124,7 @@ function CalendarElement() {
               month={month} 
               year={year} 
               responseData={responseData} 
+              authorities={props.authorities}
               
               handleDateChange={handleDateChange}
               isLoading={isLoading}

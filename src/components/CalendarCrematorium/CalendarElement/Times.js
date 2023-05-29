@@ -163,6 +163,7 @@ return (
                               month={props.month} 
                               year={props.year}
                               userAdding={props.userAdding}
+                              authorities={props.authorities}
 
                               setDate={props.setDate}
                               setShowTime={props.setShowTime}
@@ -259,6 +260,7 @@ return (
                         setTime={setTime}
                         openWindow={openWindow}
                         time={time}
+                        authorities={props.authorities}
         
                         windowVisibility={windowVisibility} 
                         setWindowVisibility={setWindowVisibility} 

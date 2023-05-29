@@ -14,6 +14,7 @@ function TimeCemetery(props) {
         month={props.month} 
         year={props.year}
         responseData={props.responseData} 
+        authorities={props.authorities}
 
         handleDateChange={props.handleDateChange}
         isLoading={props.isLoading}

@@ -5,7 +5,7 @@ import ButtonsCemetery from './ButtonsCemetery/ButtonsCemetery';
 import AddButtonCemetery from './ButtonsCemetery/AddButtonCemetery';
 // import NotificationDeleteButton from './NotificationDeleteButton/NotificationDeleteButton'
 
-const timesCemetery = [
+  const timesCemetery = [
     '07:00','07:15','07:30','07:45',
     '08:00','08:15','08:30','08:45',
     '09:00','09:15','09:30','09:45',
@@ -223,6 +223,7 @@ return (
                               month={props.month} 
                               year={props.year}
                               userAdding={props.userAdding}
+                              authorities={props.authorities}
 
                               cemetery={props.cemetery}
 
@@ -335,6 +336,7 @@ return (
                         userAdding={props.userAdding}
 
                         cemetery={props.cemetery}
+                        authorities={props.authorities}
 
                         setIsFromEdit={setIsFromEdit}
         

@@ -1,10 +1,10 @@
 import styles from './CalendarCrematorium.module.scss';
 import CalendarElement from './CalendarElement/CalendarElement';
 
-function CalendarCrematorium() {
+function CalendarCrematorium(props) {
   
   return (
-    <CalendarElement />
+    <CalendarElement authorities={props.authorities} />
   );
 }
 

@@ -14,7 +14,7 @@ const LoginForm = (props) => {
 
   const navigate = useNavigate();
 
-  console.log(props)
+  // console.log(props)
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -30,18 +30,7 @@ const LoginForm = (props) => {
     })
       .then((response) => {
         const headers = response.headers;
-        // console.log('headers: ', headers)
         const cookies = headers.get('set-cookie');
-        // console.log('cookies: ', cookies)
-        
-        // if (cookies) {
-        //   const sessionIdCookie = cookies.filter((cookie) => {
-        //     return cookie.startsWith('sessionid=');
-        //   })[0];
-        //   if (sessionIdCookie) {
-        //     document.cookie = sessionIdCookie.split(';')[0];
-        //   }
-        // }
       })
       .catch((error) => {
         console.error(error);

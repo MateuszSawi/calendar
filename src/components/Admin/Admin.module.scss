@@ -1,0 +1,204 @@
+.button {
+  display: block;
+  /* background-color: #667363; */
+  color: white;
+  height: 30px;
+  min-width: 80px;
+
+  background-color: #667363;
+  color: #fff;
+
+  border: none;
+  border-radius: 2px;
+
+  box-shadow: 0 0 2px rgba(0,0,0,0.4);
+
+  margin: 10px;
+}
+
+.button:hover {
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  background-color: #5d695a;
+}
+
+.button:active {
+  transform: translateY(0.5px);
+}
+
+//
+
+.adminPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.singleLogWrapper {
+  border-top: solid 1px;
+  // margin: 10px;
+  width: 600px;
+}
+
+.logsWrapper {
+  margin-top: 15px;
+  padding: 30px;
+  max-height: 1000px;
+  overflow: auto;
+  border: none;
+  // border-radius: 10px;
+
+  // box-shadow: 0 0 12px rgba(0,0,0,0.6);
+  // box-shadow: 0 0 12px rgba(0,0,0,0.4);
+
+  // border: solid 1px;
+
+  background-color: #d7d8d848;
+}
+
+// ::-webkit-scrollbar-button {
+//   display: none;
+// }
+
+.singleUserWrapper {
+  border-top: solid 1px;
+  // margin: 10px;
+  width: 600px;
+}
+
+.usersWrapper {
+  margin: 15px 0px;
+  padding: 30px;
+  max-height: 1000px;
+  overflow: auto;
+  border: none;
+  // border-radius: 10px;
+  background-color: #d7d8d848;
+
+  // box-shadow: 0 0 12px rgba(0,0,0,0.6);
+  // box-shadow: 0 0 12px rgba(0,0,0,0.4);
+}
+
+//
+
+.buttonPassword {
+  // display: flex;
+  // // flex-direction: ro;
+  // justify-content: flex-end;
+  /* background-color: #667363; */
+  color: white;
+  height: 30px;
+  min-width: 65px;
+
+  background-color: #667363;
+  color: #fff;
+
+  border: none;
+  border-radius: 2px;
+
+  box-shadow: 0 0 2px rgba(0,0,0,0.4);
+
+  margin: 10px;
+}
+
+.buttonPassword:hover {
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  background-color: #5d695a;
+}
+
+.buttonPassword:active {
+  transform: translateY(0.5px);
+}
+
+//
+
+.userBox {
+  width: 100px;
+  height: 300px;
+  position: fixed;
+
+  z-index: 20;
+
+  border: solid 1px;
+  background-color: #fff;
+  // transform: translateY(-100px);
+  top: 30%;
+
+  padding: 20px;
+
+  border-top: solid 1px;
+  // margin: 10px;
+  width: 558px;
+}
+
+//
+
+.container {
+  border-top: solid 1px;
+  // margin: 10px;
+  width: 600px;
+}
+
+//
+
+.message {
+  // padding-right: 10px;
+  color: #FF0000;
+}
+
+.optionButton {
+  min-height: 35px;
+  text-align: center;
+  width: 170px;
+  background-color: #fff;
+  // border: 1px solid #aaa;
+
+  border: none;
+  border-radius: 2px;
+
+  box-shadow: 0 0 2px rgba(0,0,0,0.4);
+}
+
+.optionButton:hover {
+  box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  background-color: #f4f4f4;
+}
+
+.toggleMenuCompany {
+  position: absolute;
+  // background-color: lightpink;
+
+  padding: 10px;
+
+  box-shadow: 0px 0px 10px 10px #000000;
+
+  background-color: #ebebeb;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+
+  transform: translate(100px, 2px);
+
+  max-height: 400px;
+  overflow: auto;
+}
+
+.infoBox {
+  padding: 10px;
+}
+
+.authorityButton {
+  display: flex;
+  justify-content: flex-start;
+  width: 180px;
+  margin-bottom: 2px;
+}
+
+.submittingWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.companyNameOnButton {
+  margin: 10px;
+}

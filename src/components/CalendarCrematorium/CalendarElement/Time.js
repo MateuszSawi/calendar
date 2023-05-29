@@ -17,6 +17,7 @@ function Time(props) {
 
       handleDateChange={props.handleDateChange}
       isLoading={props.isLoading}
+      authorities={props.authorities}
       
       setDate={props.setDate}
       setShowTime={props.setShowTime}

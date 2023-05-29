@@ -83,12 +83,14 @@ function AddButton(props) {
  
   return (
     <div className={styles.addButtonWrapper}>
-      <button onClick={() => {
-        props.setIsFromEdit(false);
-        addButtonClick(props.time);
-        props.setTime(props.time);
-        props.openWindow();}} >DODAJ
-      </button>
+      {props.authorities === 3 || props.authorities === 2 ? (
+        <button onClick={() => {
+          props.setIsFromEdit(false);
+          addButtonClick(props.time);
+          props.setTime(props.time);
+          props.openWindow();}} >DODAJ
+        </button>
+      ) : null}
     </div>
   )
 }

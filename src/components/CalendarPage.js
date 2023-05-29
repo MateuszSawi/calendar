@@ -3,9 +3,14 @@ import CalendarCemetery from './CalendarCemetery/CalendarCemetery';
 import styles from './CalendarPage.module.scss';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import React, { useState, useEffect } from "react";
 
-function App() {
+function App(props) {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    handleCheckSession();
+  }, []);
 
   const handleCheckSession = () => {
     // event.preventDefault();
@@ -16,7 +21,10 @@ function App() {
       }
     })
       .then((response) => {
-        // console.log(response)
+        // console.log(response.data.authorities)
+
+        props.setAuthorities(response.data.authorities);
+
         if (response.data.isLoggedIn) {
           navigate('/calendar');
         } else {
@@ -31,11 +39,11 @@ function App() {
   return (
     <div className={styles.calendarWrapper}>
       <div className={styles.calendar}>
-        <CalendarCrematorium />
+        <CalendarCrematorium authorities={props.authorities} />
       </div>
 
       <div className={styles.calendar}>
-        <CalendarCemetery />
+        <CalendarCemetery authorities={props.authorities} />
       </div>
     </div>
     );

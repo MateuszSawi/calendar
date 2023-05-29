@@ -26,69 +26,70 @@ function Cemeteries(props) {
     'nowyport',
   ];
 
-  const [cemeteryToDisplay, setCemeteryToDisplay] = useState('lostowicki');
+  // const [cemeteryToDisplay, setCemeteryToDisplay] = useState('lostowicki');
 
   // const [cemetery, setCemetery] = useState('lostowicki');
-  const [selectedOptionCemetery, setSelectedOptionCemetery] = useState(cemeteryToDisplay);
+  const [selectedOptionCemetery, setSelectedOptionCemetery] = useState(props.cemetery);
   const [isOpenCemetery, setIsOpenCemetery] = useState(false);
 
-  let cemetery;
+  // let cemetery;
 
-  const prepareCemetery = () => {
-    if(cemeteryToDisplay === 'Łostowicki') {
-      cemetery = 'lostowicki';
-      props.setCemetery('lostowicki');
+  // const prepareCemetery = () => {
+  //   if(cemeteryToDisplay === 'Łostowicki') {
+  //     cemetery = 'lostowicki';
+  //     props.setCemetery('lostowicki');
 
-    } else if(cemeteryToDisplay === 'Centralny') {
-      cemetery = 'centralny';
-      props.setCemetery('centralny');
+  //   } else if(cemeteryToDisplay === 'Centralny') {
+  //     cemetery = 'centralny';
+  //     props.setCemetery('centralny');
 
-    } else if(cemeteryToDisplay === 'Sobieszewo') {
-      cemetery = 'sobieszewo';
-      props.setCemetery('sobieszewo');
+  //   } else if(cemeteryToDisplay === 'Sobieszewo') {
+  //     cemetery = 'sobieszewo';
+  //     props.setCemetery('sobieszewo');
 
-    } else if(cemeteryToDisplay === 'Ignacego') {
-      cemetery = 'ignacego';
-      props.setCemetery('ignacego');
+  //   } else if(cemeteryToDisplay === 'Ignacego') {
+  //     cemetery = 'ignacego';
+  //     props.setCemetery('ignacego');
 
-    } else if(cemeteryToDisplay === 'Salvator') {
-      cemetery = 'salvator';
-      props.setCemetery('salvator');
+  //   } else if(cemeteryToDisplay === 'Salvator') {
+  //     cemetery = 'salvator';
+  //     props.setCemetery('salvator');
 
-    } else if(cemeteryToDisplay === 'Garnizonowy') {
-      cemetery = 'garnizonowy';
-      props.setCemetery('garnizonowy');
+  //   } else if(cemeteryToDisplay === 'Garnizonowy') {
+  //     cemetery = 'garnizonowy';
+  //     props.setCemetery('garnizonowy');
 
-    } else if(cemeteryToDisplay === 'Oliwa') {
-      cemetery = 'oliwa';
-      props.setCemetery('oliwa');
+  //   } else if(cemeteryToDisplay === 'Oliwa') {
+  //     cemetery = 'oliwa';
+  //     props.setCemetery('oliwa');
 
-    } else if(cemeteryToDisplay === 'Nowy Port') {
-      cemetery = 'nowyport';
-      props.setCemetery('nowyport');
-    }
-  }
+  //   } else if(cemeteryToDisplay === 'Nowy Port') {
+  //     cemetery = 'nowyport';
+  //     props.setCemetery('nowyport');
+  //   }
+  // }
 
-  prepareCemetery();
+  // prepareCemetery();
 
   const toggleMenuPlaceofentry = () => {
     setIsOpenCemetery(!isOpenCemetery);
   };
 
   const handleOptionClickPlaceofentry = (option) => {
-    setCemeteryToDisplay(option);
+    // setCemeteryToDisplay(option);
     setIsOpenCemetery(false);
     setSelectedOptionCemetery(option);
 
     // prepareCemetery();
-    props.setCemetery(cemeteryToDisplay);
-    props.handleDateChange(props.date, cemeteryToDisplay);
+    props.setCemetery(option);
+    console.log(option)
+    props.handleDateChange(props.date, option);
   };
 
   return (
     <div className={styles.infoBox}>
       <h1 className='header'>Cmentarz :&nbsp;</h1>
-      <button onClick={toggleMenuPlaceofentry} className={styles.optionButton}><h1 className={styles.cemeteryTitle}>{cemeteryToDisplay}</h1></button>
+      <button onClick={toggleMenuPlaceofentry} className={styles.optionButton}><h1 className={styles.cemeteryTitle}>{props.cemetery}</h1></button>
       {isOpenCemetery && (
         <div className={styles.toggleMenuCompany}>
           {cemeteriesToDisplay.map(singleCemetery => {
