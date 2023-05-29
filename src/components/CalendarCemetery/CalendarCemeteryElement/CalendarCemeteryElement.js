@@ -136,7 +136,7 @@ function CalendarCemeteryElement(props) {
 
     setIsLoading(true); // ustawienie stanu ładowania na true
 
-    axios.post('/polls/readcemetery/', { day, month, year, cemetery }, {
+    axios.post('http://localhost:8000/polls/readcemetery/', { day, month, year, cemetery }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid

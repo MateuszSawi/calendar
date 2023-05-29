@@ -13,7 +13,7 @@ function Admin(props) {
 
   const handleCheckSession = () => {
     // event.preventDefault();
-    axios.get('/polls/checksession', {
+    axios.get('http://localhost:8000/polls/checksession', {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ function Admin(props) {
 
   const getLogs = () => {
     // event.preventDefault();
-    axios.get('/polls/getlogs', {
+    axios.get('http://localhost:8000/polls/getlogs', {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ function Admin(props) {
   const [responseDataUsers, setResponseDataUsers] = useState(null);
 
   const getAccounts = () => {
-    axios.get('/polls/readuser', {
+    axios.get('http://localhost:8000/polls/readuser', {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json'
@@ -122,7 +122,7 @@ function Admin(props) {
     };
 
     console.log(data)
-    axios.post('/polls/adduser', data, {
+    axios.post('http://localhost:8000/polls/adduser', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -153,23 +153,23 @@ function Admin(props) {
 
   // ----------------------------------------------------------------
 
-  const editAccount = () => {
-    const data = { 
-      exists: "0",
+  // const editAccount = () => {
+  //   const data = { 
+  //     exists: "0",
       
-    };
-    axios.post('/polls/updateuser', data, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      withCredentials: true,
-    })
-    .then(response => {
-    })
-    .catch(error => {
-      console.error(error);
-    });
-  }
+  //   };
+  //   axios.post('http://localhost:8000/polls/updateuser', data, {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     withCredentials: true,
+  //   })
+  //   .then(response => {
+  //   })
+  //   .catch(error => {
+  //     console.error(error);
+  //   });
+  // }
 
   // ----------------------------------------------------------------
 
@@ -178,7 +178,7 @@ function Admin(props) {
       login: login,
       
     };
-    axios.post('/polls/deleteuser', data, {
+    axios.post('http://localhost:8000/polls/deleteuser', data, {
       headers: {
         'Content-Type': 'application/json',
       },

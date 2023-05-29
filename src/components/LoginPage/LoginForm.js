@@ -18,7 +18,7 @@ const LoginForm = (props) => {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    axios.post('/polls/login/', {
+    axios.post('http://localhost:8000/polls/login/', {
       username: username,
       password: password
     }, 
@@ -39,7 +39,7 @@ const LoginForm = (props) => {
 
   const handleCheckSession = (event) => {
     event.preventDefault();
-    axios.get('/polls/checksession', {
+    axios.get('http://localhost:8000/polls/checksession', {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json'
