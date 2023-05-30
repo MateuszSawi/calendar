@@ -136,7 +136,7 @@ function CalendarCemeteryElement(props) {
 
     setIsLoading(true); // ustawienie stanu ładowania na true
 
-    axios.post('http://localhost:8000/polls/readcemetery/', { day, month, year, cemetery }, {
+    axios.post('/polls/readcemetery/', { day, month, year, cemetery }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid
@@ -168,7 +168,7 @@ function CalendarCemeteryElement(props) {
   return (
     <div className='app'>
 
-      <div className={styles.infoBox}>
+    <div className={styles.infoBox}>
       <h1 className='header'>Cmentarz :&nbsp;</h1>
       <button onClick={toggleMenuCemeteries} className={styles.optionButton}><h1 className={styles.cemeteryTitle}>{cemeteryToDisplay}</h1></button>
       {isOpenCemetery && (

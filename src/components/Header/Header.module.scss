@@ -80,3 +80,32 @@
   // border: none;
   text-decoration: none;
 }
+
+@media (max-width: 900px) {
+
+  .header{
+    display: flex;
+    justify-content: center;
+  
+    // background-color: #ccc;
+  }
+  
+  .headerInner {
+    height: auto;
+    width: 90%;
+    display: block;
+    // justify-content: space-between;
+    // padding-bottom: 50px;
+  }
+
+  .userDiv {
+    // width: 50%;
+    display:inline;
+    width: 90%;
+    right: 0;
+    // justify-content: flex-end;
+    // align-items: center;
+    margin: 0px;
+    // transform: translateX(-45%);
+  }
+}

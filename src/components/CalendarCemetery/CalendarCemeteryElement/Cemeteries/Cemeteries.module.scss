@@ -96,3 +96,28 @@
 //   justify-content: center;
 //   backdrop-filter: blur(3px);
 // }
+
+@media (max-width: 900px) {
+  .infoBox {
+    display: block;
+    padding-bottom: 30px;
+  }
+
+  .toggleMenuCompany {
+    position: absolute;
+  
+    padding: 10px;
+  
+    box-shadow: 0px 0px 10px 10px #000000;
+  
+    background-color: #ebebeb;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  
+    transform: translateY(7px);
+  
+    max-height: 400px;
+    overflow: auto;
+  }
+}

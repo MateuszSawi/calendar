@@ -99,6 +99,20 @@
   box-shadow: 0 0 12px rgba(0,0,0,0.6);
 }
 
+@media (max-width: 900px) {
+  .windowBackground {
+    position: fixed;
+    width: 100%;
+    // left: 0;
+    height: 100%;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(3px);
+  }
+}
+
 // ----------------------------------------------------------------
 
 .reservationWrapper {
@@ -191,3 +205,42 @@
 .closeWindowButton:active {
   transform: translateY(0.5px);
 }
+
+// PDF
+
+  @media print {
+    body * {
+      display: none;
+    }
+  
+    .print-section {
+      display: block;
+    }
+  }
+
+  .button {
+    display: block;
+    /* background-color: #667363; */
+    color: white;
+    height: 30px;
+    min-width: 80px;
+  
+    background-color: #667363;
+    color: #fff;
+  
+    border: none;
+    border-radius: 2px;
+  
+    box-shadow: 0 0 2px rgba(0,0,0,0.4);
+  
+    margin: 10px;
+  }
+  
+  .button:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    background-color: #5d695a;
+  }
+  
+  .button:active {
+    transform: translateY(0.5px);
+  }

@@ -202,3 +202,73 @@
 .companyNameOnButton {
   margin: 10px;
 }
+
+@media (max-width: 900px) {
+  .container {
+    border-top: solid 1px;
+    // margin: 10px;
+    width: 300px;
+  }
+
+  .singleUserWrapper {
+    border-top: solid 1px;
+    // margin: 10px;
+    width: 300px;
+  }
+
+  .logsWrapper {
+    margin-top: 15px;
+    padding: 30px;
+    max-height: 1000px;
+    overflow: auto;
+    border: none;
+    // border-radius: 10px;
+    width: 300px;
+  
+    // box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    // box-shadow: 0 0 12px rgba(0,0,0,0.4);
+  
+    // border: solid 1px;
+  
+    background-color: #d7d8d848;
+  }
+
+  .button {
+    display: block;
+    /* background-color: #667363; */
+    color: white;
+    height: 30px;
+    min-width: 80px;
+  
+    background-color: #667363;
+    color: #fff;
+  
+    border: none;
+    border-radius: 2px;
+  
+    box-shadow: 0 0 2px rgba(0,0,0,0.4);
+  
+    margin: 10px;
+
+    margin-left: 50px;
+  }
+
+  .userBox {
+    width: 100px;
+    height: 300px;
+    position: fixed;
+  
+    z-index: 20;
+  
+    border: solid 1px;
+    background-color: #fff;
+    // transform: translateY(-100px);
+    top: 30%;
+  
+    padding: 20px;
+  
+    border-top: solid 1px;
+    // margin: 10px;
+    width: 308px;
+  }
+}

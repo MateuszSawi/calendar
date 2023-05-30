@@ -57,7 +57,7 @@ function CalendarElement(props) {
 
     setIsLoading(true); // ustawienie stanu ładowania na true
 
-    axios.post('http://localhost:8000/polls/readfromdatabase/', { day, month, year }, {
+    axios.post('/polls/readfromdatabase/', { day, month, year }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid
@@ -89,6 +89,8 @@ function CalendarElement(props) {
   useEffect(() => {
     handleDateChange(date);
   }, []);
+
+  // PDF
 
   return (
     <div className='app'>

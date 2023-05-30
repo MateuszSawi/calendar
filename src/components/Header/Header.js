@@ -11,7 +11,7 @@ function Header(props) {
 
   const logOut = () => {
     // event.preventDefault();
-    axios.post('http://localhost:8000/polls/logout', {
+    axios.post('/polls/logout', {
       
     }, 
     {
