@@ -14,7 +14,7 @@ function App(props) {
 
   const handleCheckSession = () => {
     // event.preventDefault();
-    axios.get('http://localhost:8000/polls/checksession', {
+    axios.get('/polls/checksession', {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json'

@@ -18,30 +18,10 @@ function TextArea(props) {
   //   readTextArea();
   // }, []);
 
-  // const readTextArea = () => {
-  //   console.log('FFF')
-  //   axios.post('http://localhost:8000/polls/readtb', { 
-  //     day: props.day, 
-  //     month: props.month, 
-  //     year: props.year, 
-  //     calendar : props.cemetery
-  //   },{
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     withCredentials: true,
-  //   })
-  //     .then(response => {
   
-  //       console.log(response)
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // };
 
   const updateTextArea = () => {
-    axios.post('http://localhost:8000/polls/addtb', { 
+    axios.post('/polls/addtb', { 
       day: props.day, 
       month: props.month, 
       year: props.year, 

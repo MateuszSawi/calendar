@@ -18,7 +18,7 @@ function SubmitButton(props) {
 
   props.setIsLoading(true); // ustawienie stanu ładowania na true
 
-  axios.post('http://localhost:8000/polls/readfromdatabase/', { day, month, year }, {
+  axios.post('/polls/readfromdatabase/', { day, month, year }, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': sessionid
@@ -110,7 +110,7 @@ function SubmitButton(props) {
       paid: props.paid,
       family: props.family,
     };
-    axios.post('http://localhost:8000/polls/addtodatabase/', data, {
+    axios.post('/polls/addtodatabase/', data, {
       headers: {
         'Content-Type': 'application/json',
       },

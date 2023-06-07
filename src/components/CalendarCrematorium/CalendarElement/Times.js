@@ -206,10 +206,6 @@ return (
                                 </div>
 
                                 <div className={styles.reservationWrapper}>
-                                  <p className={styles.whoAdded}>Dodane przez: {response.userAdding}</p>
-                                </div>
-
-                                <div className={styles.reservationWrapper}>
                                   {(response.paid === 'tak' && (response.family === 'nie' || response.family === '')) &&
                                     // <p className={styles.reservationData}>Opłacone: <strong>{response.paid}</strong></p>
                                     <p className={styles.reservationData}><strong>Opłacone</strong></p>
@@ -223,6 +219,10 @@ return (
                                     // <p className={styles.reservationData}>Udział rodziny: <strong>{response.family}</strong></p>
                                     <p className={styles.reservationData}><strong>Opłacone, Udział rodziny</strong></p>
                                   }
+                                </div>
+
+                                <div className={styles.reservationWrapper}>
+                                  <p className={styles.whoAdded}>Dodane przez: {response.userAdding}</p>
                                 </div>
                               </div>  
 

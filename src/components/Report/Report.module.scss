@@ -6,3 +6,125 @@
 
   margin-top: 50px;
 }
+
+.input {
+  // border: 1px solid #aaa;
+  // border: none;
+  border: 1px solid #aaa;
+
+  // box-shadow: inset 0 0 10px #eee;
+  height: 120%;
+
+  width: 40px;
+
+  border-radius: 5px;
+  // box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+  text-align: center;
+}
+
+.toggleMenuCompany {
+  position: absolute;
+  background-color: lightpink;
+
+  padding: 10px;
+
+  box-shadow: 0px 0px 10px 10px #000000;
+
+  background-color: #ebebeb;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+
+  transform: translate(42px, 2px);
+
+  max-height: 400px;
+  overflow: auto;
+
+  // padding-bottom: 30px;
+}
+
+.companyButtonWrapper {
+  padding: 1px;
+}
+
+.companyButton {
+  width: 120px;
+  text-align: left;
+  // border-radius: 2px;
+  height: auto;
+  background-color: #fff;
+  // border: 1px solid #aaa;
+
+  border: none;
+  border-radius: 2px;
+
+  display: flex;
+}
+
+.companyButton:hover {
+  box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  background-color: #f4f4f4;
+}
+
+.companyNameOnButton {
+  margin: 5px;
+}
+
+.optionButton {
+  min-height: 25px;
+  text-align: center;
+  width: 120px;
+  background-color: #fff;
+  // border: 1px solid #aaa;
+
+  border: none;
+  border-radius: 2px;
+
+  box-shadow: 0 0 2px rgba(0,0,0,0.4);
+}
+
+.optionButton:hover {
+  box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  background-color: #f4f4f4;
+}
+
+.infoBox {
+  max-width: 255px;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  display: block;
+  /* background-color: #667363; */
+  color: white;
+  height: 30px;
+  min-width: 80px;
+
+  background-color: #667363;
+  color: #fff;
+
+  border: none;
+  border-radius: 2px;
+
+  box-shadow: 0 0 2px rgba(0,0,0,0.4);
+
+  margin: 10px;
+}
+
+.button:hover {
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  background-color: #5d695a;
+}
+
+.button:active {
+  transform: translateY(0.5px);
+}
+
+.reportWrapper {
+  border-top: 1px solid #000;
+  margin: 10px;
+  padding: 10px;
+}

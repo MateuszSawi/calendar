@@ -272,10 +272,6 @@ return (
                                 </div>
 
                                 <div className={styles.reservationWrapper}>
-                                  <p className={styles.whoAdded}>Dodane przez: {response.userAdding}</p>
-                                </div>
-
-                                <div className={styles.reservationWrapper}>
                                   {(response.paid === 'tak' && response.trumpet === 'tak' && response.orchestra === 'tak') &&
                                     <p className={styles.reservationData}><strong>Opłacone, Trąbka, Organista</strong></p>
                                   }
@@ -297,6 +293,10 @@ return (
                                   {((response.paid === 'nie' || response.paid === '') && (response.trumpet === 'nie' || response.trumpet === '') && response.orchestra === 'tak') &&
                                     <p className={styles.reservationData}><strong>Organista</strong></p>
                                   }
+                                </div>
+
+                                <div className={styles.reservationWrapper}>
+                                  <p className={styles.whoAdded}>Dodane przez: {response.userAdding}</p>
                                 </div>
                               </div>  
 

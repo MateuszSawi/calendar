@@ -11,7 +11,7 @@ function Header(props) {
 
   const logOut = () => {
     // event.preventDefault();
-    axios.post('http://localhost:8000/polls/logout', {
+    axios.post('/polls/logout', {
       
     }, 
     {
@@ -23,7 +23,7 @@ function Header(props) {
       .then((response) => {
         // const headers = response.headers;
         // const cookies = headers.get('set-cookie');
-        console.log(response)
+        // console.log(response)
       })
       .catch((error) => {
         console.error(error);

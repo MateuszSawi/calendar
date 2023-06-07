@@ -119,7 +119,7 @@ function CalendarCemeteryElement(props) {
       year: year, 
       calendar : cemetery 
     };
-    axios.post('http://localhost:8000/polls/readtb', data,{
+    axios.post('/polls/readtb', data,{
       headers: {
         'Content-Type': 'application/json',
       },
@@ -154,7 +154,7 @@ function CalendarCemeteryElement(props) {
     setIsLoading(true); // ustawienie stanu ładowania na true
     setIsLoadingTextArea(true);
 
-    axios.post('http://localhost:8000/polls/readcemetery/', { day, month, year, cemetery }, {
+    axios.post('/polls/readcemetery/', { day, month, year, cemetery }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid

@@ -35,7 +35,7 @@ function CloseBoxButtonCemetery(props) {
       year: props.year,
       paid: props.paid
     };
-    axios.post('http://localhost:8000/polls/addtocemetery/', data, {
+    axios.post('/polls/addtocemetery/', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -65,7 +65,7 @@ function CloseBoxButtonCemetery(props) {
     // props.setIsLoading(true); // ustawienie stanu ładowania na true
     let cemetery = props.cemetery;
   
-    axios.post('http://localhost:8000/polls/readcemetery/', { day, month, year, cemetery }, {
+    axios.post('/polls/readcemetery/', { day, month, year, cemetery }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid

@@ -13,7 +13,7 @@ function Admin(props) {
 
   const handleCheckSession = () => {
     // event.preventDefault();
-    axios.get('http://localhost:8000/polls/checksession', {
+    axios.get('/polls/checksession', {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ function Admin(props) {
 
   const getLogs = () => {
     // event.preventDefault();
-    axios.get('http://localhost:8000/polls/getlogs', {
+    axios.get('/polls/getlogs', {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ function Admin(props) {
   const [responseDataUsers, setResponseDataUsers] = useState(null);
 
   const getAccounts = () => {
-    axios.get('http://localhost:8000/polls/readuser', {
+    axios.get('/polls/readuser', {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json'
@@ -117,7 +117,7 @@ function Admin(props) {
       addedPassword: password,
       addedAuth: authorityToSend
     };
-    axios.post('http://localhost:8000/polls/adduser', data, {
+    axios.post('/polls/adduser', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -151,7 +151,7 @@ function Admin(props) {
       login: login,
       
     };
-    axios.post('http://localhost:8000/polls/deleteuser', data, {
+    axios.post('/polls/deleteuser', data, {
       headers: {
         'Content-Type': 'application/json',
       },
