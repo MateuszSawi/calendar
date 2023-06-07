@@ -6,26 +6,26 @@ function Buttons(props) {
 
   // USUŃ
 
-  const [confirmed, setConfirmed] = useState(false);
+  // const [confirmed, setConfirmed] = useState(false);
 
-  const deleteButtonClick = () => {
-    if (!confirmed) {
-      // Tutaj wyświetl modal lub potwierdzenie
-      if (window.confirm('Czy na pewno chcesz usunąć rezerwację?')) {
-        setConfirmed(true);
+  // const deleteButtonClick = () => {
+  //   if (!confirmed) {
+  //     // Tutaj wyświetl modal lub potwierdzenie
+  //     if (window.confirm('Czy na pewno chcesz usunąć rezerwację?')) {
+  //       setConfirmed(true);
 
-        handleDataDelete();
+  //       handleDataDelete();
 
-        handleDateChangeOnDelete(props.date);
+  //       handleDateChangeOnDelete(props.date);
 
-        setTimeout(() => {
-          handleDateChangeOnDelete(props.date);
-        }, 2000);
-      }
-    } else {
-      setConfirmed(false);
-    }
-  }
+  //       setTimeout(() => {
+  //         handleDateChangeOnDelete(props.date);
+  //       }, 2000);
+  //     }
+  //   } else {
+  //     setConfirmed(false);
+  //   }
+  // }
 
   const handleDataDelete = () => {
     const data = { 
@@ -41,8 +41,12 @@ function Buttons(props) {
       day: props.day,
       month: props.month,
       year: props.year,
+
+      cemetery: props.cemetery,
+      dateofdeath: props.dateofdeath,
+      paid: props.paid,
     };
-    axios.post('/polls/addtodatabase/', data, {
+    axios.post('http://localhost:8000/polls/addtodatabase/', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -66,7 +70,7 @@ function Buttons(props) {
 
     props.setIsLoading(true); // ustawienie stanu ładowania na true
   
-    axios.post('/polls/readfromdatabase/', { day, month, year }, {
+    axios.post('http://localhost:8000/polls/readfromdatabase/', { day, month, year }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid
@@ -92,17 +96,20 @@ function Buttons(props) {
 
   // powiadomienie przed usuń
 
-  // const showDeleteNotification = () => {
-  //   props.setNotificationVisability(true);
-  // }
+  const [deleteNotificationVisability, setDeleteNotificationVisability] = useState(false);
 
-  // if (props.deleteConfirm) {
-  //   deleteButtonClick();
-  //   props.setDeleteConfirm(false);
-  //   props.setNotificationVisability(false);
-  // }
-  // deleteButtonClick();
+  const deleteButtonClick = () => {
+    // setConfirmed(true);
+    setDeleteNotificationVisability(false);
 
+    handleDataDelete();
+
+    handleDateChangeOnDelete(props.date);
+
+    setTimeout(() => {
+      handleDateChangeOnDelete(props.date);
+    }, 2000);
+  }
 
   // EDYTUJ
 
@@ -129,7 +136,7 @@ function Buttons(props) {
   
     // props.setIsLoading(true); // ustawienie stanu ładowania na true
   
-    axios.post('/polls/readfromdatabase/', { day, month, year }, {
+    axios.post('http://localhost:8000/polls/readfromdatabase/', { day, month, year }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid
@@ -148,7 +155,7 @@ function Buttons(props) {
     });
   };
 
-  // console.log(props.authorities);
+  // console.log(props);
  
   return (
     <div className={styles.buttonsWrapper}>
@@ -164,10 +171,27 @@ function Buttons(props) {
 
           {props.authorities === 3 || props.authorities === 2 ? (
             <button onClick={() => {
-              // showDeleteNotification();
-              deleteButtonClick();
+              setDeleteNotificationVisability(true);
+              // deleteButtonClick();
             }}> USUŃ </button>
           ) : null}
+
+          {deleteNotificationVisability === true &&
+            <div className={styles.confirmBoxBackground}>
+              <div className={styles.confirmBox}>
+                <p className={styles.notificationData}><strong>{props.time}</strong> {props.dayOfTheWeek} {props.fixedDate} - krematorium</p>
+                <p>Czy na pewno chcesz usunąć rezerwację?</p>
+
+                <button onClick={() => {
+                  setDeleteNotificationVisability(false);
+                }}> Anuluj </button>
+
+                <button className={styles.buttonToDelete} onClick={() => {
+                  deleteButtonClick();
+                }}> Usuń </button>
+              </div>
+            </div>
+          }
         </div>
       )} 
     </div>

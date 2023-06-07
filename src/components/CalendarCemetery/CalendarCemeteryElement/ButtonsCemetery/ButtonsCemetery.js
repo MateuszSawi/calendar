@@ -6,26 +6,26 @@ function ButtonsCemetery(props) {
 
   // USUŃ
 
-  const [confirmed, setConfirmed] = useState(false);
+  // const [confirmed, setConfirmed] = useState(false);
 
-  const deleteButtonClick = () => {
-    if (!confirmed) {
-      // Tutaj wyświetl modal lub potwierdzenie
-      if (window.confirm('Czy na pewno chcesz usunąć rezerwację?')) {
-        setConfirmed(true);
+  // const deleteButtonClick = () => {
+  //   if (!confirmed) {
+  //     // Tutaj wyświetl modal lub potwierdzenie
+  //     if (window.confirm('Czy na pewno chcesz usunąć rezerwację?')) {
+  //       setConfirmed(true);
 
-        handleDataDelete();
+  //       handleDataDelete();
 
-        handleDateChangeOnDelete(props.date);
+  //       handleDateChangeOnDelete(props.date);
 
-        setTimeout(() => {
-          handleDateChangeOnDelete(props.date);
-        }, 2000);
-      }
-    } else {
-      setConfirmed(false);
-    }
-  }
+  //       setTimeout(() => {
+  //         handleDateChangeOnDelete(props.date);
+  //       }, 2000);
+  //     }
+  //   } else {
+  //     setConfirmed(false);
+  //   }
+  // }
 
   const handleDataDelete = () => {
     const data = { 
@@ -44,10 +44,10 @@ function ButtonsCemetery(props) {
       day: props.day,
       month: props.month,
       year: props.year,
-
+      paid: props.paid,
       cemetery: props.cemetery
     };
-    axios.post('/polls/addtocemetery/', data, {
+    axios.post('http://localhost:8000/polls/addtocemetery/', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -72,7 +72,7 @@ function ButtonsCemetery(props) {
     props.setIsLoading(true); // ustawienie stanu ładowania na true
     let cemetery = props.cemetery;
   
-    axios.post('/polls/readcemetery/', { day, month, year, cemetery }, {
+    axios.post('http://localhost:8000/polls/readcemetery/', { day, month, year, cemetery }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid
@@ -98,17 +98,20 @@ function ButtonsCemetery(props) {
 
   // powiadomienie przed usuń
 
-  // const showDeleteNotification = () => {
-  //   props.setNotificationVisability(true);
-  // }
+  const [deleteNotificationVisability, setDeleteNotificationVisability] = useState(false);
 
-  // if (props.deleteConfirm) {
-  //   deleteButtonClick();
-  //   props.setDeleteConfirm(false);
-  //   props.setNotificationVisability(false);
-  // }
-  // deleteButtonClick();
+  const deleteButtonClick = () => {
+    // setConfirmed(true);
+    setDeleteNotificationVisability(false);
 
+    handleDataDelete();
+
+    handleDateChangeOnDelete(props.date);
+
+    setTimeout(() => {
+      handleDateChangeOnDelete(props.date);
+    }, 2000);
+  }
 
   // EDYTUJ
 
@@ -136,7 +139,7 @@ function ButtonsCemetery(props) {
     // props.setIsLoading(true); // ustawienie stanu ładowania na true
     let cemetery = props.cemetery;
   
-    axios.post('/polls/readcemetery/', { day, month, year, cemetery }, {
+    axios.post('http://localhost:8000/polls/readcemetery/', { day, month, year, cemetery }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid
@@ -169,10 +172,27 @@ function ButtonsCemetery(props) {
 
           {props.authorities === 3 || props.authorities === 2 ? (
             <button onClick={() => {
-              // showDeleteNotification();
-              deleteButtonClick();
+              setDeleteNotificationVisability(true);
+              // deleteButtonClick();
             }}> USUŃ </button>
           ) : null}
+
+          {deleteNotificationVisability === true &&
+            <div className={styles.confirmBoxBackground}>
+              <div className={styles.confirmBox}>
+                <p className={styles.notificationData}><strong>{props.time}</strong> {props.dayOfTheWeek} {props.fixedDate} - {props.cemeteryNameTitle}</p>
+                <p>Czy na pewno chcesz usunąć rezerwację?</p>
+
+                <button onClick={() => {
+                  setDeleteNotificationVisability(false);
+                }}> Anuluj </button>
+
+                <button className={styles.buttonToDelete} onClick={() => {
+                  deleteButtonClick();
+                }}> Usuń </button>
+              </div>
+            </div>
+          }
         </div>
       )} 
     </div>

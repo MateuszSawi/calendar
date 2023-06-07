@@ -16,11 +16,18 @@ function TimeCemetery(props) {
         responseData={props.responseData} 
         authorities={props.authorities}
 
+        readTextArea={props.readTextArea}
+        setIsLoadingTextArea={props.setIsLoadingTextArea}
+        isLoadingTextArea={props.isLoadingTextArea}
+
+
         handleDateChange={props.handleDateChange}
         isLoading={props.isLoading}
+
+        setTextArea={props.setTextArea}
+        textArea={props.textArea}
         
         cemetery={props.cemetery}
-
         setDate={props.setDate}
         setShowTime={props.setShowTime}
         getCookie={props.getCookie}

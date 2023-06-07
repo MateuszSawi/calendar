@@ -11,7 +11,7 @@ function Header(props) {
 
   const logOut = () => {
     // event.preventDefault();
-    axios.post('/polls/logout', {
+    axios.post('http://localhost:8000/polls/logout', {
       
     }, 
     {
@@ -36,10 +36,6 @@ function Header(props) {
       navigate('/');
 
   }
-
-  const adminPage = () => {
-
-  }
   
 return (
   <header className={styles.header}>
@@ -62,12 +58,16 @@ return (
           {props.authorities === 3 ? (
             <Link to="/admin" className={styles.link} >
               <div className={styles.user}>
-                <button className={styles.button} onClick={() => {
-                  adminPage();
-                }}>Admin</button>
+                <button className={styles.button}>Admin</button>
               </div>
             </Link>
           ) : null}
+
+          <Link to="/raport" className={styles.link} >
+            <div className={styles.user}>
+              <button className={styles.button}>Raport</button>
+            </div>
+          </Link>
 
           <div className={styles.user}>
             <button className={styles.button} onClick={() => {

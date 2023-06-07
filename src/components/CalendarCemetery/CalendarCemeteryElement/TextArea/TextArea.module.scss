@@ -1,0 +1,51 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.textarea {
+  height: 100px;
+  width: 90%;
+  margin: 0px 10px;
+
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  background-color: #f4f4f4;
+  background-color: #fff;
+  resize: vertical;
+}
+
+.button {
+  display: block;
+  /* background-color: #667363; */
+  color: white;
+  height: 30px;
+  min-width: 80px;
+
+  background-color: #667363;
+  color: #fff;
+  width: 130px;
+
+  border: none;
+  border-radius: 2px;
+
+  box-shadow: 0 0 2px rgba(0,0,0,0.4);
+
+  margin: 10px;
+}
+
+.button:hover {
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  background-color: #5d695a;
+}
+
+.button:active {
+  transform: translateY(0.5px);
+}
+
+.loading {
+  height: 106px;
+  margin: 0px 10px;
+}

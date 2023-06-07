@@ -62,88 +62,122 @@ function BoxCemetery(props) {
 
   // trumpet
 
-  let trumpetValue;
+  if (!responseDataInitial.trumpet) {responseDataInitial.trumpet = ''}
 
-  if (responseDataInitial.trumpet === 'tak') {
-    trumpetValue = true;
-  } else if (responseDataInitial.trumpet === 'nie') {
-    trumpetValue = false;
-  }
-
-  const [trumpet, setTrumpet] = useState(trumpetValue);
-  const [yesCheckedTrumpet, setYesCheckedTrumpet] = useState(responseDataInitial.trumpet === 'tak');
-  const [noCheckedTrumpet, setNoCheckedTrumpet] = useState(responseDataInitial.trumpet === 'nie');
+  const [trumpet, setTrumpet] = useState(responseDataInitial.trumpet);
+  const [yesCheckedTrumpet, setYesCheckedTrumpet] = useState(trumpet === 'tak');
+  const [noCheckedTrumpet, setNoCheckedTrumpet] = useState(trumpet === 'nie');
 
   const handleYesChangeTrumpet = () => {
-    setYesCheckedTrumpet(true);
+    setYesCheckedTrumpet(!yesCheckedTrumpet);
     setNoCheckedTrumpet(false);
-    setTrumpet(true);
+    if (trumpet === 'nie' || trumpet === '') {
+      setTrumpet('tak');
+    } else {
+      setTrumpet('');
+    }
   };
 
   const handleNoChangeTrumpet = () => {
     setYesCheckedTrumpet(false);
-    setNoCheckedTrumpet(true);
-    setTrumpet(false);
+    setNoCheckedTrumpet(!noCheckedTrumpet);
+    setTrumpet('nie');
+    if (trumpet === 'tak' || trumpet === '') {
+      setTrumpet('nie');
+    } else {
+      setTrumpet('');
+    }
   };
 
   // orchestra
 
-  let orchestraValue;
+  if (!responseDataInitial.orchestra) {responseDataInitial.orchestra = ''}
 
-  if (responseDataInitial.orchestra === 'tak') {
-    orchestraValue = true;
-  } else if (responseDataInitial.orchestra === 'nie') {
-    orchestraValue = false;
-  }
-
-  const [orchestra, setOrchestra] = useState(orchestraValue);
-  const [yesCheckedOrchestra, setYesCheckedOrchestra] = useState(responseDataInitial.orchestra === 'tak');
-  const [noCheckedOrchestra, setNoCheckedOrchestra] = useState(responseDataInitial.orchestra === 'nie');
+  const [orchestra, setOrchestra] = useState(responseDataInitial.orchestra);
+  const [yesCheckedOrchestra, setYesCheckedOrchestra] = useState(orchestra === 'tak');
+  const [noCheckedOrchestra, setNoCheckedOrchestra] = useState(orchestra === 'nie');
 
   const handleYesChangeOrchestra = () => {
-    setYesCheckedOrchestra(true);
+    setYesCheckedOrchestra(!yesCheckedOrchestra);
     setNoCheckedOrchestra(false);
-    setOrchestra(true);
+    if (orchestra === 'nie' || orchestra === '') {
+      setOrchestra('tak');
+    } else {
+      setOrchestra('');
+    }
   };
 
   const handleNoChangeOrchestra = () => {
     setYesCheckedOrchestra(false);
-    setNoCheckedOrchestra(true);
-    setOrchestra(false);
+    setNoCheckedOrchestra(!noCheckedOrchestra);
+    if (orchestra === 'tak' || orchestra === '') {
+      setOrchestra('nie');
+    } else {
+      setOrchestra('');
+    }
+  };
+
+  // paid
+
+  if (!responseDataInitial.paid) {responseDataInitial.paid = ''}
+
+  const [paid, setPaid] = useState(responseDataInitial.paid);
+  const [yesCheckedPaid, setYesCheckedPaid] = useState(paid === 'tak');
+  const [noCheckedPaid, setNoCheckedPaid] = useState(paid === 'nie');
+
+
+  const handleYesChangePaid = () => {
+    setYesCheckedPaid(!yesCheckedPaid);
+    setNoCheckedPaid(false);
+    if (paid === 'nie' || paid === '') {
+      setPaid('tak');
+    } else {
+      setPaid('');
+    }
+  };
+
+  const handleNoChangePaid = () => {
+    setYesCheckedPaid(false);
+    setNoCheckedPaid(!noCheckedPaid);
+    if (paid === 'tak' || paid === '') {
+      setPaid('nie');
+    } else {
+      setPaid('');
+    }
   };
 
   // company
 
   const companies = [
-    'Obol - Sopot',
-    'Zakrzewski - Gdynia',
-    'Ostatnia posługa - Rumia',
-    'Chejron - Gdynia',
-    'Orszak - Gdynia',
-    'Ochnio - Wejherowo',
-    'Eternum - Rumia',
-    'Tanatos - Gdańsk',
-    'Zarząd cmentarzy komunalnych - Gdynia',
-    'Lilia - Starogard Gdański',
-    'Anubis - Sopot',
-    'M.Z.Z. Koziara - Gdańsk',
-    'Aakcesoria Masiak-Lewandowska - Gdynia',
-    'Lademann - Wejherowo',
-    'Henryk Pioch - Kartuzy',
-    'Kalia - Kleszczewo',
-    'Hedez - Puck',
-    'Kalia - Gdańsk',
-    'Juka - Starogard Gdańsk',
-    'Św.Józef - Żukowo',
     'PPU "Zieleń" - Gdańsk',
-    'Światłość wiekuista - Pruszcz Gdański',
-    'Kremo - Gdańsk',
-    'Kalia - Puck',
-    'Przymorze - Gdańsk',
-    'Credo - Gdańsk',
-    'Róża - Gdynia',
+    'Akcesoria Masiak-Lewandowska - Gdynia',
+    'Anubis - Sopot',
+    'Chejron - Gdynia',
     'Concordia - Gdynia',
+    'Credo - Gdańsk',
+    'Eternum - Rumia',
+    'Hedez - Puck',
+    'Henryk Pioch - Kartuzy',
+    'Juka - Starogard Gdańsk',
+    'Kalia - Gdańsk',
+    'Kalia - Kleszczewo',
+    'Kalia - Puck',
+    'Kremo - Gdańsk',
+    'Lademann - Wejherowo',
+    'Lilia - Starogard Gdański',
+    'M.Z.Z. Koziara - Gdańsk',
+    'Ochnio - Wejherowo',
+    'Ostatnia posługa - Rumia',
+    'Orszak - Gdynia',
+    'Obol - Sopot',
+    'Przymorze - Gdańsk',
+    'Róża - Gdynia',
     'Starówka - Tczew',
+    'Św.Józef - Żukowo',
+    'Światłość wiekuista - Pruszcz Gdański',
+    'Tanatos - Gdańsk',
+    'Zakrzewski - Gdynia',
+    'Zarząd cmentarzy komunalnych - Gdynia',
     'ZCK Sopot'
   ];      
 
@@ -187,11 +221,12 @@ function BoxCemetery(props) {
   const entryPlaces = [
     'Od bramy głównej',
     'Od bramy ul. Cedrowa',
+    'Od bramy ul. Kartuska',
     'Z kaplicy',
     'Przy kaplicy',
     'Przy grobie',
     'Przy Niszy',
-    'Przy Grobowcu'
+    'Przy Grobowcu',
   ];      
 
   if (!responseDataInitial.placeofentry) {responseDataInitial.placeofentry = ''}
@@ -340,6 +375,7 @@ function BoxCemetery(props) {
             time={props.event}
 
             cemetery={props.cemetery}
+            paid={paid}
       
             setDate={props.setDate}
             setShowTime={props.setShowTime}
@@ -391,19 +427,6 @@ function BoxCemetery(props) {
 
           cemetery={props.cemetery}
         /> */}
-        
-        <div className={styles.infoBox}>
-          <label>
-            Imię :&nbsp;
-            <input
-              className={styles.input}
-              type="text"
-              value={name}
-              onChange={handleNameInputChange}
-              placeholder="Podaj imię"
-            />
-          </label>
-        </div>
 
         <div className={styles.infoBox}>
           <label>
@@ -414,6 +437,19 @@ function BoxCemetery(props) {
               value={surname}
               onChange={handleSurnameInputChange}
               placeholder="Podaj nazwisko"
+            />
+          </label>
+        </div>
+
+        <div className={styles.infoBox}>
+          <label>
+            Imię :&nbsp;
+            <input
+              className={styles.input}
+              type="text"
+              value={name}
+              onChange={handleNameInputChange}
+              placeholder="Podaj imię"
             />
           </label>
         </div>
@@ -431,6 +467,29 @@ function BoxCemetery(props) {
             &nbsp;kg
           </label>
         </div> */}
+
+        <div className={styles.infoBox}>
+          Opłacone :&nbsp;
+          <div className={styles.checkboxWrapper}>
+            <div>
+              <input type="checkbox" 
+                checked={yesCheckedPaid} 
+                value={true} 
+                className={styles.checkboxInfo} 
+                onChange={handleYesChangePaid} />
+              Tak
+            </div>
+            
+            <div>
+              <input 
+                type="checkbox" 
+                checked={noCheckedPaid} 
+                className={styles.checkboxInfo} 
+                onChange={handleNoChangePaid} />
+              Nie
+            </div>
+          </div>
+        </div>
 
         <div className={styles.infoBox}>
           Trąbka :&nbsp;
@@ -529,12 +588,14 @@ function BoxCemetery(props) {
 
               <div onClick={() => handleOptionClickCompanyOther('Inna')}  className={styles.companyButtonWrapper}><button className={styles.companyButton}>
                 <p className={styles.companyNameOnButton}>{selectedOptionCompany === 'Inna' ? <strong>Inna</strong> : 'Inna'}</p></button>
-                {selectedOptionCompany === 'Inna' && (
-                  <div>
-                    <input type="text" value={inputValueCompany} onChange={handleInputChangeCompany} className={styles.otherCompanyInput} />
-                    <button onClick={closeCompanies} className={styles.submitOtherCompanyButton}>zatwierdź</button>
+                  <div className={styles.companyOtherWrapper}>
+                    {selectedOptionCompany === 'Inna' && (
+                      <div className={styles.companyOtherWrapper}>
+                        <input type="text" value={inputValueCompany} onChange={handleInputChangeCompany} className={styles.otherCompanyInput} />
+                        <button onClick={closeCompanies} className={styles.submitOtherCompanyButton}>zatwierdź</button>
+                      </div>
+                    )}
                   </div>
-                )}
               </div>
             </div>
           )}
@@ -621,6 +682,7 @@ function BoxCemetery(props) {
         month={props.month}
         year={props.year}
         time={props.event}
+        paid={paid}
 
         setDate={props.setDate}
         setShowTime={props.setShowTime}

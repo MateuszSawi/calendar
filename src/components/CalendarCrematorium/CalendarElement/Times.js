@@ -37,9 +37,22 @@ function Times(props) {
   
   let addButtonVisibility = true;
 
-  // powiadomienie przed usuń
+  // powiadomienie przed usuń -----------------------------------
 
-  // const [notificationVisability, setNotificationVisability] = useState(false);
+  const [notificationVisability, setNotificationVisability] = useState(false);
+
+
+
+
+
+  
+
+
+
+
+
+  // ------------------------------------------------------------
+
   const [isFromEdit, setIsFromEdit] = useState(false);
 
   // ------------------------------------------------------------
@@ -95,6 +108,10 @@ return (
       </div>
     )}
 
+    {/* <div className={styles.confirmBox}>
+      <p>fsf</p>
+    </div> */}
+
     <div>
       {/* Dodaj przycisk do wywołania drukowania */}
       <button className={styles.button} onClick={handlePrint}>Drukuj</button>
@@ -119,10 +136,10 @@ return (
                   <div className={styles.timeBox}>
                     <div className={styles.leftWrapper}>
                       {!isMidnight && (
-                        <span><strong>{time}</strong> {props.dayOfTheWeek} {props.fixedDate}</span>
+                        <span><strong>{time}</strong> {props.dayOfTheWeek} {props.fixedDate} - krematorium</span>
                       )}
                       {isMidnight && (
-                        <span><strong>24:00</strong> {props.dayOfTheWeek} {props.fixedDate}</span>
+                        <span><strong>24:00</strong> {props.dayOfTheWeek} {props.fixedDate} - krematorium</span>
                       )}
                     </div>
                   </div>
@@ -132,37 +149,80 @@ return (
                       responseData.results.map(response => {
 
                         let responseDataTime = response.time.substring(0, response.time.length - 3);
-                        let responseDataWeight = Math.round(response.weight);
+                        // let responseDataWeight = Math.round(response.weight);
 
-                        if (response.family === true) {
-                          response.family = 'tak';
-                        } else if (response.family === false){
-                          response.family = 'nie';
-                        }
+                        // if (response.family === true) {
+                        //   response.family = 'tak';
+                        // } else if (response.family === false){
+                        //   response.family = 'nie';
+                        // }
+
+                        // if (response.paid === true) {
+                        //   response.paid = 'tak';
+                        // } else if (response.paid === false){
+                        //   response.paid = 'nie';
+                        // }
 
                         if (responseDataTime === time) {
                           addButtonVisibility = false;
+
+                          let isCompanyOnlySpaces = response.company.trim().length === 0;
 
                           return (
                             <div className={styles.innerTimeBox}>
                               <div className={styles.responseInfo}>
                                 <div className={styles.reservationWrapper}>
-                                  <p className={styles.reservationData}>{response.name} {response.surname}</p>
-                                  <p className={styles.reservationData}>{responseDataWeight} kg</p>
+                                  <p className={styles.reservationData}>{response.surname} {response.name}</p>
+                                  {(response.weight !== '') &&
+                                    <p className={styles.reservationData}>{response.weight} kg</p>
+                                  }
                                 </div>
                                   
                                 <div className={styles.reservationWrapper}>
-                                  <p className={styles.reservationData}>Udział rodziny: {response.family}</p>
-                                  <p className={styles.reservationData}>Wyznanie: {response.religion}</p>
-                                  <p className={styles.reservationData}>Firma: {response.company}</p>
+                                  {isCompanyOnlySpaces &&
+                                    <p className={styles.reservationData}><strong>REZERWACJA KAPLICY</strong></p>
+                                  } 
+                                  {!isCompanyOnlySpaces &&
+                                    <p className={styles.reservationData}>Firma: {response.company}</p>
+                                  } 
+
+                                  {(response.religion !== '') &&
+                                    <p className={styles.reservationData}>Wyznanie: {response.religion}</p>
+                                  } 
+                                  
+                                  {(response.dateofdeath !== '--') &&
+                                    <p className={styles.reservationData}>Data zgonu: {response.dateofdeath}</p>
+                                  }
+
+                                  {(response.cemetery !== '') &&
+                                    <p className={styles.reservationData}>Cmentarz: {response.cemetery}</p>
+                                  }
                                 </div>
                                   
                                 <div className={styles.reservationWrapper}>
-                                  <p className={styles.reservationData}>Uwagi: {response.otherInfo}</p>
+                                  {(response.otherInfo !== '') &&
+                                    <p className={styles.reservationData}>Uwagi: {response.otherInfo}</p>
+                                  }
                                 </div>
 
                                 <div className={styles.reservationWrapper}>
-                                  <p className={styles.reservationData}>Dodane przez: {response.userAdding}</p>
+                                  <p className={styles.whoAdded}>Dodane przez: {response.userAdding}</p>
+                                </div>
+
+                                <div className={styles.reservationWrapper}>
+                                  {(response.paid === 'tak' && (response.family === 'nie' || response.family === '')) &&
+                                    // <p className={styles.reservationData}>Opłacone: <strong>{response.paid}</strong></p>
+                                    <p className={styles.reservationData}><strong>Opłacone</strong></p>
+                                  }
+                                  {((response.paid === 'nie' || response.paid === '') && response.family === 'tak') &&
+                                    // <p className={styles.reservationData}>Udział rodziny: <strong>{response.family}</strong></p>
+                                    <p className={styles.reservationData}><strong>Udział rodziny</strong></p>
+                                  }
+
+                                  {(response.paid === 'tak' && response.family === 'tak') &&
+                                    // <p className={styles.reservationData}>Udział rodziny: <strong>{response.family}</strong></p>
+                                    <p className={styles.reservationData}><strong>Opłacone, Udział rodziny</strong></p>
+                                  }
                                 </div>
                               </div>  
 
@@ -185,6 +245,8 @@ return (
                                 userAdding={props.userAdding}
                                 authorities={props.authorities}
 
+                                response={response}
+
                                 setDate={props.setDate}
                                 setShowTime={props.setShowTime}
                                 getCookie={props.getCookie}
@@ -204,67 +266,6 @@ return (
                                 isLoading={props.isLoading}
                                 setIsLoading={props.setIsLoading}
                               />
-
-                              {/* {notificationVisability && (
-                                // klasa times żeby dodały sie style przyciskow
-                                <div className={styles.notificationBackground}>
-                                  <div className={styles.notificationWrapper}>
-                                    <div className={styles.notificationBar}>
-                                      <button className={styles.closeWindowButton} onClick={() => {
-                                          setNotificationVisability(false);
-                                        }}>X
-                                      </button>
-                                    </div>
-
-                                    <div className="times" > 
-                                      <div className={styles.notificationBox}>
-                                        <p>Czy napewno usunąć rezerwację?</p>
-
-                                        <button 
-                                          onClick={() => {
-                                            setDeleteConfirm(true);
-                                          }}> USUŃ 
-                                        </button>
-
-                                        // {/* <NotificationDeleteButton 
-                                        //   addButtonVisibility={addButtonVisibility}
-                                        //   setTime={setTime}
-                                        //   openWindow={openWindow}
-                                        //   time={time}
-
-                                        //   windowVisibility={windowVisibility} 
-                                        //   setWindowVisibility={setWindowVisibility} 
-                                        //   setEvent={setEvent} 
-                                        //   event={event} 
-                                        //   date={props.date} 
-                                        //   fixedDate={props.fixedDate} 
-                                        //   dayOfTheWeek={props.dayOfTheWeek} 
-                                        //   day={props.day} 
-                                        //   month={props.month} 
-                                        //   year={props.year}
-                                        //   userAdding={props.userAdding}
-
-                                        //   setDate={props.setDate}
-                                        //   setShowTime={props.setShowTime}
-                                        //   getCookie={props.getCookie}
-                                        //   setResponseData={props.setResponseData}
-
-                                        //   handleDateChange={props.handleDateChange}
-                                        //   setNotificationVisability={setNotificationVisability}
-
-                                        //   responseData={props.responseData} 
-                                        //   isLoading={props.isLoading}
-                                        //   setIsLoading={props.setIsLoading}
-                                        // />                 
-                                      </div>
-                                    </div>
-
-                                    <div className={styles.notificationBar}>
-
-                                    </div>
-                                  </div>
-                                </div>
-                              )} */}
                             </div>                       
                           )
                         } else {
@@ -311,35 +312,6 @@ return (
 
                   </div>
                 </div>
-
-                {/* <Buttons 
-                  addButtonVisibility={addButtonVisibility}
-                  setTime={setTime}
-                  openWindow={openWindow}
-                  time={time}
-
-                  windowVisibility={windowVisibility} 
-                  setWindowVisibility={setWindowVisibility} 
-                  setEvent={setEvent} 
-                  event={event} 
-                  date={props.date} 
-                  fixedDate={props.fixedDate} 
-                  dayOfTheWeek={props.dayOfTheWeek} 
-                  day={props.day} 
-                  month={props.month} 
-                  year={props.year}
-                  userAdding={props.userAdding}
-
-                  setDate={props.setDate}
-                  setShowTime={props.setShowTime}
-                  getCookie={props.getCookie}
-                  setResponseData={props.setResponseData}
-
-                  handleDateChange={props.handleDateChange}
-
-                  responseData={props.responseData} 
-                  isLoading={props.isLoading}
-                /> */}
               </div>
             )
           })}

@@ -6,66 +6,6 @@ import CloseBoxButton from './CloseBoxButton/CloseBoxButton';
 import axios from 'axios';
 
 function Box(props) {
-
-  // let initialName = '';
-
-  // console.log(props)
-
-  // const handleDateChange = (date, event) => {
-  //   // setDate(date);
-  //   // setShowTime(true);
-  //   const day = date.getDate();
-  //   const month = date.getMonth() + 1; // add 1 since getMonth() returns zero-based index
-  //   const year = date.getFullYear();
-  //   const data = { day: day, month: month, year: year };
-  //   const sessionid = props.getCookie("jwt_token");
-  //   // console.log(sessionid);
-
-  //   // setIsLoading(true); // ustawienie stanu ładowania na true
-
-  //   axios.post('http://localhost:8000/polls/readfromdatabase/', { day, month, year }, {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': sessionid
-  //     },
-  //     withCredentials: true
-  //   })
-  //     .then(response => {
-  //       console.log(event);
-  //       // eslint-disable-next-line array-callback-return
-  //       // const reservations = response.data.results.map(reservation => {
-  //       //   let responseDataTime = reservation.time.substring(0, reservation.time.length - 3);
-
-  //       //   if(event === responseDataTime) {
-  //       //     console.log('TUTAJ: ', responseDataTime);
-  //       //   }
-  //       //   return '';
-  //       // })
-
-  //       // console.log(reservations);
-  //       for (let reservation of response.data.results) {
-  //         let responseDataTime = reservation.time.substring(0, reservation.time.length - 3);
-  //         // console.log('TUTAJ: ', responseDataTime)
-  //         if(event === responseDataTime) {
-  //           console.log('TUTAJ: ', reservation);
-
-  //           // initialName = name;
-
-  //         }
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //       // handle error
-  //     });
-  // };
-
-  // // if (x === 0) {
-  // handleDateChange(props.date, props.event);
-  //   // console.(props.event);
-  //   x = 1;
-  // }
-
   // const [responseDataInitial, setResponseDataInitial] = useState(null);
   let responseDataInitial = [];
 
@@ -113,15 +53,75 @@ function Box(props) {
     setSurname(value);
   };
 
+  // responseDataInitial.dateofdeath
+
+  // console.log(responseDataInitial.dateofdeath)
+
+  if (!responseDataInitial.dateofdeath) {responseDataInitial.dateofdeath = '--'}
+
+
+  let partsDay = responseDataInitial.dateofdeath.split("-");
+  let dayInitial = partsDay[0].charAt(0) + (partsDay[0].length > 1 ? partsDay[0].charAt(1) : "");
+
+
+
+  let partsMonth = responseDataInitial.dateofdeath.split("-");
+  let monthInitial = partsMonth[1].substring(0, 2);
+
+
+
+  let partsYear = responseDataInitial.dateofdeath.split("-");
+  let yearInitial = partsYear[partsYear.length - 1];
+
+
+  // console.log(dayInitial, monthInitial, yearInitial)
+  
+  // dayOfDeath
+
+  if (!dayInitial) {dayInitial = ''}
+
+  const [dayOfDeath, setdayOfDeath] = useState(dayInitial);
+
+  const handledayOfDeathInputChange = (event) => {
+    const value = event.target.value;
+    setdayOfDeath(value);
+  };
+
+  // monthOfDeath
+
+  if (!monthInitial) {monthInitial = ''}
+
+  const [monthOfDeath, setmonthOfDeath] = useState(monthInitial);
+
+  const handlemonthOfDeathInputChange = (event) => {
+    const value = event.target.value;
+    setmonthOfDeath(value);
+  };
+
+  // yearOfDeath
+
+  if (!yearInitial) {yearInitial = ''}
+
+  const [yearOfDeath, setyearOfDeath] = useState(yearInitial);
+
+  const handleyearOfDeathInputChange = (event) => {
+    const value = event.target.value;
+    setyearOfDeath(value);
+  };
+
+  // dateofdeath
+
+  let dateofdeath = dayOfDeath + '-' + monthOfDeath + '-' + yearOfDeath;
+
   // weight
 
   if (!responseDataInitial.weight) {responseDataInitial.weight = ''}
-  if (responseDataInitial.weight === 0) {responseDataInitial.weight = ''}
-  if (responseDataInitial.weight === '0') {responseDataInitial.weight = ''}
+  // if (responseDataInitial.weight === 0) {responseDataInitial.weight = ''}
+  // if (responseDataInitial.weight === '0') {responseDataInitial.weight = ''}
 
-  const parsedWeight = parseInt(responseDataInitial.weight);
+  // const parsedWeight = parseInt(responseDataInitial.weight);
 
-  const [weight, setWeight] = useState(parsedWeight);
+  const [weight, setWeight] = useState(responseDataInitial.weight);
 
   const handleWeightInputChange = (event) => {
     const value = event.target.value;
@@ -130,64 +130,88 @@ function Box(props) {
 
   // family
 
-  let familyValue;
+  if (!responseDataInitial.family) {responseDataInitial.family = ''}
 
-  if (responseDataInitial.family === 'tak') {
-    familyValue = true;
-  } else if (responseDataInitial.family === 'nie') {
-    familyValue = false;
-  }
-
-  const [family, setFamily] = useState(familyValue);
-  const [yesChecked, setYesChecked] = useState(responseDataInitial.family === 'tak');
-  const [noChecked, setNoChecked] = useState(responseDataInitial.family === 'nie');
+  const [family, setFamily] = useState(responseDataInitial.family);
+  const [yesChecked, setYesChecked] = useState(family === 'tak');
+  const [noChecked, setNoChecked] = useState(family === 'nie');
 
   const handleYesChange = () => {
-    setYesChecked(true);
+    setYesChecked(!yesChecked);
     setNoChecked(false);
-    setFamily(true);
+    setFamily('tak');
+    if (family === 'nie' || family === '') {
+      setFamily('tak');
+    } else {
+      setFamily('');
+    }
   };
 
   const handleNoChange = () => {
     setYesChecked(false);
-    setNoChecked(true);
-    setFamily(false);
-  };
-
-  // if(responseDataInitial.family === 'tak') {
-  //   setYesChecked(true);
-  //   setNoChecked(false);
-  // }
-  // if(responseDataInitial.family === 'false') {
-  //   handleNoChange();
-  // }
-
-  // const [family, setFamily] = useState('');
-  
-  // if (yesChecked === true ) {
-  //   setFamily(true);
-  // } else if (noChecked === true ) {
-  //   setFamily(false);
-  // }
-
-  //
-
-  // if (!responseDataInitial.family) {responseDataInitial.family = ''}
-
-  // const [family, setFamily] = useState(responseDataInitial.family);
-  const [isOpenFamily, setIsOpenFamily] = useState(false);
-
-
-  const toggleMenuFamily = () => {
-    if (isOpenCompany === false && isOpenReligion === false) {
-      setIsOpenFamily(!isOpenFamily);
+    setNoChecked(!noChecked);
+    if (family === 'tak' || family === '') {
+      setFamily('nie');
+    } else {
+      setFamily('');
     }
   };
 
-  const handleOptionClickFamily = (option) => {
-    setFamily(option);
-    setIsOpenFamily(false);
+  // paid
+
+  if (!responseDataInitial.paid) {responseDataInitial.paid = ''}
+
+  const [paid, setPaid] = useState(responseDataInitial.paid);
+  const [yesCheckedPaid, setYesCheckedPaid] = useState(paid === 'tak');
+  const [noCheckedPaid, setNoCheckedPaid] = useState(paid === 'nie');
+
+
+  const handleYesChangePaid = () => {
+    setYesCheckedPaid(!yesCheckedPaid);
+    setNoCheckedPaid(false);
+    if (paid === 'nie' || paid === '') {
+      setPaid('tak');
+    } else {
+      setPaid('');
+    }
   };
+
+  const handleNoChangePaid = () => {
+    setYesCheckedPaid(false);
+    setNoCheckedPaid(!noCheckedPaid);
+    if (paid === 'tak' || paid === '') {
+      setPaid('nie');
+    } else {
+      setPaid('');
+    }
+  };
+
+  // const [paid, setPaid] = useState(responseDataInitial.paid);
+  // const [yesCheckedPaid, setYesCheckedPaid] = useState();
+  // const [noCheckedPaid, setNoCheckedPaid] = useState();
+
+  // if (!responseDataInitial.paid) {responseDataInitial.paid = ''}
+  // if (responseDataInitial.paid === 'tak') {
+  //   setYesCheckedPaid(true);
+  //   setNoCheckedPaid(false);
+  // }
+  // if (responseDataInitial.paid === 'nie') {
+  //   setYesCheckedPaid(false);
+  //   setNoCheckedPaid(true);
+  // }
+
+  // const handleYesChangePaid = () => {
+  //   setYesCheckedPaid(true);
+  //   setNoCheckedPaid(false);
+  //   setPaid('tak');
+  // };
+
+  // const handleNoChangePaid = () => {
+  //   setYesCheckedPaid(false);
+  //   setNoCheckedPaid(true);
+  //   setPaid('nie');
+  // };
+
 
   // religion
 
@@ -198,7 +222,7 @@ function Box(props) {
 
 
   const toggleMenuReligion = () => {
-    if (isOpenCompany === false && isOpenFamily === false) {
+    if (isOpenCompany === false) {
       setIsOpenReligion(!isOpenReligion);
     }
   };
@@ -211,47 +235,48 @@ function Box(props) {
   // company
 
   const companies = [
-    'Obol - Sopot',
-    'Zakrzewski - Gdynia',
-    'Ostatnia posługa - Rumia',
-    'Chejron - Gdynia',
-    'Orszak - Gdynia',
-    'Ochnio - Wejherowo',
-    'Eternum - Rumia',
-    'Tanatos - Gdańsk',
-    'Zarząd cmentarzy komunalnych - Gdynia',
-    'Lilia - Starogard Gdański',
-    'Anubis - Sopot',
-    'M.Z.Z. Koziara - Gdańsk',
-    'Aakcesoria Masiak-Lewandowska - Gdynia',
-    'Lademann - Wejherowo',
-    'Henryk Pioch - Kartuzy',
-    'Kalia - Kleszczewo',
-    'Hedez - Puck',
-    'Kalia - Gdańsk',
-    'Juka - Starogard Gdańsk',
-    'Św.Józef - Żukowo',
     'PPU "Zieleń" - Gdańsk',
-    'Światłość wiekuista - Pruszcz Gdański',
-    'Kremo - Gdańsk',
-    'Kalia - Puck',
-    'Przymorze - Gdańsk',
-    'Credo - Gdańsk',
-    'Róża - Gdynia',
+    'Akcesoria Masiak-Lewandowska - Gdynia',
+    'Anubis - Sopot',
+    'Chejron - Gdynia',
     'Concordia - Gdynia',
+    'Credo - Gdańsk',
+    'Eternum - Rumia',
+    'Hedez - Puck',
+    'Henryk Pioch - Kartuzy',
+    'Juka - Starogard Gdańsk',
+    'Kalia - Gdańsk',
+    'Kalia - Kleszczewo',
+    'Kalia - Puck',
+    'Kremo - Gdańsk',
+    'Lademann - Wejherowo',
+    'Lilia - Starogard Gdański',
+    'M.Z.Z. Koziara - Gdańsk',
+    'Ochnio - Wejherowo',
+    'Ostatnia posługa - Rumia',
+    'Orszak - Gdynia',
+    'Obol - Sopot',
+    'Przymorze - Gdańsk',
+    'Róża - Gdynia',
     'Starówka - Tczew',
+    'Św.Józef - Żukowo',
+    'Światłość wiekuista - Pruszcz Gdański',
+    'Tanatos - Gdańsk',
+    'Zakrzewski - Gdynia',
+    'Zarząd cmentarzy komunalnych - Gdynia',
     'ZCK Sopot'
   ];      
 
   if (!responseDataInitial.company) {responseDataInitial.company = ''}
 
+  let company;
+
   const [isOpenCompany, setIsOpenCompany] = useState(false);
   const [selectedOptionCompany, setSelectedOptionCompany] = useState(responseDataInitial.company);
   const [inputValueCompany, setInputValueCompany] = useState('');
-  let company;
 
   const toggleMenuCompany = () => {
-    if (isOpenReligion === false && isOpenFamily === false) {
+    if (isOpenReligion === false) {
       setIsOpenCompany(!isOpenCompany);
     }
   };
@@ -278,6 +303,54 @@ function Box(props) {
     company = inputValueCompany;
   } 
 
+  // cemetery
+
+  const cemeteries = [
+    'Łostowicki',
+    'Centralny',
+    'Sobieszewo',
+    'Ignacego',
+    'Salvator',
+    'Garnizonowy',
+    'Oliwa',
+    'NowyPort'
+  ];      
+
+  if (!responseDataInitial.cemetery) {responseDataInitial.cemetery = ''}
+
+  const [isOpenCemetery, setIsOpenCemetery] = useState(false);
+  const [selectedOptionCemetery, setSelectedOptionCemetery] = useState(responseDataInitial.cemetery);
+  const [inputValueCemetery, setInputValueCemetery] = useState('');
+  let cemetery;
+
+  const toggleMenuCemetery = () => {
+    if (isOpenReligion === false) {
+      setIsOpenCemetery(!isOpenCemetery);
+    }
+  };
+
+  const handleOptionClickCemetery = (option) => {
+    setSelectedOptionCemetery(option);
+    setIsOpenCemetery(false);
+  };
+
+  const handleOptionClickCemeteryOther = (option) => {
+    setSelectedOptionCemetery(option);
+  };
+
+  const handleInputChangeCemetery = (event) => {
+    setInputValueCemetery(event.target.value);
+  };
+
+  const closeCemeteries = () => {
+    setIsOpenCemetery(false);
+  }
+
+  cemetery = selectedOptionCemetery;
+  if (cemetery === 'Inna') {
+    cemetery = inputValueCemetery;
+  } 
+
   // otherInfo
 
   if (!responseDataInitial.otherInfo) {responseDataInitial.otherInfo = ''}
@@ -297,6 +370,39 @@ function Box(props) {
   } else {
     isMidnight = false;
   }
+
+  //
+
+  const handleKeyDown = (event) => {
+    const key = event.key;
+    const { selectionStart, selectionEnd, target } = event;
+  
+    // Obsługa klawiszy strzałek
+    if (key === "ArrowLeft" || key === "ArrowRight") {
+      // Pozwól na poruszanie się kursora wewnątrz pola tekstowego
+      return;
+    }
+  
+    // Obsługa klawiszy Backspace i Delete
+    if (key === "Backspace" || key === "Delete") {
+      // Jeśli zaznaczono tekst, usuń go
+      if (selectionStart !== selectionEnd) {
+        const value = target ? target.value : '';
+        const newValue = value.slice(0, selectionStart) + value.slice(selectionEnd);
+        // Aktualizuj wartość pola tekstowego
+        handledayOfDeathInputChange(newValue);
+      }
+      return;
+    }
+  
+    // Sprawdzenie, czy wprowadzony znak jest cyfrą od 0 do 9
+    if (!/[0-9]/.test(key)) {
+      event.preventDefault(); // Zatrzymaj propagację zdarzenia
+    }
+  };
+
+  //
+  
 
   return (
     <div className={styles.window}>
@@ -337,7 +443,9 @@ function Box(props) {
 
             isFromEdit={props.isFromEdit}
             setIsFromEdit={props.setIsFromEdit}
-            
+
+            paid={paid}
+            dateofdeath={dateofdeath}
             name={name}
             surname={surname}
             setWeight={setWeight}
@@ -351,19 +459,6 @@ function Box(props) {
       </div>
 
       <div className={styles.innerWindow}>
-        
-        <div className={styles.infoBox}>
-          <label>
-            Imię :&nbsp;
-            <input
-              className={styles.input}
-              type="text"
-              value={name}
-              onChange={handleNameInputChange}
-              placeholder="Podaj imię"
-            />
-          </label>
-        </div>
 
         <div className={styles.infoBox}>
           <label>
@@ -377,19 +472,97 @@ function Box(props) {
             />
           </label>
         </div>
+
+        <div className={styles.infoBox}>
+          <label>
+            Imię :&nbsp;
+            <input
+              className={styles.input}
+              type="text"
+              value={name}
+              onChange={handleNameInputChange}
+              placeholder="Podaj imię"
+            />
+          </label>
+        </div>
       
         <div className={styles.infoBoxKg}>
           <label>
             Waga :&nbsp;
-            <input
+            {/* <input
               className={styles.input}
               type="number"
               value={weight}
               onChange={handleWeightInputChange}
               placeholder="Podaj wagę w kg"
+            /> */}
+            <input
+              className={styles.input}
+              type="text"
+              maxLength="10" pattern="[0-9]*"
+              value={weight}
+              onChange={handleWeightInputChange}
+              onKeyDown={handleKeyDown}
+              placeholder="Podaj wagę w kg"
             />
             &nbsp;kg
           </label>
+        </div>
+
+        <div className={styles.infoBox}>
+          <label>
+            Data śmierci :&nbsp;
+            <input
+              className={styles.inputDay}
+              type="text"
+              maxLength="2" pattern="[0-9]*"
+              value={dayOfDeath}
+              onChange={handledayOfDeathInputChange}
+              onKeyDown={handleKeyDown}
+              placeholder="DD"
+            />-
+            <input
+              className={styles.inputDay}
+              type="text"
+              maxLength="2" pattern="[0-9]*"
+              value={monthOfDeath}
+              onChange={handlemonthOfDeathInputChange}
+              onKeyDown={handleKeyDown}
+              placeholder="MM"
+            />-
+            <input
+              className={styles.inputYear}
+              type="text"
+              maxLength="4" pattern="[0-9]*"
+              value={yearOfDeath}
+              onChange={handleyearOfDeathInputChange}
+              onKeyDown={handleKeyDown}
+              placeholder="RRRR"
+            />
+          </label>
+        </div>
+
+        <div className={styles.infoBox}>
+          Opłacone :&nbsp;
+          <div className={styles.checkboxWrapper}>
+            <div>
+              <input type="checkbox" 
+                checked={yesCheckedPaid} 
+                value={true} 
+                className={styles.checkboxInfo} 
+                onChange={handleYesChangePaid} />
+              Tak
+            </div>
+            
+            <div>
+              <input 
+                type="checkbox" 
+                checked={noCheckedPaid} 
+                className={styles.checkboxInfo} 
+                onChange={handleNoChangePaid} />
+              Nie
+            </div>
+          </div>
         </div>
 
         <div className={styles.infoBox}>
@@ -443,12 +616,44 @@ function Box(props) {
 
               <div onClick={() => handleOptionClickCompanyOther('Inna')}  className={styles.companyButtonWrapper}><button className={styles.companyButton}>
                 <p className={styles.companyNameOnButton}>{selectedOptionCompany === 'Inna' ? <strong>Inna</strong> : 'Inna'}</p></button>
-                {selectedOptionCompany === 'Inna' && (
-                  <div>
-                    <input type="text" value={inputValueCompany} onChange={handleInputChangeCompany} className={styles.otherCompanyInput} />
-                    <button onClick={closeCompanies} className={styles.submitOtherCompanyButton}>zatwierdź</button>
+                  <div className={styles.companyOtherWrapper}>
+                    {selectedOptionCompany === 'Inna' && (
+                      <div className={styles.companyOtherWrapper}>
+                        <input type="text" value={inputValueCompany} onChange={handleInputChangeCompany} className={styles.otherCompanyInput} />
+                        <button onClick={closeCompanies} className={styles.submitOtherCompanyButton}>zatwierdź</button>
+                      </div>
+                    )}
                   </div>
-                )}
+              </div>
+            </div>
+          )}
+        </div>   
+
+        <div className={styles.infoBox}>
+          <label>Cmentarz :&nbsp;</label>
+          <button onClick={toggleMenuCemetery} className={styles.optionButton}>{cemetery}</button>
+          {isOpenCemetery && (
+            <div className={styles.toggleMenuCompany}>
+              {cemeteries.map(singleCemetery => {
+                return (
+                  <div onClick={() => handleOptionClickCemetery(singleCemetery)} className={styles.companyButtonWrapper}>
+                    <button className={styles.companyButton}>
+                      <p className={styles.companyNameOnButton}>{selectedOptionCemetery === singleCemetery ? <strong>{singleCemetery}</strong> : singleCemetery}</p>
+                    </button>
+                  </div>
+                )
+              })}
+
+              <div onClick={() => handleOptionClickCemeteryOther('Inna')}  className={styles.companyButtonWrapper}><button className={styles.companyButton}>
+                <p className={styles.companyNameOnButton}>{selectedOptionCemetery === 'Inna' ? <strong>Inna</strong> : 'Inna'}</p></button>
+                  <div className={styles.companyOtherWrapper}>
+                    {selectedOptionCemetery === 'Inna' && (
+                      <div className={styles.companyOtherWrapper}>
+                        <input type="text" value={inputValueCemetery} onChange={handleInputChangeCemetery} className={styles.otherCompanyInput} />
+                        <button onClick={closeCemeteries} className={styles.submitOtherCompanyButton}>zatwierdź</button>
+                      </div>
+                    )} 
+                  </div>
               </div>
             </div>
           )}
@@ -500,6 +705,9 @@ function Box(props) {
         responseData={props.responseData} 
         isLoading={props.isLoading}
         
+        paid={paid}
+        dateofdeath={dateofdeath}
+        cemetery={cemetery}
         name={name}
         surname={surname}
         setWeight={setWeight}

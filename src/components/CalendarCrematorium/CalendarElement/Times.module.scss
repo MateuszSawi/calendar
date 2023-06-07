@@ -87,7 +87,7 @@
 .window {
   height: 80%;
   overflow: auto;
-  max-height: 620px;
+  // max-height: 620px;
   width: 70%;
   // width: 380px;
   max-width: 400px;
@@ -123,6 +123,12 @@
 .reservationData {
   padding: 0px 0px 10px 10px;
   margin: 0;
+}
+
+.whoAdded {
+  padding: 0px 0px 10px 10px;
+  margin: 0;
+  font-size: 0.75em;
 }
 
 // ----------------------------------------------------------------
@@ -244,3 +250,18 @@
   .button:active {
     transform: translateY(0.5px);
   }
+
+//
+
+.confirmBox {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  transform: translateX(50%);
+  top: 10%;
+
+  border: 1px solid;
+  
+}

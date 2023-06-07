@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './TimesCemetery.module.scss';
 import BoxCemetery from './BoxCemetery/BoxCemetery';
 import ButtonsCemetery from './ButtonsCemetery/ButtonsCemetery';
 import AddButtonCemetery from './ButtonsCemetery/AddButtonCemetery';
+import TextArea from './TextArea/TextArea';
 import html2pdf from 'html2pdf.js';
 
   const timesCemetery = [
@@ -85,6 +86,8 @@ function TimesCemetery(props) {
     html2pdf().set(opt).from(element).save();
   };
 
+  // console.log(props.cemetery)
+
 return (
   <div >
     {windowVisibility && (
@@ -132,6 +135,21 @@ return (
     </div>
 
     <div className={styles.printsection} ref={componentRef}>
+
+      <TextArea
+        day={props.day} 
+        month={props.month} 
+        year={props.year}
+        cemetery={props.cemetery}
+
+        readTextArea={props.readTextArea}
+        setIsLoadingTextArea={props.setIsLoadingTextArea}
+        isLoadingTextArea={props.isLoadingTextArea}
+
+        setTextArea={props.setTextArea}
+        textArea={props.textArea}
+      />
+
       {props.isLoading ? <div>Ładowanie...</div> : (
         <div className="times" >
           {timesCemetery.map(time => {    
@@ -143,6 +161,35 @@ return (
             } else {
               isMidnight = false;
             }
+
+            let cemeteryNameTitle;
+
+            if (props.cemetery === 'lostowicki') {
+              cemeteryNameTitle = 'Łostowicki';
+            } 
+            else if (props.cemetery === 'centralny') {
+              cemeteryNameTitle = 'Centralny';
+            } 
+            else if (props.cemetery === 'sobieszewo') {
+              cemeteryNameTitle = 'Sobieszewo';
+            } 
+            else if (props.cemetery === 'ignacego') {
+              cemeteryNameTitle = 'Ignacego';
+            } 
+            else if (props.cemetery === 'salvator') {
+              cemeteryNameTitle = 'Salvator';
+            } 
+            else if (props.cemetery === 'garnizonowy') {
+              cemeteryNameTitle = 'Garnizonowy';
+            } 
+            else if (props.cemetery === 'oliwa') {
+              cemeteryNameTitle = 'Oliwa';
+            } 
+            else if (props.cemetery === 'nowyport') {
+              cemeteryNameTitle = 'Nowy Port';
+            }
+            
+            let minutes = time.substring(3, 5);
                   
             return (
               <div className={styles.container}>
@@ -150,10 +197,17 @@ return (
                   <div className={styles.timeBox}>
                     <div className={styles.leftWrapper}>
                       {!isMidnight && (
-                        <span><strong>{time}</strong> {props.dayOfTheWeek} {props.fixedDate}</span>
+                        <span><strong>{time}</strong> {props.dayOfTheWeek} {props.fixedDate} - {cemeteryNameTitle}</span>
                       )}
                       {isMidnight && (
                         <span><strong>24:00</strong> {props.dayOfTheWeek} {props.fixedDate}</span>
+                      )}
+
+                      {(props.cemetery === 'centralny') && (minutes === '00') && (
+                        <span> - nowa kaplica</span>
+                      )}
+                      {(props.cemetery === 'centralny') && (minutes === '30') && (
+                        <span> - stara kaplica</span>
                       )}
                     </div>
                   </div>
@@ -165,17 +219,17 @@ return (
                         let responseDataTime = response.time.substring(0, response.time.length - 3);
                         // let responseDataWeight = Math.round(response.weight);
 
-                        if (response.trumpet === true) {
-                          response.trumpet = 'tak';
-                        } else if (response.trumpet === false){
-                          response.trumpet = 'nie';
-                        }
+                        // if (response.trumpet === true) {
+                        //   response.trumpet = 'tak';
+                        // } else if (response.trumpet === false){
+                        //   response.trumpet = 'nie';
+                        // }
 
-                        if (response.orchestra === true) {
-                          response.orchestra = 'tak';
-                        } else if (response.orchestra === false){
-                          response.orchestra = 'nie';
-                        }
+                        // if (response.orchestra === true) {
+                        //   response.orchestra = 'tak';
+                        // } else if (response.orchestra === false){
+                        //   response.orchestra = 'nie';
+                        // }
 
                         if (responseDataTime === time) {
                           addButtonVisibility = false;
@@ -184,34 +238,65 @@ return (
                             <div className={styles.innerTimeBox}>
                               <div className={styles.responseInfo}>
                                 <div className={styles.reservationWrapper}>
-                                  <p className={styles.reservationData}>{response.name} {response.surname}</p>
+                                  <p className={styles.reservationData}>{response.surname} {response.name}</p>
                                 </div>
 
                                 <div className={styles.reservationWrapper}>
-                                  <p className={styles.reservationData}>Firma: {response.company}</p>
-                                  <p className={styles.reservationData}>Miejsce wyjścia: {response.placeofentry}</p>
+                                  {(response.company !== '') &&
+                                    <p className={styles.reservationData}>Firma: {response.company}</p>
+                                  }
+                                  {(response.placeofentry !== '') &&
+                                    <p className={styles.reservationData}>Miejsce wyjścia: {response.placeofentry}</p>
+                                  }
                                 </div>
 
                                 <div className={styles.reservationWrapper}>
-                                  <p className={styles.reservationData}>Miejsce pochówku: {response.burialplace}</p>
-                                  <p className={styles.reservationData}>Rodzaj pochówku: {response.burialtype}</p>
+                                  {(response.burialplace !== '') &&
+                                    <p className={styles.reservationData}>Miejsce pochówku: {response.burialplace}</p>
+                                  }
+                                  {(response.burialtype !== '') &&
+                                    <p className={styles.reservationData}>Rodzaj pochówku: {response.burialtype}</p>
+                                  }
                                 </div>
 
                                 <div className={styles.reservationWrapper}>
-                                  <p className={styles.reservationData}>trąbka: {response.trumpet}</p>
-                                  <p className={styles.reservationData}>organista: {response.orchestra}</p>
-                                </div>
-
-                                <div className={styles.reservationWrapper}>
-                                  <p className={styles.reservationData}>Opis usługi: {response.servicedescription}</p>
+                                  {(response.servicedescription !== '') &&
+                                    <p className={styles.reservationData}>Opis usługi: {response.servicedescription}</p>
+                                  }
                                 </div>
                                   
                                 <div className={styles.reservationWrapper}>
-                                  <p className={styles.reservationData}>Uwagi: {response.others}</p>
+                                  {(response.others !== '') &&
+                                    <p className={styles.reservationData}>Uwagi: {response.others}</p>
+                                  }
                                 </div>
 
                                 <div className={styles.reservationWrapper}>
-                                  <p className={styles.reservationData}>Dodane przez: {response.userAdding}</p>
+                                  <p className={styles.whoAdded}>Dodane przez: {response.userAdding}</p>
+                                </div>
+
+                                <div className={styles.reservationWrapper}>
+                                  {(response.paid === 'tak' && response.trumpet === 'tak' && response.orchestra === 'tak') &&
+                                    <p className={styles.reservationData}><strong>Opłacone, Trąbka, Organista</strong></p>
+                                  }
+                                  {(response.paid === 'tak' && response.trumpet === 'tak' && (response.orchestra === 'nie' || response.orchestra === '')) &&
+                                    <p className={styles.reservationData}><strong>Opłacone, Trąbka</strong></p>
+                                  }
+                                  {(response.paid === 'tak' && (response.trumpet === 'nie' || response.trumpet === '') && response.orchestra === 'tak') &&
+                                    <p className={styles.reservationData}><strong>Opłacone, Organista</strong></p>
+                                  }
+                                  {((response.paid === 'nie' || response.paid === '') && response.trumpet === 'tak' && response.orchestra === 'tak') &&
+                                    <p className={styles.reservationData}><strong>Trąbka, Organista</strong></p>
+                                  }
+                                  {(response.paid === 'tak' && (response.trumpet === 'nie' || response.trumpet === '') && (response.orchestra === 'nie' || response.orchestra === '')) &&
+                                    <p className={styles.reservationData}><strong>Opłacone</strong></p>
+                                  }
+                                  {((response.paid === 'nie' || response.paid === '') && response.trumpet === 'tak' && (response.orchestra === 'nie' || response.orchestra === '')) &&
+                                    <p className={styles.reservationData}><strong>Trąbka</strong></p>
+                                  }
+                                  {((response.paid === 'nie' || response.paid === '') && (response.trumpet === 'nie' || response.trumpet === '') && response.orchestra === 'tak') &&
+                                    <p className={styles.reservationData}><strong>Organista</strong></p>
+                                  }
                                 </div>
                               </div>  
 
@@ -242,6 +327,8 @@ return (
                                 setResponseData={props.setResponseData}
 
                                 handleDateChange={props.handleDateChange}
+
+                                cemeteryNameTitle={cemeteryNameTitle}
                                 // setNotificationVisability={setNotificationVisability}
                                 // notificationVisability={notificationVisability}
 

@@ -27,6 +27,24 @@
   // box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
+.inputDay {
+  border: 1px solid #aaa;
+  height: 120%;
+
+  border-radius: 5px;
+  width: 25px;
+
+}
+
+.inputYear {
+  border: 1px solid #aaa;
+  height: 120%;
+
+  border-radius: 5px;
+  width: 40px;
+
+}
+
 .checkboxInfo {
   /* ...existing styles */
   // display: grid;
@@ -74,6 +92,8 @@
 
   max-height: 400px;
   overflow: auto;
+
+  // padding-bottom: 30px;
 }
 
 .textarea {
@@ -278,4 +298,16 @@
 .leftWrapper {
   width: 80%;
   background-color: blueviolet;
+}
+
+.companyOtherWrapper {
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+}
+
+.otherCompanyInput {
+  width: 195px;
+  height: 25px;
+  margin: 2px 0px;
 }

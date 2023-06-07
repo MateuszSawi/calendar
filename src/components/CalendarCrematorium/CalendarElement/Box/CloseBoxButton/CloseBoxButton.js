@@ -29,8 +29,12 @@ function CloseBoxButton(props) {
       day: props.day,
       month: props.month,
       year: props.year,
+
+      cemetery: props.cemetery,
+      dateofdeath: props.dateofdeath,
+      paid: props.paid,
     };
-    axios.post('/polls/addtodatabase/', data, {
+    axios.post('http://localhost:8000/polls/addtodatabase/', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -59,7 +63,7 @@ function CloseBoxButton(props) {
   
     // props.setIsLoading(true); // ustawienie stanu ładowania na true
   
-    axios.post('/polls/readfromdatabase/', { day, month, year }, {
+    axios.post('http://localhost:8000/polls/readfromdatabase/', { day, month, year }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid

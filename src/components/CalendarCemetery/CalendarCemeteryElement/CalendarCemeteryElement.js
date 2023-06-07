@@ -4,14 +4,11 @@ import Calendar from 'react-calendar';
 import './CalendarCemeteryElement.css';
 import TimeCemetery from './TimeCemetery';
 import axios from 'axios';
-// import Cemeteries from './Cemeteries/Cemeteries';
 import styles from './Cemeteries/Cemeteries.module.scss'
 
 function CalendarCemeteryElement(props) {
   const [date, setDate] = useState(new Date());
   const [showTime, setShowTime] = useState(false); 
-
-  // console.log(date);
 
   let fixedDate = moment(date).format('DD/MM/YYYY');
   let dayOfTheWeek = moment(date).format('dddd'); 
@@ -49,22 +46,10 @@ function CalendarCemeteryElement(props) {
 
   // ------- cemetery -------
 
-  // let cemetery;
   const [cemetery, setCemetery] = useState('lostowicki');
   const [cemeteryToDisplay, setCemeteryToDisplay] = useState('Łostowicki');
   const [selectedOptionCemetery, setSelectedOptionCemetery] = useState(cemeteryToDisplay);
   const [isOpenCemetery, setIsOpenCemetery] = useState(false);
-
-  // const cemeteriesToDisplay = [
-  //   'lostowicki',
-  //   'centralny',
-  //   'sobieszewo',
-  //   'ignacego',
-  //   'salvator',
-  //   'garnizonowy',
-  //   'oliwa',
-  //   'nowyport',
-  // ];
 
   const cemeteriesToDisplay = [
     'Łostowicki',
@@ -121,6 +106,37 @@ function CalendarCemeteryElement(props) {
     setCemetery(option);
   };
 
+  // ================== text area =================
+
+  const [isLoadingTextArea, setIsLoadingTextArea] = useState(false);
+
+  const [textArea, setTextArea] = useState('');
+
+  const readTextArea = (day, month, year, cemetery) => {
+    const data = { 
+      day: day, 
+      month: month, 
+      year: year, 
+      calendar : cemetery 
+    };
+    axios.post('http://localhost:8000/polls/readtb', data,{
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    })
+      .then(response => {
+        if (response.data.results[0]) {
+          setTextArea(response.data.results[0].textfield);
+        } else {
+          setTextArea('');
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
   // ------------ API ------------
 
   const handleDateChange = (date) => {
@@ -129,14 +145,16 @@ function CalendarCemeteryElement(props) {
     const day = date.getDate();
     const month = date.getMonth() + 1; // add 1 since getMonth() returns zero-based index
     const year = date.getFullYear();
-    // const cemeteryToSend = cemetery;
     const data = { day: day, month: month, year: year, cemetery: cemetery };
+
+    readTextArea(day, month, year, cemetery);
+
     const sessionid = getCookie("jwt_token");
-    // console.log(sessionid);
 
     setIsLoading(true); // ustawienie stanu ładowania na true
+    setIsLoadingTextArea(true);
 
-    axios.post('/polls/readcemetery/', { day, month, year, cemetery }, {
+    axios.post('http://localhost:8000/polls/readcemetery/', { day, month, year, cemetery }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': sessionid
@@ -144,7 +162,6 @@ function CalendarCemeteryElement(props) {
       withCredentials: true
     })
       .then(response => {
-        // console.log(response.data);
         setResponseData(response.data);
 
         setTimeout(() => { // wymuszenie minimum czasu ładowania
@@ -154,6 +171,7 @@ function CalendarCemeteryElement(props) {
 
         setTimeout(() => { // TEGO NIE
           setIsLoading(false); // ustawienie stanu ładowania na false
+          setIsLoadingTextArea(false);
         }, 2000);
       })
       .catch(error => {
@@ -163,6 +181,7 @@ function CalendarCemeteryElement(props) {
   
   useEffect(() => {
     handleDateChange(date);
+    // readTextArea(day, month, year, cemetery);
   }, [cemetery]);
 
   return (
@@ -226,6 +245,13 @@ function CalendarCemeteryElement(props) {
         
         handleDateChange={handleDateChange}
         isLoading={isLoading}
+
+        setTextArea={setTextArea}
+        textArea={textArea}
+
+        readTextArea={readTextArea}
+        setIsLoadingTextArea={setIsLoadingTextArea}
+        isLoadingTextArea={isLoadingTextArea}
         
         cemetery={cemetery}
         setDate={setDate}

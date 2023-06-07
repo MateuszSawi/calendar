@@ -20,7 +20,7 @@ function SubmitButtonCemetery(props) {
 
   let cemetery = props.cemetery;
 
-  axios.post('/polls/readcemetery/', { day, month, year, cemetery }, {
+  axios.post('http://localhost:8000/polls/readcemetery/', { day, month, year, cemetery }, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': sessionid
@@ -48,7 +48,10 @@ function SubmitButtonCemetery(props) {
   };
 
   const submitForm = (time) => {
-    if (!props.company || props.company === 'wybierz' || props.company === '') {
+
+    let isCompanyOnlySpaces = props.company.trim().length === 0;
+
+    if (!props.company || props.company === 'wybierz' || props.company === '' || isCompanyOnlySpaces) {
       setMessage('Błędne wypełnienie!');
       handleClick();
     } else {
@@ -60,9 +63,9 @@ function SubmitButtonCemetery(props) {
       setMessage('');
       handleClick();
       // const weightToSend = props.weight ? props.weight : 0;
-      const trumpetToSend = props.trumpet ? props.trumpet : false;
-      const orchestraToSend = props.orchestra ? props.orchestra : false;
-      handleDataSend(trumpetToSend, orchestraToSend);
+      // const trumpetToSend = props.trumpet ? props.trumpet : false;
+      // const orchestraToSend = props.orchestra ? props.orchestra : false;
+      handleDataSend();
 
       if (props.windowVisibility === true) {
         props.setWindowVisibility(false);
@@ -103,14 +106,14 @@ function SubmitButtonCemetery(props) {
 
   // console.log(props.family)
 
-  const handleDataSend = (trumpetToSend, orchestraToSend) => {
+  const handleDataSend = () => {
     const data = { 
       exists: "2",
       cemetery: props.cemetery,
       name: props.name,
       surname: props.surname,
-      trumpet: trumpetToSend,
-      orchestra: orchestraToSend,
+      trumpet: props.trumpet,
+      orchestra: props.orchestra,
       company: props.company,
       placeofentry: props.placeofentry,
       burialplace: props.burialplace,
@@ -122,8 +125,9 @@ function SubmitButtonCemetery(props) {
       day: props.day,
       month: props.month,
       year: props.year,
+      paid: props.paid
     };
-    axios.post('/polls/addtocemetery/', data, {
+    axios.post('http://localhost:8000/polls/addtocemetery/', data, {
       headers: {
         'Content-Type': 'application/json',
       },

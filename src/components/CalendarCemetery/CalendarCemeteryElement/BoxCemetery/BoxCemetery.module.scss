@@ -328,3 +328,17 @@
   width: 80%;
   background-color: blueviolet;
 }
+
+//
+
+.companyOtherWrapper {
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+}
+
+.otherCompanyInput {
+  width: 195px;
+  height: 25px;
+  margin: 2px 0px;
+}

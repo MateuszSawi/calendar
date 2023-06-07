@@ -1,0 +1,25 @@
+.confirmButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px; /* Dodatkowy margines na górę */
+}
+
+.confirmButton {
+  background-color: white; /* Biały kolor tła */
+  color: black; /* Kolor tekstu */
+  margin-left: 10px; /* Dodatkowy margines między przyciskami */
+}
+
+.cancelButtonWrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px; /* Dodatkowy margines na dół */
+}
+
+.cancelButton {
+  /* Pozostałe style */
+}
+
+.whiteButton {
+  background-color: white; /* Biały kolor tła */
+}

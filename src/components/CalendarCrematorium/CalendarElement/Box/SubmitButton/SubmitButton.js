@@ -18,7 +18,7 @@ function SubmitButton(props) {
 
   props.setIsLoading(true); // ustawienie stanu ładowania na true
 
-  axios.post('/polls/readfromdatabase/', { day, month, year }, {
+  axios.post('http://localhost:8000/polls/readfromdatabase/', { day, month, year }, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': sessionid
@@ -46,10 +46,10 @@ function SubmitButton(props) {
   };
 
   const submitForm = (time) => {
-    if (!props.company || props.company === 'wybierz' || props.company === '') {
-      setMessage('Błędne wypełnienie!');
-      handleClick();
-    } else {
+    // if (!props.company || props.company === 'wybierz' || props.company === '') {
+    //   setMessage('Błędne wypełnienie!');
+    //   handleClick();
+    // } else {
       // if (!props.name) {
       //   props.name = '';
       // }
@@ -57,9 +57,10 @@ function SubmitButton(props) {
 
       setMessage('');
       handleClick();
-      const weightToSend = props.weight ? props.weight : 0;
-      const familyToSend = props.family ? props.family : false;
-      handleDataSend(weightToSend, familyToSend);
+      // const weightToSend = props.weight ? props.weight : 0;
+      // const familyToSend = props.family ? props.family : false;
+      // handleDataSend(weightToSend);
+      handleDataSend();
 
       if (props.windowVisibility === true) {
         props.setWindowVisibility(false);
@@ -73,19 +74,7 @@ function SubmitButton(props) {
         handleDateChange(props.date);
         // console.log('1');
       }, 2000);
-    }
-    // console.log(props.name,
-    //   props.surname, ' | ',
-    // //  weightToSend,' | ',
-    //   props.family,' | ',
-    //   props.company,' | ',
-    //   props.religion,' | ',
-    //   props.otherInfo,' | ',
-    //   props.time,' | ',
-    //   props.date,' | ',
-    //   props.day,' | ',
-    //    props.month,' | ',
-    //   props.year,);
+    // }
   }
 
   // message
@@ -98,15 +87,15 @@ function SubmitButton(props) {
 
   const [loading, setLoading] = useState(true);
 
-  // console.log(props.family)
+  // console.log(props)
 
-  const handleDataSend = (weightToSend, familyToSend) => {
+  // const handleDataSend = (weightToSend) => {
+  const handleDataSend = () => {
     const data = { 
       exists: "2",
       name: props.name,
       surname: props.surname,
-      weight: weightToSend,
-      family: familyToSend,
+      weight: props.weight,
       company: props.company,
       religion: props.religion,
       otherInfo: props.otherInfo,
@@ -115,20 +104,23 @@ function SubmitButton(props) {
       day: props.day,
       month: props.month,
       year: props.year,
+
+      cemetery: props.cemetery,
+      dateofdeath: props.dateofdeath,
+      paid: props.paid,
+      family: props.family,
     };
-    axios.post('/polls/addtodatabase/', data, {
+    axios.post('http://localhost:8000/polls/addtodatabase/', data, {
       headers: {
         'Content-Type': 'application/json',
       },
       withCredentials: true,
     })
-    .then(response => {
-      // console.log('xxx',response.data);
-      
+    .then(response => {     
+
     })
     .catch(error => {
       console.error(error);
-      // handle error
     });
   };
   

@@ -13,15 +13,13 @@ function Admin(props) {
 
   const handleCheckSession = () => {
     // event.preventDefault();
-    axios.get('/polls/checksession', {
+    axios.get('http://localhost:8000/polls/checksession', {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json'
       }
     })
       .then((response) => {
-        // console.log(response.data.authorities)
-
         props.setAuthorities(response.data.authorities);
 
         if (response.data.isLoggedIn) {
@@ -42,14 +40,14 @@ function Admin(props) {
 
   const getLogs = () => {
     // event.preventDefault();
-    axios.get('/polls/getlogs', {
+    axios.get('http://localhost:8000/polls/getlogs', {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json'
       }
     })
       .then((response) => {
-        console.log(response.data.results);
+        // console.log(response.data.results);
         setLogsArr(response.data.results);
         setResponseData(response.data.results);
       })
@@ -72,14 +70,13 @@ function Admin(props) {
   const [responseDataUsers, setResponseDataUsers] = useState(null);
 
   const getAccounts = () => {
-    axios.get('/polls/readuser', {
+    axios.get('http://localhost:8000/polls/readuser', {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json'
       }
     })
     .then((response) => {
-      console.log(response.data.results);
       setUsersArr(response.data.results);
       setResponseDataUsers(response.data.results);
     })
@@ -120,9 +117,7 @@ function Admin(props) {
       addedPassword: password,
       addedAuth: authorityToSend
     };
-
-    console.log(data)
-    axios.post('/polls/adduser', data, {
+    axios.post('http://localhost:8000/polls/adduser', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -138,11 +133,9 @@ function Admin(props) {
 
       setTimeout(() => { // wymuszenie minimum czasu ładowania
         getAccounts();
-        // setIsLoading(false);
       }, 1000); // czas ładowania w milisekundach
 
       setTimeout(() => { // wymuszenie minimum czasu ładowania
-        // props.setResponseData(response.data);
         setIsLoading(false);
       }, 2000);
     })
@@ -153,32 +146,12 @@ function Admin(props) {
 
   // ----------------------------------------------------------------
 
-  // const editAccount = () => {
-  //   const data = { 
-  //     exists: "0",
-      
-  //   };
-  //   axios.post('http://localhost:8000/polls/updateuser', data, {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     withCredentials: true,
-  //   })
-  //   .then(response => {
-  //   })
-  //   .catch(error => {
-  //     console.error(error);
-  //   });
-  // }
-
-  // ----------------------------------------------------------------
-
   const deleteAccount = (login) => {
     const data = { 
       login: login,
       
     };
-    axios.post('/polls/deleteuser', data, {
+    axios.post('http://localhost:8000/polls/deleteuser', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -189,11 +162,9 @@ function Admin(props) {
 
       setTimeout(() => { // wymuszenie minimum czasu ładowania
         getAccounts();
-        // setIsLoading(false);
       }, 1000); // czas ładowania w milisekundach
 
       setTimeout(() => { // wymuszenie minimum czasu ładowania
-        // props.setResponseData(response.data);
         setIsLoading(false);
       }, 2000);
     })
@@ -204,12 +175,9 @@ function Admin(props) {
 
   // ----------------------------------------------------------------
 
-  // const [showPassword, setShowPassword] = useState(false);
   const [showPasswordIndex, setShowPasswordIndex] = useState(-1);
 
-  // ----------------------------------------------------------------
-
-  // burialtyp
+  // authorities
 
   const authorities = [
     'wyświetlanie',
@@ -229,7 +197,6 @@ function Admin(props) {
 
   const handleOptionClickAuthority = (option) => {
     setAuthority(option);
-    // setIsOpenAuthority(false);
     setSelectedAuthority(option);
   };
 
@@ -261,8 +228,6 @@ function Admin(props) {
 
     if (!login || authority === 'wybierz' || !password) {
       setMessage('Błędne wypełnienie!');
-      console.error('sdfsdf')
-      // handleClick();
     } else {
       setIsOpenAuthority(false);
       addAccount();
@@ -273,11 +238,10 @@ function Admin(props) {
 
   return (
     <div className={styles.adminPanel}>
-      {isLoading ? <div>Ładowanie użytkowników...</div> : (
+      {isLoading ? <div className={styles.loading}>Ładowanie użytkowników...</div> : (
         <div>
           <div className={styles.x}>
             <button className={styles.button} onClick={() => {
-              // addAccount();
               setIsOpenAuthority(true);
             }}>Dodaj użytkownika</button>
           </div>
@@ -309,6 +273,20 @@ function Admin(props) {
                 } else if (user.authorities === 1) {
                   authorityToDispaly = 'wyświetlanie';
             
+                }
+
+                // zmieniony czas ostatniego logowania (+2h)
+
+                let newTimeString;
+
+                if (lastLoginToDisplay) {
+                  const [date, time] = lastLoginToDisplay.split(', ');
+                  const [hour, minute] = time.split(':');
+                
+                  // Zwiększenie godziny o 2
+                  let newHour = parseInt(hour, 10) + 2;
+                
+                  newTimeString = `${date}, ${newHour.toString().padStart(2, '0')}:${minute}`;
                 }
 
                 return (
@@ -393,7 +371,10 @@ function Admin(props) {
                           {index === showPasswordIndex ? 'Ukryj' : 'Pokaż'}
                         </button>
                       </p>
-                      <p>Ostatnie logowanie: {lastLoginToDisplay}</p>
+                      <p>Ostatnie logowanie: &nbsp;
+                        {/* {lastLoginToDisplay},  */}
+                        {newTimeString}
+                      </p>
                       <p>Uprawnienia: {authorityToDispaly}</p>
 
                       <button className={styles.buttonPassword} onClick={() => {
@@ -423,6 +404,15 @@ function Admin(props) {
           {responseData && (
             logsArr.map((log) => {
               let timeOfChange = log.time ? log.time.slice(0, -7) : '';
+
+              const [hour, minute] = timeOfChange.split(':');
+
+              // Zwiększenie godziny o 2
+              const newHour = parseInt(hour, 10) + 2;
+
+              const newTimeString = `${newHour.toString().padStart(2, '0')}:${minute}`;
+
+              // ---------- action --------------
 
               let action;
 
@@ -511,7 +501,11 @@ function Admin(props) {
               return (
               <div className={styles.singleLogWrapper}>
                 <p>Użytkownik: <strong>{log.userAdding}</strong></p>
-                <p>Czas w którym użytkownik dokonał zmiany: <strong>{timeOfChange}</strong>, {log.date_of_activity}</p>
+                <p>Czas w którym użytkownik dokonał zmiany: &nbsp;
+                  <strong>
+                    {/* {timeOfChange} */}
+                    {newTimeString}
+                  </strong>, {log.date_of_activity}</p>
                 <p>Zmiana w dniu: {log.date_of_action_plus_time}</p>
                 <p>{action}</p>
               </div>
