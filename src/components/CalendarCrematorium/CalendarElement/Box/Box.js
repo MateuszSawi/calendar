@@ -1,9 +1,7 @@
 import styles from './Box.module.scss';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import SubmitButton from './SubmitButton/SubmitButton';
 import CloseBoxButton from './CloseBoxButton/CloseBoxButton';
-import axios from 'axios';
 
 function Box(props) {
   // const [responseDataInitial, setResponseDataInitial] = useState(null);
@@ -17,11 +15,6 @@ function Box(props) {
       responseDataInitial = response;
     }
   })
-
-  // console.log(responseDataInitial)
-
-
-  // console.log(props.responseData);
 
   const closeWindow = () => {
     if (props.windowVisibility === true) {
@@ -378,7 +371,11 @@ function Box(props) {
     const { selectionStart, selectionEnd, target } = event;
   
     // Obsługa klawiszy strzałek
-    if (key === "ArrowLeft" || key === "ArrowRight") {
+    if (
+      key === "ArrowLeft" ||
+      key === "ArrowRight" ||
+      key === "Tab" // Dodajemy obsługę klawisza Tab
+    ) {
       // Pozwól na poruszanie się kursora wewnątrz pola tekstowego
       return;
     }
