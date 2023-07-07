@@ -7,6 +7,11 @@
   justify-content: space-between;
 }
 
+.printsection {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
 .timeBoxWrapper {
   // background-color: red;
   width: 100%;
@@ -265,3 +270,5 @@
   border: 1px solid;
   
 }
+
+//

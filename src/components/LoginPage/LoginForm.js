@@ -72,27 +72,29 @@ const LoginForm = (props) => {
       <div className={styles.loginBox}>
         <form onSubmit={handleSubmit}>
           <div className={styles.loginElement}>
-            <label>
+            <p className={styles.label}>
               Nazwa użytkownika : &nbsp;
-              <input
+            </p>
+            <input
                 className={styles.input}
                 type="text"
+                placeholder='Login'
                 value={username}
                 onChange={(event) => setUsername(event.target.value)}
               />
-            </label>
           </div>
 
           <div className={styles.loginElement}>
-            <label>
+            <p className={styles.label}>
               Hasło : &nbsp;
-              <input
+            </p>
+            <input
                 className={styles.input}
                 type="password"
+                placeholder='Hasło'
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-              />
-            </label>
+            />
           </div>
 
           <div className={styles.loginButtonWrapper}>

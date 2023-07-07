@@ -108,10 +108,6 @@ return (
       </div>
     )}
 
-    {/* <div className={styles.confirmBox}>
-      <p>fsf</p>
-    </div> */}
-
     <div>
       {/* Dodaj przycisk do wywołania drukowania */}
       <button className={styles.button} onClick={handlePrint}>Drukuj</button>

@@ -84,6 +84,7 @@ function Report(props) {
   // API
 
   const [reports, setReports] = useState();
+  const [reports2, setReports2] = useState();
 
   const getReport = () => {
 
@@ -109,6 +110,7 @@ function Report(props) {
   
     // const sessionid = props.getCookie("jwt_token");
 
+    // raporty zliczające ilosc kremacji --------------------------------------------------------------------------------------
     axios.post('/polls/report', data, {
       withCredentials: true,
       headers: {
@@ -116,11 +118,33 @@ function Report(props) {
       }
     })
       .then(response => {
-  
-        // console.log(response.data.results)
-
         setReports(response.data.results);
+      })
+      .catch(error => {
+        console.error(error);
+      });
 
+      // szczegółowe raporty kremacji -----------------------------------------------------------------------------------------
+      axios.post('/polls/reportgetmonth', data, {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        console.log(response.data.results);
+  
+        const sortedData = [...response.data.results].sort((a, b) => {
+          if (a.company < b.company) {
+            return -1;
+          }
+          if (a.company > b.company) {
+            return 1;
+          }
+          return 0;
+        });
+
+        setReports2(sortedData);
       })
       .catch(error => {
         console.error(error);
@@ -165,22 +189,79 @@ function Report(props) {
         }}>Wygeneruj raport kremacji miesiąca
       </button>
 
-      <div>
-        {reports &&
-          reports.map(report => {
-            const isCompanyEmptySpaces = report.company.trim().length === 0;
+      <div className={styles.reportsWrapper}>
+        <div className={styles.reports}>
+          <h3>Raporty ilości kremacji</h3>
 
-            if (!isCompanyEmptySpaces) {
-              return (
-                <div className={styles.reportWrapper} key={report.id}>
-                  <p>Firma: <strong>{report.company}</strong></p>
-                  <p>Ilość kremacji: <strong>{report.count}</strong></p>
-                </div>
-              );
-            } else {
-              return null;
-            }
-          })}
+          {reports &&
+            reports.map(report => {
+              const isCompanyEmptySpaces = report.company.trim().length === 0;
+
+              if (!isCompanyEmptySpaces) {
+                return (
+                  <div className={styles.reportWrapper} key={report.id}>
+                    <p>Firma: <strong>{report.company}</strong></p>
+                    <p>Ilość kremacji: <strong>{report.count}</strong></p>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
+        </div>
+
+        <div className={styles.reports}>
+          <h3>Sczegółowe raporty</h3>
+
+          {reports2 &&
+            reports2.map(report => {
+              const isCompanyEmptySpaces = report.company.trim().length === 0;
+
+              let familyToDisplay;
+
+              if (report.family === 'tak') {
+                familyToDisplay = 'tak'
+              } else {
+                familyToDisplay = 'nie'
+              }
+
+              let timeTiDisplay = report.time.substring(0, report.time.length - 3);
+
+              let monthToDisplay;
+
+              if (report.month === 1) {monthToDisplay = 'styczeń'}
+              else if (report.month === 2) {monthToDisplay = 'luty'}
+              else if (report.month === 3) {monthToDisplay = 'marzec'}
+              else if (report.month === 4) {monthToDisplay = 'kwiecień'}
+              else if (report.month === 5) {monthToDisplay = 'maj'}
+              else if (report.month === 6) {monthToDisplay = 'czerwiec'}
+              else if (report.month === 7) {monthToDisplay = 'lipiec'}
+              else if (report.month === 8) {monthToDisplay = 'sierpień'}
+              else if (report.month === 9) {monthToDisplay = 'wrzesień'}
+              else if (report.month === 10) {monthToDisplay = 'październik'}
+              else if (report.month === 11) {monthToDisplay = 'listopad'}
+              else if (report.month === 12) {monthToDisplay = 'grudzień'}
+
+              if (!isCompanyEmptySpaces) {
+                return (
+                  <div className={styles.reportWrapper} key={report.id}>
+                    <p>Firma: <strong>{report.company}</strong></p>
+                    {report.surname !== '' && report.name !== '' &&
+                      <p>Nazwisko i imię: <strong>{report.surname} {report.name}</strong></p>
+                    }
+                    {report.dateofdeath !== '--' &&
+                      <p>Data śmierci: <strong>{report.dateofdeath}</strong></p>
+                    }
+                    <p>Godzina kremacji: <strong>{timeTiDisplay}</strong></p>
+                    <p>Data kremacji: <strong>{report.day} {monthToDisplay} {report.year}</strong></p>
+                    <p>Udział rodziny: <strong>{familyToDisplay}</strong></p>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
+        </div>
       </div>
     </div>
   )
